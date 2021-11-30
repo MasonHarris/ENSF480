@@ -25,8 +25,10 @@ public class LoginController extends GUIcontroller  {
 		//for the type of account logged into, for example if a landlord logs in create a landlord viewer
 		//and controller. The login validation should return a object for that user as well or what the unique
 		//key to access info about user on database
-		//else if login is invalid, error message
+		//else if login is invalid(make this clear), error message
+		
 		System.out.println("user " + username + " passwrod " + password);
+		//this should call a validate login function in the database, so model.validateLogin(username,password)
 		if(username.equals("miku") && password.contentEquals("nakano")) {
 			//deal with valid login
 			System.out.println("valid");

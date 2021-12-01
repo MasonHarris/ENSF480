@@ -12,6 +12,7 @@ public class RenterView extends GUIview {
 	JComboBox<String> furnished;
 	//used to display search results
 	JPanel displayResults;
+	
 	public RenterView(String frameName, int width, int height) {
 		super(frameName,width,height);
 		displayInitial();
@@ -106,6 +107,9 @@ public class RenterView extends GUIview {
 		errorLabel.setBounds((int) (width*0.3),(int) (height*0.25),(int)(width*0.1),(int)(height*0.3));
 	    panel.add(errorLabel);
 		panel.repaint();
+	}
+	public void displaySearch() {
+		
 	}
 
 }

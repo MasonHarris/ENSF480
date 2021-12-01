@@ -10,7 +10,11 @@ public class RenterController extends GUIcontroller {
 		view.addSubmitListener(e->
 		propertySearch());
 	}
-	
+	public RenterController(Database model) {
+		super(model);
+		view.addSubmitListener(e->
+		propertySearch());
+	}
 	public void propertySearch() {
 		
 	}

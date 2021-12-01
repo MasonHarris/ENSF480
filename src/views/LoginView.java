@@ -11,9 +11,16 @@ public class LoginView extends GUIview {
     JPanel loginPanel;
    JTextField usernameText;
    JPasswordField passwordText;
-	public LoginView() {
-		frame = new JFrame("Login Screen");
-		frame.setSize(400,200);
+  
+	public LoginView(String frameName, int width, int height) {
+		
+		super(frameName,width,height);
+		displayIntial();
+		
+		
+	}
+	public void displayIntial() {
+		
 		panel = new JPanel(new FlowLayout());
 		renterButton = new JButton("Proceed as normal renter");
 		loginButton = new JButton("login");
@@ -24,25 +31,27 @@ public class LoginView extends GUIview {
 		panel.add(renterButton);
 		
 		
-		frame.add(panel);
-		frame.setVisible(true);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setContentPane(panel);
+		frame.invalidate();
+		frame.validate();
 		
 		
 	}
 	public void showLogin() {
 		loginPanel = new JPanel(null);
 		JLabel user = new JLabel("Username");
-		user.setBounds(10,20,80,25);
+		System.out.println("height " + height);
+		System.out.println("width " + width);
+		user.setBounds((int) (width*0.025),(int) (height*0.1),(int) (width*0.2),(int) (height*0.125));
 		
 		usernameText = new JTextField(20);
-		usernameText.setBounds(100,20,165,25);
+		usernameText.setBounds((int) (width*0.25),(int) (height*0.1),(int) (width*0.41),(int) (height*0.125));
 		JLabel password = new JLabel("Password");
-		password.setBounds(10,50,80,25);
+		password.setBounds((int) (width*0.025),(int) (height*0.25),(int) (width*0.2),(int) (height*0.125));
 		passwordText = new JPasswordField();
-		passwordText.setBounds(100,50,165,25);
+		passwordText.setBounds((int) (width*0.25),(int) (height*0.25),(int) (width*0.41),(int) (height*0.125));
 		
-		loginButton.setBounds(100,80,165,25);
+		loginButton.setBounds((int) (width*0.25),(int) (height*0.40),(int)(width*0.41),(int)(height*0.125));
 		loginPanel.add(user);
 		loginPanel.add(usernameText);
 		loginPanel.add(password);
@@ -73,7 +82,7 @@ public class LoginView extends GUIview {
 	}
 	public void displayLoginError() {
 		JLabel error = new JLabel("Invalid login");
-		error.setBounds(100,100,165,25);
+		error.setBounds((int) (width*0.25),(int) (height*0.55),(int)(width*0.41),(int)(height*0.125));
 		loginPanel.add(error);
 		loginPanel.repaint();
 		

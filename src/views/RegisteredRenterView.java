@@ -11,26 +11,34 @@ public class RegisteredRenterView extends RenterView {
 	JButton viewNotifications;
 	JButton unsubscribe;
 	JButton search;
-	JPanel searchPanel;
+	JPanel optionsPanel;
 	JPanel notificationsPanel;
 	public RegisteredRenterView(String frameName, int width, int height) {
 		super(frameName,width,height);
+		intializeDashboard();
+		//add methods to initialize other panels
+		
 	}
-	@Override
+
 	//needs to display Initial registered renter screen
-	public void displayInitial() {
-		//these probably need to be adjusted
-		panel = new JPanel(new FlowLayout());
+	public void displayDashboard() {
+		frame.setContentPane(optionsPanel);
+		frame.invalidate();
+		frame.validate();
+		
+	}
+	
+	public void intializeDashboard() {
+		optionsPanel = new JPanel(new FlowLayout());
 		logout = new JButton("Logout");
 		viewNotifications = new JButton("View Notificiatons");
 		unsubscribe = new JButton("Unsubscribe");
 		search = new JButton("Search");
-		panel.add(search);
-		panel.add(viewNotifications);
-		panel.add(unsubscribe);
-		panel.add(logout);
 		
-		
+		optionsPanel.add(search);
+		optionsPanel.add(viewNotifications);
+		optionsPanel.add(unsubscribe);
+		optionsPanel.add(logout);
 		
 	}
 	public void addLogoutListener(ActionListener listener) {
@@ -49,14 +57,8 @@ public class RegisteredRenterView extends RenterView {
 		viewNotifications.addActionListener(listener);
 		
 	}
-	public void search() {
-		super.displayInitial();
-	}
-	//switches to display search panel on frame
-	public void displaySearchPanel() {
-		
-	}
-	//switches to display notifications panel on frame
+	
+	//switches to display notifications optionsPanel on frame
 	public void displayNotificationsPanel() {
 		
 	}

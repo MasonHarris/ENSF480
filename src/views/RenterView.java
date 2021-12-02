@@ -15,9 +15,10 @@ public class RenterView extends GUIview {
 	
 	public RenterView(String frameName, int width, int height) {
 		super(frameName,width,height);
-		displayInitial();
+		intializeSearchPanel();
+		
 	}
-	public void displayInitial() {
+	public void intializeSearchPanel() {
 		JLabel searchLabel = new JLabel("Search criteria for property");
 		searchLabel.setBounds((int)(width*0.3),(int)(height*0.01),(int)(width*0.5),(int)(height*0.02));
 		
@@ -75,10 +76,15 @@ public class RenterView extends GUIview {
 		panel.add(submitButton);
 		
 		
+		
+		
+		
+	}
+	
+	public void displaySearchPanel() {
 		frame.setContentPane(panel);
 		frame.invalidate();
 		frame.validate();
-		
 		
 	}
 	

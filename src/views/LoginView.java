@@ -15,11 +15,11 @@ public class LoginView extends GUIview {
 	public LoginView(String frameName, int width, int height) {
 		
 		super(frameName,width,height);
-		displayIntial();
+		
 		
 		
 	}
-	public void displayIntial() {
+	public void displayDashboard() {
 		
 		panel = new JPanel(new FlowLayout());
 		renterButton = new JButton("Proceed as normal renter");

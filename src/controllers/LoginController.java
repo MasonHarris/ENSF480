@@ -9,17 +9,23 @@ public class LoginController extends GUIcontroller  {
 	public LoginController(Database model,LoginView view) {
 		super(model);
 		this.view = view;
+		
+	}
+	public void start() {
+		view.displayDashboard();
+		
 		//uses lambdas to add event listeners
 		
 		view.addSelectLoginListener(e-> view.showLogin());
 		view.addRenterListener(e->{
 		view.dispose();
 		RenterController renter = new RenterController(model,new RenterView("Renter",1200,1200));
-		
-		});
+		renter.start();
+				
+			});
 		view.addLoginListener(e-> {
-			
-			login(view.getUserText(),view.getPasswordText());
+					
+				login(view.getUserText(),view.getPasswordText());
 		});
 	}
 	public void login(String username,String password) {
@@ -35,6 +41,9 @@ public class LoginController extends GUIcontroller  {
 		if(username.equals("miku") && password.contentEquals("nakano")) {
 			//deal with valid login
 			System.out.println("valid");
+			view.dispose();
+			RegisteredRenterController miku = new RegisteredRenterController(model,new RegisteredRenterView("Miku",1200,1200));
+			miku.start();
 		}
 		else {
 			view.displayLoginError();

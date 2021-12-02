@@ -2,7 +2,7 @@ package views;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-
+import java.util.ArrayList;
 public class RenterView extends GUIview {
 	JButton submitButton;
 	JTextField bathRoomsText;
@@ -108,8 +108,9 @@ public class RenterView extends GUIview {
 	    panel.add(errorLabel);
 		panel.repaint();
 	}
-	public void displaySearch() {
+	//receives arraylist of properties to display
+	/*public void displaySearch(ArrayList<Property>) {
 		
-	}
+	}*/
 
 }

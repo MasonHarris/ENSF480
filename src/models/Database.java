@@ -1,5 +1,6 @@
 package models;
 //this should be a singleton
+import java.util.ArrayList;
 public class Database {
 	static Database onlyInstance;
 	
@@ -13,5 +14,6 @@ public class Database {
 		}
 		return onlyInstance;
 	}
+	//the search property method should return an arraylist of property objects
 
 }

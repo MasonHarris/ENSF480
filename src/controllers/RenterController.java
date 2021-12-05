@@ -2,6 +2,8 @@ package controllers;
 
 import models.Database;
 import views.RenterView;
+import java.util.ArrayList;
+import models.Property;
 
 public class RenterController extends GUIcontroller {
 	private RenterView view;
@@ -23,6 +25,8 @@ public class RenterController extends GUIcontroller {
 
 	}
 
+	// deals with property search. Takes in view as an argument so that this method
+	// can be used with registered renter as well
 	public void propertySearch(RenterView view) {
 		int bathrooms;
 		int bedRooms;
@@ -49,15 +53,21 @@ public class RenterController extends GUIcontroller {
 			return;
 
 		}
-		String propeString = view.getPropertyType();
+		String propeString = view.getPropertyType().toLowerCase();
 		if (!isStringAlpha(propeString)) {
 			view.displayError("Property type must contain only alphabetical characters");
 			return;
 		}
-		String furString = view.getFurnishingInfo();
+		String furString = view.getFurnishingInfo().toLowerCase();
 		String quadString = view.getQuadrant();
+		// clear any previous errors
+		view.displayError("");
 		// this should call a function to match the properties with the search
 		// information and return an arraylist of property objects
+		ArrayList<Property> properties = new ArrayList<Property>();
+		properties.add(new Property("Apartment", true, 5, 5, false, 5, "NW", "Listed", "123 street", 5, 5.6));
+		properties.add(new Property("House", true, 55, 59, false, 5, "SW", "Listed", "1234 street", 52, 5.62));
+		view.displaySearch(properties);
 
 	}
 

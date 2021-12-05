@@ -16,6 +16,7 @@ public class ManagerController extends GUIcontroller {
     public void start() {
         view.intializeDashboard();
         view.displayDashboard();
+        // logouts by destroying current user frame and recreating intial login frame
         view.addLogoutListener(e -> {
             view.dispose();
             login.start();

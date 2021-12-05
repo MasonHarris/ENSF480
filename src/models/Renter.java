@@ -4,8 +4,10 @@ import java.util.ArrayList;
 
 public class Renter {
 	public String sendEmails;
-	
-	public ArrayList<Property> search() {
-		
-	}
+
+	/*
+	 * public ArrayList<Property> search() {
+	 * 
+	 * }
+	 */
 }

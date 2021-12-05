@@ -1,13 +1,16 @@
 package views;
 
-import javax.print.DocFlavor.STRING;
 import javax.swing.*;
+
+import models.Property;
+import views.TablePanel;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
 
 public class RenterView extends GUIview {
 	JButton submitButton;
+	TablePanel tPanel;
 	JTextField bathRoomsText;
 	JTextField bedRoomsText;
 	JTextField propertyTypeText;
@@ -21,9 +24,11 @@ public class RenterView extends GUIview {
 		super(width, height);
 		intializeSearchPanel();
 		initalizeFrame(frameName);
+		tPanel = new TablePanel(width, height, "Contact selected landlord");
 
 	}
 
+	// creates and saves search panel elements into memory
 	public void intializeSearchPanel() {
 		JLabel searchLabel = new JLabel("Search criteria for property");
 		searchLabel.setBounds((int) (width * 0.3), (int) (height * 0.01), (int) (width * 0.5), (int) (height * 0.02));
@@ -96,6 +101,8 @@ public class RenterView extends GUIview {
 
 	}
 
+	// following get methods are used to extract the text entered in on gui
+	// textboxes/combo boxes
 	public String getBedRoomsText() {
 		return bedRoomsText.getText();
 	}
@@ -116,19 +123,24 @@ public class RenterView extends GUIview {
 		return propertyTypeText.getText();
 	}
 
+	// the following methods until the end add event listeners to all the buttons
 	public void addSubmitListener(ActionListener listener) {
 		submitButton.addActionListener(listener);
+	}
+
+	public void addContactListener(ActionListener listener) {
+		tPanel.submitButton.addActionListener(listener);
 	}
 
 	public void displayError(String error) {
 		errorLabel.setText(error);
 		panel.repaint();
 	}
-	// receives arraylist of properties to display
-	/*
-	 * public void displaySearch(ArrayList<Property>) {
-	 * 
-	 * }
-	 */
+
+	public void displaySearch(ArrayList<Property> properties) {
+		tPanel.displayPropertyTableRenter(properties);
+		frame.setContentPane(tPanel);
+		frame.revalidate();
+	}
 
 }

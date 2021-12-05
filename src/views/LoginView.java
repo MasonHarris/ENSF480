@@ -11,6 +11,8 @@ public class LoginView extends GUIview {
 	JPanel loginPanel;
 	JTextField usernameText;
 	JPasswordField passwordText;
+	JButton selectSignUpButton;
+	JButton signupButton;
 
 	public LoginView(String frameName, int width, int height) {
 
@@ -25,15 +27,17 @@ public class LoginView extends GUIview {
 		renterButton = new JButton("Proceed as normal renter");
 		loginButton = new JButton("login");
 		selectLogin = new JButton("Login as registered user");
+		signupButton = new JButton();
+		selectSignUpButton = new JButton("Sign up");
 		panel.add(renterButton);
-
+		panel.add(selectSignUpButton);
 		panel.add(selectLogin);
 		panel.add(renterButton);
 
 	}
 
 	public void displayDashboard() {
-		System.out.println("hello");
+
 		frame.setContentPane(panel);
 		frame.invalidate();
 		frame.validate();
@@ -70,6 +74,11 @@ public class LoginView extends GUIview {
 
 	}
 
+	public void signUpPanel() {
+
+	}
+
+	// the following methods until the end add event listeners to all the buttons
 	public void addRenterListener(ActionListener listener) {
 		renterButton.addActionListener(listener);
 	}
@@ -82,6 +91,15 @@ public class LoginView extends GUIview {
 		selectLogin.addActionListener(listener);
 	}
 
+	public void addSelectSignupListener(ActionListener listener) {
+		selectSignUpButton.addActionListener(listener);
+	}
+
+	public void addSignupListener(ActionListener listener) {
+		signupButton.addActionListener(listener);
+	}
+
+	// methods used to retrieve values in user input sections
 	public String getUserText() {
 		return usernameText.getText();
 	}

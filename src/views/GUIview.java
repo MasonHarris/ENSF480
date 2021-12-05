@@ -18,6 +18,7 @@ public abstract class GUIview {
 
 	}
 
+	// creates and saves the frame into memory
 	public void initalizeFrame(String frameName) {
 		frame = new JFrame(frameName);
 		frame.setSize(width, height);
@@ -26,6 +27,7 @@ public abstract class GUIview {
 
 	}
 
+	// destroys frame
 	public void dispose() {
 		frame.dispose();
 	}

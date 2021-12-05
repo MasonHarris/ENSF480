@@ -2,9 +2,12 @@ package views;
 
 import java.awt.FlowLayout;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
+
+import models.Property;
 
 public class ManagerView extends GUIview {
     JButton logoutButton;
@@ -12,22 +15,29 @@ public class ManagerView extends GUIview {
     JButton submitButton;
     JButton accessDatabaseButton;
     JButton generateReportButton;
+    JButton setFeesButton;
+    TablePanel tPanel;
+    String options[] = { "active", "cancelled", "rented", "suspended", "unsuspended" };
 
     public ManagerView(String frameName, int width, int height) {
         super(width, height);
+        tPanel = new TablePanel(width, height, "save changes");
         initalizeFrame(frameName);
     }
 
+    // creates and saves dashboard elements into memory
     public void intializeDashboard() {
         changeStateButton = new JButton("Change listing state");
         logoutButton = new JButton("Logout");
         generateReportButton = new JButton("Generate periodical report");
         accessDatabaseButton = new JButton("Access database");
         submitButton = new JButton("Submit");
+        setFeesButton = new JButton("Set or change fees");
         panel = new JPanel(new FlowLayout());
         panel.add(changeStateButton);
         panel.add(generateReportButton);
         panel.add(accessDatabaseButton);
+        panel.add(setFeesButton);
         panel.add(logoutButton);
 
     }
@@ -38,6 +48,7 @@ public class ManagerView extends GUIview {
 
     }
 
+    // the following methods until the end add event listeners to all the buttons
     public void addLogoutListener(ActionListener listener) {
         logoutButton.addActionListener(listener);
 
@@ -60,6 +71,19 @@ public class ManagerView extends GUIview {
 
     public void addSubmitListener(ActionListener listener) {
         submitButton.addActionListener(listener);
+    }
+
+    public void addSetFeesListner(ActionListener listener) {
+        setFeesButton.addActionListener(listener);
+    }
+
+    public void listingChangesListener(ActionListener listener) {
+        tPanel.submitButton.addActionListener(listener);
+    }
+
+    public void displayListingChanges(ArrayList<Property> properties) {
+        tPanel.displayPropertyTableChangeListing(properties, options);
+
     }
 
 }

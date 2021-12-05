@@ -2,9 +2,13 @@ package views;
 
 import java.awt.FlowLayout;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Properties;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
+
+import models.Property;
 
 public class LandlordView extends GUIview {
     JButton registerButton;
@@ -13,12 +17,16 @@ public class LandlordView extends GUIview {
     JButton payFeeButton;
     JButton submitButton;
     JButton viewNotifications;
+    TablePanel tPanel;
+    String options[] = { "Suspended", "Unsuspended", "Cancelled", "Rented" };
 
     public LandlordView(String frameName, int width, int height) {
         super(width, height);
+        tPanel = new TablePanel(width, height, "Save changes");
         initalizeFrame(frameName);
     }
 
+    // creates and saves dashboard elements into memory
     public void intializeDashboard() {
         panel = new JPanel(new FlowLayout());
         registerButton = new JButton("Register property");
@@ -30,7 +38,7 @@ public class LandlordView extends GUIview {
         panel.add(changeStateButton);
         panel.add(viewNotifications);
         panel.add(logoutButton);
-        
+
     }
 
     public void displayDashboard() {
@@ -38,6 +46,7 @@ public class LandlordView extends GUIview {
         frame.revalidate();
     }
 
+    // the following methods until the end add event listeners to all the buttons
     public void addLogoutListener(ActionListener listener) {
         logoutButton.addActionListener(listener);
     }
@@ -59,6 +68,17 @@ public class LandlordView extends GUIview {
 
     public void addNotificationsListener(ActionListener listener) {
         viewNotifications.addActionListener(listener);
+    }
+
+    public void listingChangesListener(ActionListener listener) {
+        tPanel.submitButton.addActionListener(listener);
+    }
+
+    public void displayListingChanges(ArrayList<Property> properties) {
+        tPanel.displayPropertyTableChangeListing(properties, options);
+        frame.setContentPane(tPanel);
+        frame.revalidate();
+
     }
 
 }

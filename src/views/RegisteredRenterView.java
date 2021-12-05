@@ -11,7 +11,7 @@ public class RegisteredRenterView extends RenterView {
 	JButton viewNotifications;
 	JButton unsubscribe;
 	JButton search;
-	JPanel optionsPanel;
+	JPanel dashBoardPanel;
 	JPanel notificationsPanel;
 
 	public RegisteredRenterView(String frameName, int width, int height) {
@@ -24,26 +24,28 @@ public class RegisteredRenterView extends RenterView {
 
 	// needs to display Initial registered renter screen
 	public void displayDashboard() {
-		frame.setContentPane(optionsPanel);
+		frame.setContentPane(dashBoardPanel);
 		frame.invalidate();
 		frame.validate();
 
 	}
 
+	//creates and saves dashboard elements into memory
 	public void intializeDashboard() {
-		optionsPanel = new JPanel(new FlowLayout());
+		dashBoardPanel = new JPanel(new FlowLayout());
 		logout = new JButton("Logout");
 		viewNotifications = new JButton("View Notificiatons");
 		unsubscribe = new JButton("Unsubscribe");
 		search = new JButton("Search");
 
-		optionsPanel.add(search);
-		optionsPanel.add(viewNotifications);
-		optionsPanel.add(unsubscribe);
-		optionsPanel.add(logout);
+		dashBoardPanel.add(search);
+		dashBoardPanel.add(viewNotifications);
+		dashBoardPanel.add(unsubscribe);
+		dashBoardPanel.add(logout);
 
 	}
 
+	// the following methods until the end add event listeners to all the buttons
 	public void addLogoutListener(ActionListener listener) {
 		logout.addActionListener(listener);
 

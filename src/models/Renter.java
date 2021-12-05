@@ -1,9 +1,11 @@
 package models;
 
+import java.util.ArrayList;
+
 public class Renter {
 	public String sendEmails;
 	
-	public void search() {
+	public ArrayList<Property> search() {
 		
 	}
 }

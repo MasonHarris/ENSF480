@@ -1,16 +1,14 @@
 package views;
 import javax.swing.*;
-<<<<<<< Updated upstream
+
 import java.awt.*;
 import java.awt.event.*;
-public abstract class GUIview {
-	JFrame frame;
-	JPanel panel;
+
 	
-	public GUIview() {
+	
 		
 		
-=======
+
 import java.awt.event.ActionListener;
 
 public abstract class GUIview {
@@ -43,11 +41,9 @@ public abstract class GUIview {
 	// destroys frame
 	public void dispose() {
 		frame.dispose();
->>>>>>> Stashed changes
+
 	}
-    public void dispose() {
-    	frame.dispose();
-    }
+   
 
 	public void addBackListener(ActionListener listener) {
 		backButton.addActionListener(listener);

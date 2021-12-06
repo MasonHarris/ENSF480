@@ -6,11 +6,13 @@ import views.ManagerView;
 public class ManagerController extends GUIcontroller {
     private ManagerView view;
     private LoginController login;
+    private String username;
 
-    public ManagerController(Database model, ManagerView view, LoginController login) {
+    public ManagerController(Database model, ManagerView view, LoginController login, String username) {
         super(model);
         this.view = view;
         this.login = login;
+        this.username = username;
     }
 
     public void start() {

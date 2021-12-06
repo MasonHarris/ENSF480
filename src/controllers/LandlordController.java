@@ -10,8 +10,9 @@ public class LandlordController extends GUIcontroller {
 
     private LandlordView view;
     private LoginController login;
+    private String username;
 
-    public LandlordController(Database model, LandlordView view, LoginController login) {
+    public LandlordController(Database model, LandlordView view, LoginController login, String username) {
         super(model);
         this.view = view;
         this.login = login;
@@ -28,12 +29,16 @@ public class LandlordController extends GUIcontroller {
 
         });
         view.formListener(e -> registerProperty());
-        ArrayList<Property> properties = new ArrayList<>();
-        properties.add(new Property("Apartment", true, 5, 5, false, 5, "NW", "Listed", "123 street", 5, 5.6));
-        properties.add(new Property("House", true, 55, 59, false, 5, "SW", "Listed", "1234 street", 52, 5.62));
+        ArrayList<Property> properties = model.getLandlordProperties(username);
         view.addChangeListingListener(e -> {
             view.displayListingChanges(properties);
         });
+    }
+    public void registerProperty(Property property){
+        model.registerProperty(property);
+    }
+    public void changeListing(int propertyiD, String newListing){
+        model.changePropertyListing(propertyiD, newListing);
     }
 
     public void registerProperty() {

@@ -59,16 +59,16 @@ public class LoginController extends GUIcontroller {
 			view.dispose();
 			if(model.validateAccountType(username).equals("Landlord")){
 				LandlordController landlord = new LandlordController(model, new LandlordView("Landlord", 1200, 1200),
-					this);
+					this, username);
 					landlord.start();
 			}
 			else if(model.validateAccountType(username).equals("Manager")){
-				ManagerController manager = new ManagerController(model, new ManagerView("Manager", 1200, 1200), this);
+				ManagerController manager = new ManagerController(model, new ManagerView("Manager", 1200, 1200), this, username);
 				manager.start();
 			}
 			else{
 				RegisteredRenterController registeredRenter = new RegisteredRenterController(model, new RegisteredRenterView(username, 1200, 1200),
-				this);
+				this, username);
 				registeredRenter.start();
 			}
 		} 

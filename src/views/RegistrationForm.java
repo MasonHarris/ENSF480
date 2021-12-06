@@ -58,9 +58,17 @@ public class RegistrationForm extends JPanel {
 
     }
 
-    public void setText(String error) {
+    public void displayError(String error) {
         errorLabel.setText(error);
         repaint();
+    }
+
+    // gets registration values in this order address number, addresss name,
+    // bathrooms, bedrooms, property type, quadrant, furnished
+    public String[] getValues() {
+        return new String[] { addressNumber.getText(), addressName.getText(), bathrooms.getText(),
+                bedrooms.getText(), propertyType.getText(), (String) quadrant.getSelectedItem(),
+                (String) furnished.getSelectedItem() };
     }
 
 }

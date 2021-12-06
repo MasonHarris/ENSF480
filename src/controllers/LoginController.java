@@ -50,27 +50,28 @@ public class LoginController extends GUIcontroller {
 		// key to access info about user on database
 		// else if login is invalid(make this clear in the return), error message
 
-		System.out.println("user " + username + " passwrod " + password);
+		System.out.println("user " + username + " password " + password);
 		// this should call a validate login function in the database, so
 		// model.validateLogin(username,password)
-		if (username.equals("miku") && password.contentEquals("nakano")) {
+		if (model.validateLogin(username, password)) {
 			// deal with valid login
 			System.out.println("valid");
 			view.dispose();
-			RegisteredRenterController miku = new RegisteredRenterController(model,
-					new RegisteredRenterView("Miku", 1200, 1200), this);
-			miku.start();
-		} else if (username.equals("ai") && password.equals("hayasaka")) {
-			view.dispose();
-			LandlordController hayasaka = new LandlordController(model, new LandlordView("frameName", 1200, 1200),
+			if(model.validateAccountType(username).equals("Landlord")){
+				LandlordController landlord = new LandlordController(model, new LandlordView("Landlord", 1200, 1200),
 					this);
-			hayasaka.start();
-		} else if (username.equals("Yuuki") && password.equals("Asuna")) {
-			view.dispose();
-			ManagerController asuna = new ManagerController(model, new ManagerView("Manager", 1200, 1200), this);
-			asuna.start();
-		}
-
+					landlord.start();
+			}
+			else if(model.validateAccountType(username).equals("Manager")){
+				ManagerController manager = new ManagerController(model, new ManagerView("Manager", 1200, 1200), this);
+				manager.start();
+			}
+			else{
+				RegisteredRenterController registeredRenter = new RegisteredRenterController(model, new RegisteredRenterView(username, 1200, 1200),
+				this);
+				registeredRenter.start();
+			}
+		} 
 		else {
 			view.displayLoginError();
 

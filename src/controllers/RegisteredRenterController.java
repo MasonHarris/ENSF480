@@ -7,11 +7,13 @@ import models.Property;
 public class RegisteredRenterController extends RenterController {
 	private RegisteredRenterView view;
 	private LoginController login;
+	private String username;
 
-	public RegisteredRenterController(Database model, RegisteredRenterView view, LoginController login) {
+	public RegisteredRenterController(Database model, RegisteredRenterView view, LoginController login, String username) {
 		super(model);
 		this.view = view;
 		this.login = login;
+		this.username = username;
 		// super.view = view;
 
 	}

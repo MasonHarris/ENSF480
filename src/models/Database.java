@@ -45,8 +45,6 @@ public class Database {
 			System.exit(0);
 			return false;
 		}
-		
-		
 	}
 	public String validateAccountType(String user){
 		try{
@@ -74,6 +72,110 @@ public class Database {
 			return "Renter";
 		}
 	}
-	//the search property method should return an arraylist of property objects
+	public ArrayList<Property> getAllProperties(){
+		try{
+			ArrayList<Property> list = new ArrayList<Property>();
+			String query = "SELECT * FROM PROPERTY";
+			PreparedStatement statement = connection.prepareStatement(query);
+			ResultSet res = statement.executeQuery();
+			while(res.next()){
+				list.add(new Property(res.getString("propertyType"), res.getBoolean("isListed"), res.getInt("noOfBedrooms"), 
+				res.getInt("noOfBathrooms"), res.getBoolean("Furnished"), res.getInt("propertyID"), res.getString("cityQuadrant"), 
+				res.getString("listingState"), res.getString("address"), res.getInt("listingPeriod"), res.getDouble("amountofFee"), 
+				res.getString("landlordUsername")));
+			}
+			return list;
+		}
+		catch(SQLException e){
+			System.out.println(e);
+			System.exit(0);
+			return new ArrayList<Property>();
+		}
+	}
+	public ArrayList<Property> getLandlordProperties(String username){
+		try{
+			ArrayList<Property> list = new ArrayList<Property>();
+			String query = "SELECT * FROM PROPERTY WHERE landlordUsername = ?";
+			PreparedStatement statement = connection.prepareStatement(query);
+			statement.setString(1, username);
+			ResultSet res = statement.executeQuery();
+			while(res.next()){
+				list.add(new Property(res.getString("propertyType"), res.getBoolean("isListed"), res.getInt("noOfBedrooms"), 
+				res.getInt("noOfBathrooms"), res.getBoolean("Furnished"), res.getInt("propertyID"), res.getString("cityQuadrant"), 
+				res.getString("listingState"), res.getString("address"), res.getInt("listingPeriod"), res.getDouble("amountofFee"), 
+				res.getString("landlordUsername")));
+			}
+			return list;
+		}
+		catch(SQLException e){
+			System.out.println(e);
+			System.exit(0);
+			return new ArrayList<Property>();
+		}
+	}
+	public void registerProperty(Property p){
+		try{
+			String query = "INSERT INTO PROPERTY(propertyType, propertyID, isListed, noOfBedrooms, noOfBathrooms, Furnished, cityQuadrant, listingPeriod, landlordUsername, listingState, amountofFee, address)";
+			query = query + "Values(?,?,?,?,?,?,?,?,?,?,?)";
+			PreparedStatement statement = connection.prepareStatement(query);
+			statement.setString(1, p.getPropertyType());
+			statement.setBoolean(2, p.isIsListed());
+			statement.setInt(3, p.getNumOfBed());
+			statement.setInt(4, p.getNumOfBath());
+			statement.setBoolean(5, p.isIsFurnished());
+			statement.setString(6, p.getCityQuadrant());
+			statement.setInt(7, p.getListingPeriod());
+			statement.setString(8, p.getLandlordUsername());
+			statement.setString(9, p.getPropertyStatus());
+			statement.setDouble(10, p.getAmountOfFee());
+			statement.setString(11, p.getAddress());
+			statement.executeUpdate();
+		}
+		catch(SQLException e){
+			System.out.println(e);
+			System.exit(0);
+		}
+	}
+	public void changePropertyListing(int id, String listing){
+		try{
+			String query = "UPDATE PROPERTY SET listingState = ? WHERE propertyID = ?";
+			PreparedStatement statement = connection.prepareStatement(query);
+			statement.setString(1, listing);
+			statement.setInt(2, id);
+			statement.executeUpdate();
+		}
+		catch(SQLException e){
+			System.out.println(e);
+			System.exit(0);
+		}
+	}
+	public void registerUser(String user, String password){
+		try{
+			String query = "INSERT INTO ACCOUNT(Username, Password) Values(?,?)";
+			PreparedStatement statement = connection.prepareStatement(query);
+			statement.setString(1, user);
+			statement.setString(2, password);
+			statement.executeUpdate();
+		}
+		catch(SQLException e){
+			System.out.println(e);
+			System.exit(0);
+		}
+	}
+	public void subscribeNotification(String user, int noOfBath, int noOfBed, Boolean Furnished, String cityQuaString, String propertyType){
 
+	}
+	public void unsubscribeNotification(String user){
+		try{
+			String query = "DELETE FROM NOTIFICATION WHERE Username = ?";
+			PreparedStatement statement = connection.prepareStatement(query);
+			statement.setString(1, user);
+			statement.executeUpdate();
+		}
+		catch(SQLException e){
+			System.out.println(e);
+			System.exit(0);
+		}
+	}
+	//the search property method should return an arraylist of property objects
 }

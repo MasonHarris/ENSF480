@@ -18,12 +18,13 @@ public class LandlordView extends GUIview {
     JButton submitButton;
     JButton viewNotifications;
     TablePanel tPanel;
-    propertyRegistrationForm form;
+    RegistrationForm form;
+    String options[] = { "Suspended", "Unsuspended", "Cancelled", "Rented" };
 
     public LandlordView(String frameName, int width, int height) {
         super(width, height);
         tPanel = new TablePanel(width, height, "Save changes");
-        form = new propertyRegistrationForm();
+        form = new RegistrationForm();
         initalizeFrame(frameName);
     }
 

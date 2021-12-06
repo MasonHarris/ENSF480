@@ -13,14 +13,12 @@ public class LandlordController extends GUIcontroller {
 
     private LandlordView view;
     private LoginController login;
-    // properties registered to the landlord
-    private ArrayList<Property> regiProperties;
+    private String username;
 
-    public LandlordController(Database model, LandlordView view, LoginController login) {
+    public LandlordController(Database model, LandlordView view, LoginController login, String username) {
         super(model);
         this.view = view;
         this.login = login;
-        regiProperties = new ArrayList<Property>();
 
     }
 

@@ -2,17 +2,19 @@ package controllers;
 
 import models.Database;
 import views.RegisteredRenterView;
-import views.RenterView;
 import models.Property;
 
 public class RegisteredRenterController extends RenterController {
 	private RegisteredRenterView view;
 	private LoginController login;
+	private String username;
 
-	public RegisteredRenterController(Database model, RegisteredRenterView view, LoginController login) {
+	public RegisteredRenterController(Database model, RegisteredRenterView view, LoginController login,
+			String username) {
 		super(model);
 		this.view = view;
 		this.login = login;
+		this.username = username;
 		// super.view = view;
 
 	}
@@ -38,6 +40,7 @@ public class RegisteredRenterController extends RenterController {
 	public void propertySearch(RenterView view) {
 		super.propertySearch(view);
 		// code to subscribe renter to database
+		
 	}
 
 	public void unsubscribeRenter() {

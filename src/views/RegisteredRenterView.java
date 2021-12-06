@@ -30,11 +30,11 @@ public class RegisteredRenterView extends RenterView {
 
 	}
 
-	// creates and saves dashboard elements into memory
+	//creates and saves dashboard elements into memory
 	public void intializeDashboard() {
 		dashBoardPanel = new JPanel(new FlowLayout());
 		logout = new JButton("Logout");
-		viewNotifications = new JButton("View Notifications");
+		viewNotifications = new JButton("View Notificiatons");
 		unsubscribe = new JButton("Unsubscribe");
 		search = new JButton("Search");
 

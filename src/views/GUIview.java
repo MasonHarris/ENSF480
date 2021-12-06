@@ -34,12 +34,11 @@ public abstract class GUIview {
 	// destroys frame
 	public void dispose() {
 		frame.dispose();
-
 	}
-   
 
-	public void addBackListener(ActionListener listener) {
+public void addBackListener(ActionListener listener) {
 		backButton.addActionListener(listener);
 	}
+
 
 }

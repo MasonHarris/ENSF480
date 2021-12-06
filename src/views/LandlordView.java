@@ -77,7 +77,7 @@ public class LandlordView extends GUIview {
     }
 
     public void registerFormListener(ActionListener listener) {
-        form.sendButton.addActionListener(listener);
+        form.register.addActionListener(listener);
     }
 
     public void displayListingChanges(ArrayList<Property> properties) {
@@ -92,7 +92,7 @@ public class LandlordView extends GUIview {
     }
 
     public String[] getformFields() {
-        return form.getFields();
+        return form.getValues();
     }
 
     public HashMap<Integer, String> getSelectedProperties() {
@@ -100,7 +100,7 @@ public class LandlordView extends GUIview {
     }
 
     public void displayRegisterProperty() {
-        form.displayForm();
+        form.displayForm(width, height);
         frame.setContentPane(form);
         frame.revalidate();
     }

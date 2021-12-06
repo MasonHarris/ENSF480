@@ -11,6 +11,7 @@ public class ManagerController extends GUIcontroller {
     private ManagerView view;
     private LoginController login;
     private String username;
+    private ArrayList<Property> allProperties;
 
     public ManagerController(Database model, ManagerView view, LoginController login, String username) {
         super(model);

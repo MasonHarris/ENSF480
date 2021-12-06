@@ -10,7 +10,7 @@ import views.LandlordView;
 import java.util.HashMap;
 
 public class LandlordController extends GUIcontroller {
-
+    private ArrayList<Property> regiProperties;
     private LandlordView view;
     private LoginController login;
     private String username;
@@ -33,8 +33,6 @@ public class LandlordController extends GUIcontroller {
         });
         view.addBackListener(e -> view.displayDashboard());
 
-        regiProperties.add(new Property("Apartment", true, 5, 5, false, 5, "NW", "Listed", "123 street", 5, 5.6));
-        regiProperties.add(new Property("House", true, 55, 59, false, 5, "SW", "Listed", "1234 street", 52, 5.62));
         view.addChangeListingListener(e -> {
             view.displayListingChanges(regiProperties);
         });

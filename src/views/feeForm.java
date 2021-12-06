@@ -14,22 +14,28 @@ public class feeForm extends JPanel {
     JLabel errorLabel;
 
     public feeForm() {
-        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        setLayout(null);
 
     }
 
-    public void displayFees(int periodValue, double feesValue) {
+    public void displayFees(int width, int height, int periodValue, double feesValue) {
         fee = new JTextField(Double.toString(feesValue));
+
         period = new JTextField(Integer.toString(periodValue));
         submit = new JButton("Submit");
-        JLabel feeLabel = new JLabel("Fee value");
-        add(feeLabel);
-        add(fee);
+        fee.setBounds(110, (int) (height * 0.05), (int) (width * 0.1), (int) (height * 0.025));
+        JLabel feeLabel = new JLabel("Fees");
+        feeLabel.setBounds(10, (int) (height * 0.05), (int) (width * 0.1), (int) (height * 0.025));
         JLabel periodLabel = new JLabel("Period");
-        add(periodLabel);
+        period.setBounds(110, (int) (height * 0.10), (int) (width * 0.1), (int) (height * 0.025));
+        periodLabel.setBounds(10, (int) (height * 0.10), (int) (width * 0.1), (int) (height * 0.025));
+        submit.setBounds(110, (int) (height * 0.15), (int) (width * 0.1), (int) (height * 0.025));
+        errorLabel.setBounds(110, (int) (height * 0.20), (int) (width * 0.1), (int) (height * 0.025));
         add(period);
+        add(periodLabel);
+        add(fee);
+        add(feeLabel);
         add(submit);
-        errorLabel = new JLabel();
         add(errorLabel);
 
     }

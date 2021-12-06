@@ -80,6 +80,10 @@ public class LandlordView extends GUIview {
         form.register.addActionListener(listener);
     }
 
+    public void formError(String error) {
+        form.displayError(error);
+    }
+
     public void displayListingChanges(ArrayList<Property> properties) {
         tPanel.displayPropertyTableChangeListing(properties);
         backButton.setBounds((int) (width * 0.25), (int) (height * 0.55), (int) (width * 0.2),

@@ -34,7 +34,8 @@ VALUES
 	('doctor','wdsd341212',4),
 	('sandy','n2nk23km2',5),
 	('jake','world123',6),
-	('ai', 'hayasaka',7);
+	('ai', 'hayasaka',7),
+    ('itsuki','nakano',8);
 /*!40000 ALTER TABLE `ACCOUNT` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -80,7 +81,8 @@ LOCK TABLES `MANAGER` WRITE;
 
 INSERT INTO `MANAGER` (`id`, `Username`)
 VALUES
-	(1,'jake');
+	(1,'jake'),
+    (8,'ituski');
 
 /*!40000 ALTER TABLE `MANAGER` ENABLE KEYS */;
 UNLOCK TABLES;

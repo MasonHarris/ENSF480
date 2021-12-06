@@ -33,7 +33,10 @@ public class RegisteredRenterController extends RenterController {
 		});
 		view.addSearchListener(e -> view.displaySearchPanel());
 		view.addUnsubscribeListener(e -> unsubscribeRenter());
-		view.addNotificationsListener(e -> view.displayNotificationsPanel());
+		// someone should add a function to get all the properties the renter was
+		// notified of as an arraylist of property
+		// then put that arraylist as the argument of view.displayNotificationsPanel()
+		// view.addNotificationsListener(e -> view.displayNotificationsPanel());
 		view.addBackListener(e -> view.displayDashboard());
 	}
 
@@ -44,10 +47,16 @@ public class RegisteredRenterController extends RenterController {
 
 	}
 
+	public void viewNotifications() {
+		// gets notifications from database(as arraylist of properties)
+
+	}
+
 	public void unsubscribeRenter() {
 		// code to unsubscribe renter
 		// if renter unsubscribed
-		view.unsubscribeConfirmation();
+		view.confirmation("You have been unsubscribed");
+		model.unsubscribeNotification(username);
 
 	}
 

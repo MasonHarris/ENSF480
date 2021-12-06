@@ -2,9 +2,13 @@ package views;
 
 import java.awt.FlowLayout;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Properties;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
+
+import models.Property;
 
 public class RegisteredRenterView extends RenterView {
 	JButton logout;
@@ -30,7 +34,7 @@ public class RegisteredRenterView extends RenterView {
 
 	}
 
-	//creates and saves dashboard elements into memory
+	// creates and saves dashboard elements into memory
 	public void intializeDashboard() {
 		dashBoardPanel = new JPanel(new FlowLayout());
 		logout = new JButton("Logout");
@@ -67,12 +71,8 @@ public class RegisteredRenterView extends RenterView {
 	}
 
 	// switches to display notifications optionsPanel on frame
-	public void displayNotificationsPanel() {
-
-	}
-
-	// should display a pop up to confirm unsubscription is unsuccessful
-	public void unsubscribeConfirmation() {
+	public void displayNotificationsPanel(ArrayList<Property> notifications) {
+		super.displaySearch(notifications);
 
 	}
 

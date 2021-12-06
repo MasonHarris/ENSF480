@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import models.Property;
-import java.util.Map;
+
 import models.Property;
 
 public class RenterController extends GUIcontroller {

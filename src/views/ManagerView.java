@@ -17,11 +17,13 @@ public class ManagerView extends GUIview {
     JButton generateReportButton;
     JButton setFeesButton;
     TablePanel tPanel;
+    feeForm form;
 
     public ManagerView(String frameName, int width, int height) {
         super(width, height);
         tPanel = new TablePanel(width, height, "save changes");
         initalizeFrame(frameName);
+        form = new feeForm();
     }
 
     // creates and saves dashboard elements into memory
@@ -78,6 +80,27 @@ public class ManagerView extends GUIview {
 
     public void TableButtonListener(ActionListener listener) {
         tPanel.submitButton.addActionListener(listener);
+    }
+
+    public void FeesListener(ActionListener listener) {
+        form.submit.addActionListener(listener);
+
+    }
+
+    public void displayForm(int periodValue, int feesValue) {
+        backButton.setBounds(110, (int) (height * 0.20), (int) (width * 0.1), (int) (height * 0.025));
+        form.add(backButton);
+        form.displayFees(width, height, periodValue, feesValue);
+        frame.setContentPane(form);
+        frame.revalidate();
+    }
+
+    public void displayFormError(String error) {
+        form.displayError(error);
+    }
+
+    public String[] getFormFields() {
+        return form.getFields();
     }
 
     public HashMap<Integer, String> getSelectedProperties() {

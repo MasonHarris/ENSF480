@@ -19,6 +19,9 @@ public class LandlordController extends GUIcontroller {
         super(model);
         this.view = view;
         this.login = login;
+        this.username = username;
+        regiProperties = new ArrayList<Property>();
+        regiProperties = model.getLandlordProperties(this.username);
 
     }
 
@@ -46,9 +49,30 @@ public class LandlordController extends GUIcontroller {
     }
 
     public void registerProperty() {
-        String[] inputs = view.getformFields();
-        // need to add error checking to inputs, if successful this should call a
-        // function to update database
+        // gets registration values in this order address number, addresss name,
+        // bathrooms, bedrooms, property type, quadrant, furnished
+        String value[] = view.getformFields();
+        int addressNumber;
+        int bedrooms;
+        int bathrooms;
+        try {
+            addressNumber = Integer.parseInt(value[0]);
+            bedrooms = Integer.parseInt(value[2]);
+            bathrooms = Integer.parseInt(value[3]);
+        } catch (NumberFormatException e) {
+            view.formError("Non number put in number field");
+
+            return;
+
+        }
+
+        if (!isStringAlpha(value[4]) || !isStringAlpha(value[1])) {
+            view.formError("Non alphabetic character put in invalid field");
+            return;
+        }
+
+        view.confirmation("Registered property");
+        
 
     }
 
@@ -67,7 +91,7 @@ public class LandlordController extends GUIcontroller {
             if ((oldstate != pair.getValue())) {
                 // update database with new state(pair.getValue()) should also update properties
                 // arraylist by calling getAllProperties after loop
-                System.out.println("Property " + pair.getKey() + " has a new status of  " + pair.getValue());
+                model.changePropertyListing(regiProperties.get(pair.getKey()).getPropertyId(), pair.getValue());
             }
         }
 

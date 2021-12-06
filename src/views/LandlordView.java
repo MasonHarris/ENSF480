@@ -18,6 +18,7 @@ public class LandlordView extends GUIview {
     JButton submitButton;
     JButton viewNotifications;
     TablePanel tPanel;
+    RegistrationForm form;
     String options[] = { "Suspended", "Unsuspended", "Cancelled", "Rented" };
 
     public LandlordView(String frameName, int width, int height) {
@@ -72,6 +73,25 @@ public class LandlordView extends GUIview {
 
     public void listingChangesListener(ActionListener listener) {
         tPanel.submitButton.addActionListener(listener);
+    }
+
+    public void formListener(ActionListener listener) {
+        form.register.addActionListener(listener);
+
+    }
+
+    public String[] getFormValues() {
+        return form.getValues();
+    }
+
+    public void displayRegisterForm() {
+        form.displayForm();
+        frame.setContentPane(form);
+        frame.revalidate();
+    }
+
+    public void formError(String error) {
+        form.displayError(error);
     }
 
     public void displayListingChanges(ArrayList<Property> properties) {

@@ -33,11 +33,17 @@ public class LandlordController extends GUIcontroller {
         view.addChangeListingListener(e -> {
             view.displayListingChanges(properties);
         });
+        view.addBackListener(e -> {
+            view.displayDashboard();
+        });
+        view.addRegisterListener(e -> view.displayRegisterForm());
     }
-    public void registerProperty(Property property){
+
+    public void registerProperty(Property property) {
         model.registerProperty(property);
     }
-    public void changeListing(int propertyiD, String newListing){
+
+    public void changeListing(int propertyiD, String newListing) {
         model.changePropertyListing(propertyiD, newListing);
     }
 

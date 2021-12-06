@@ -1,4 +1,7 @@
 
+
+
+USE PROPERTY_RENTAL;
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
@@ -30,8 +33,8 @@ VALUES
 	('cats34','sfmk3ml$312',3),
 	('doctor','wdsd341212',4),
 	('sandy','n2nk23km2',5),
-	('jake','world123',6);
-
+	('jake','world123',6),
+	('ai', 'hayasaka',7);
 /*!40000 ALTER TABLE `ACCOUNT` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -54,7 +57,8 @@ LOCK TABLES `LANDLORD` WRITE;
 INSERT INTO `LANDLORD` (`Username`, `name`, `emailAddress`)
 VALUES
 	('doctor','Howl','howl@me.com'),
-	('sandy','Sandy','sandy1234@gmail.com');
+	('sandy','Sandy','sandy1234@gmail.com'),
+    ('ai','hayasaka','email@email.com');
 
 /*!40000 ALTER TABLE `LANDLORD` ENABLE KEYS */;
 UNLOCK TABLES;

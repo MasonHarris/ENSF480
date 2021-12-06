@@ -23,6 +23,9 @@ public class ManagerController extends GUIcontroller {
             view.dispose();
             login.start();
         });
+        view.addBackListener(e -> {
+            view.displayDashboard();
+        });
 
     }
 

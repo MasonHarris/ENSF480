@@ -82,6 +82,9 @@ public class ManagerView extends GUIview {
     }
 
     public void displayListingChanges(ArrayList<Property> properties) {
+        backButton.setBounds((int) (width * 0.4), (int) (height * 0.55), (int) (width * 0.1),
+                (int) (height * 0.030));
+        tPanel.add(backButton);
         tPanel.displayPropertyTableChangeListing(properties, options);
 
     }

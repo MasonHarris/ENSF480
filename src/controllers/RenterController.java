@@ -17,6 +17,9 @@ public class RenterController extends GUIcontroller {
 	public void start() {
 		view.addSubmitListener(e -> propertySearch(this.view));
 		view.displaySearchPanel();
+		view.addBackListener(e -> {
+			view.displaySearchPanel();
+		});
 
 	}
 

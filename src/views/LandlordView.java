@@ -24,6 +24,7 @@ public class LandlordView extends GUIview {
     public LandlordView(String frameName, int width, int height) {
         super(width, height);
         tPanel = new TablePanel(width, height, "Save changes");
+        form = new RegistrationForm();
         initalizeFrame(frameName);
     }
 
@@ -85,7 +86,10 @@ public class LandlordView extends GUIview {
     }
 
     public void displayRegisterForm() {
-        form.displayForm();
+        backButton.setBounds(100, (int) (height * 0.41), (int) (width * 0.1), (int) (height * 0.025));
+
+        form.add(backButton);
+        form.displayForm(width, height);
         frame.setContentPane(form);
         frame.revalidate();
     }
@@ -96,6 +100,9 @@ public class LandlordView extends GUIview {
 
     public void displayListingChanges(ArrayList<Property> properties) {
         tPanel.displayPropertyTableChangeListing(properties, options);
+        backButton.setBounds((int) (width * 0.35), (int) (height * 0.36), (int) (width * 0.25),
+                (int) (height * 0.030));
+        tPanel.add(backButton);
         frame.setContentPane(tPanel);
         frame.revalidate();
 

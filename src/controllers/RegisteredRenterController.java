@@ -9,7 +9,8 @@ public class RegisteredRenterController extends RenterController {
 	private LoginController login;
 	private String username;
 
-	public RegisteredRenterController(Database model, RegisteredRenterView view, LoginController login, String username) {
+	public RegisteredRenterController(Database model, RegisteredRenterView view, LoginController login,
+			String username) {
 		super(model);
 		this.view = view;
 		this.login = login;
@@ -32,6 +33,9 @@ public class RegisteredRenterController extends RenterController {
 		view.addSearchListener(e -> view.displaySearchPanel());
 		view.addUnsubscribeListener(e -> unsubscribeRenter());
 		view.addNotificationsListener(e -> view.displayNotificationsPanel());
+		view.addBackListener(e -> {
+			view.displayDashboard();
+		});
 	}
 
 	public void unsubscribeRenter() {

@@ -2,6 +2,7 @@ package controllers;
 
 import models.Database;
 import views.RegisteredRenterView;
+import views.RenterView;
 import models.Property;
 
 public class RegisteredRenterController extends RenterController {
@@ -40,7 +41,7 @@ public class RegisteredRenterController extends RenterController {
 	public void propertySearch(RenterView view) {
 		super.propertySearch(view);
 		// code to subscribe renter to database
-		
+
 	}
 
 	public void unsubscribeRenter() {

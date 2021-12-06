@@ -36,9 +36,13 @@ public abstract class GUIview {
 		frame.dispose();
 	}
 
-public void addBackListener(ActionListener listener) {
+	public void addBackListener(ActionListener listener) {
 		backButton.addActionListener(listener);
 	}
 
+	public void confirmation(String message) {
+		JDialog confirm = new JDialog(frame, message);
+		confirm.setVisible(true);
+	}
 
 }

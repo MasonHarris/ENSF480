@@ -7,7 +7,7 @@ import java.util.Properties;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
-
+import java.util.HashMap;
 import models.Property;
 
 public class LandlordView extends GUIview {
@@ -17,6 +17,8 @@ public class LandlordView extends GUIview {
     JButton payFeeButton;
     JButton submitButton;
     JButton viewNotifications;
+    JButton payFeesButton;
+    TablePanel feePanel;
     TablePanel tPanel;
     RegistrationForm form;
     String options[] = { "Suspended", "Unsuspended", "Cancelled", "Rented" };
@@ -24,6 +26,8 @@ public class LandlordView extends GUIview {
     public LandlordView(String frameName, int width, int height) {
         super(width, height);
         tPanel = new TablePanel(width, height, "Save changes");
+        form = new RegistrationForm();
+        feePanel = new TablePanel(width, height, "Pay fees");
         initalizeFrame(frameName);
     }
 
@@ -34,10 +38,12 @@ public class LandlordView extends GUIview {
         changeStateButton = new JButton("Change listing state");
         logoutButton = new JButton("Logout");
         submitButton = new JButton("Submit");
+        payFeeButton = new JButton("Pay fees");
         viewNotifications = new JButton("View notifications");
         panel.add(registerButton);
         panel.add(changeStateButton);
         panel.add(viewNotifications);
+        panel.add(payFeeButton);
         panel.add(logoutButton);
 
     }
@@ -62,6 +68,14 @@ public class LandlordView extends GUIview {
 
     }
 
+    public void addPayFeeListener(ActionListener listener) {
+        payFeeButton.addActionListener(listener);
+    }
+
+    public void payFormListener(ActionListener listener) {
+        feePanel.submitButton.addActionListener(listener);
+    }
+
     public void addSubmitListener(ActionListener listener) {
         submitButton.addActionListener(listener);
 
@@ -71,34 +85,56 @@ public class LandlordView extends GUIview {
         viewNotifications.addActionListener(listener);
     }
 
-    public void listingChangesListener(ActionListener listener) {
+    public void TableButtonListener(ActionListener listener) {
         tPanel.submitButton.addActionListener(listener);
     }
 
-    public void formListener(ActionListener listener) {
+    public void registerFormListener(ActionListener listener) {
         form.register.addActionListener(listener);
-
-    }
-
-    public String[] getFormValues() {
-        return form.getValues();
-    }
-
-    public void displayRegisterForm() {
-        form.displayForm();
-        frame.setContentPane(form);
-        frame.revalidate();
     }
 
     public void formError(String error) {
         form.displayError(error);
     }
 
+    public void displayFees(ArrayList<Property> properties) {
+        backButton.setBounds((int) (width * 0.25), (int) (height * 0.55), (int) (width * 0.2),
+                (int) (height * 0.030));
+        feePanel.displayPropertyPayFees(properties);
+        feePanel.add(backButton);
+        frame.setContentPane(feePanel);
+        frame.revalidate();
+    }
+
     public void displayListingChanges(ArrayList<Property> properties) {
-        tPanel.displayPropertyTableChangeListing(properties, options);
+        tPanel.displayPropertyTableChangeListing(properties);
+        backButton.setBounds((int) (width * 0.25), (int) (height * 0.55), (int) (width * 0.2),
+                (int) (height * 0.030));
+        tPanel.add(backButton);
+
         frame.setContentPane(tPanel);
         frame.revalidate();
 
+    }
+
+    public String[] getformFields() {
+        return form.getValues();
+    }
+
+    public HashMap<Integer, String> getSelectedProperties() {
+        return tPanel.getSelectedProperties(7);
+    }
+
+    public HashMap<Integer, String> getPaymentProperties() {
+        return feePanel.getSelectedProperties(0);
+    }
+
+    public void displayRegisterProperty() {
+        backButton.setBounds(110, (int) (height * 0.40), (int) (width * 0.1), (int) (height * 0.025));
+        form.add(backButton);
+        form.displayForm(width, height);
+        frame.setContentPane(form);
+        frame.revalidate();
     }
 
 }

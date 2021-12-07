@@ -2,6 +2,7 @@ package controllers;
 
 import models.Database;
 import views.RegisteredRenterView;
+import views.RenterView;
 import models.Property;
 
 public class RegisteredRenterController extends RenterController {
@@ -9,7 +10,8 @@ public class RegisteredRenterController extends RenterController {
 	private LoginController login;
 	private String username;
 
-	public RegisteredRenterController(Database model, RegisteredRenterView view, LoginController login, String username) {
+	public RegisteredRenterController(Database model, RegisteredRenterView view, LoginController login,
+			String username) {
 		super(model);
 		this.view = view;
 		this.login = login;
@@ -31,7 +33,23 @@ public class RegisteredRenterController extends RenterController {
 		});
 		view.addSearchListener(e -> view.displaySearchPanel());
 		view.addUnsubscribeListener(e -> unsubscribeRenter());
-		view.addNotificationsListener(e -> view.displayNotificationsPanel());
+		// someone should add a function to get all the properties the renter was
+		// notified of as an arraylist of property
+		// then put that arraylist as the argument of view.displayNotificationsPanel()
+		// view.addNotificationsListener(e -> view.displayNotificationsPanel());
+		view.addBackListener(e -> view.displayDashboard());
+	}
+
+	@Override
+	public void propertySearch(RenterView view) {
+		super.propertySearch(view);
+		// code to subscribe renter to database
+
+	}
+
+	public void viewNotifications() {
+		// gets notifications from database(as arraylist of properties)
+
 	}
 	public void subscribeRenter(){
 	}
@@ -39,8 +57,8 @@ public class RegisteredRenterController extends RenterController {
 	public void unsubscribeRenter() {
 		// code to unsubscribe renter
 		// if renter unsubscribed
+		view.confirmation("You have been unsubscribed");
 		model.unsubscribeNotification(username);
-		view.unsubscribeConfirmation();
 
 	}
 

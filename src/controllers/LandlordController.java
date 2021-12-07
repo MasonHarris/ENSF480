@@ -2,12 +2,15 @@ package controllers;
 
 import java.util.ArrayList;
 
+import javax.print.attribute.standard.RequestingUserName;
+
 import models.Database;
 import models.Property;
 import views.LandlordView;
+import java.util.HashMap;
 
 public class LandlordController extends GUIcontroller {
-
+    private ArrayList<Property> regiProperties;
     private LandlordView view;
     private LoginController login;
     private String username;
@@ -16,6 +19,9 @@ public class LandlordController extends GUIcontroller {
         super(model);
         this.view = view;
         this.login = login;
+        this.username = username;
+        regiProperties = new ArrayList<Property>();
+        regiProperties = model.getLandlordProperties(this.username);
 
     }
 
@@ -28,23 +34,46 @@ public class LandlordController extends GUIcontroller {
             login.start();
 
         });
-        view.formListener(e -> registerProperty());
-        ArrayList<Property> properties = model.getLandlordProperties(username);
+        view.addBackListener(e -> view.displayDashboard());
+
         view.addChangeListingListener(e -> {
-            view.displayListingChanges(properties);
+            view.displayListingChanges(regiProperties);
         });
+        view.TableButtonListener(e -> changeListingState());
+        view.registerFormListener(e -> registerProperty());
+        view.addRegisterListener(e -> view.displayRegisterProperty());
+        //displayFees needs an arraylist argument consisting of an arraylist of property objects that are unpaid for this landlord
+       // view.addPayFeeListener(e -> view.displayFees());
+        view.payFormListener(e -> payFees());
     }
+<<<<<<< HEAD
     public void changeListing(int propertyiD, String newListing){
         model.changePropertyListing(propertyiD, newListing);
+=======
+
+    // used to fill properties arraylist
+    public void getRegisteredProperties() {
+
+>>>>>>> main
     }
 
     public void registerProperty() {
         // gets registration values in this order address number, addresss name,
         // bathrooms, bedrooms, property type, quadrant, furnished
+<<<<<<< HEAD
         String value[] = view.getFormValues();
         int bedrooms;
         int bathrooms;
         Boolean furnished = false;
+=======
+        String value[] = view.getformFields();
+        int addressNumber;
+        int bedrooms;
+        int bathrooms;
+        for (String v : value) {
+            System.out.print(v + " ");
+        }
+>>>>>>> main
         try {
             bedrooms = Integer.parseInt(value[2]);
             bathrooms = Integer.parseInt(value[3]);
@@ -62,6 +91,41 @@ public class LandlordController extends GUIcontroller {
         if (!isStringAlpha(value[4]) || !isStringAlpha(value[1])) {
             view.formError("Non alphabetic character put in invalid field");
             return;
+        }
+        view.formError("");
+        view.confirmation("registered property successfully");
+
+    }
+
+    public void changeListingState() {
+        // integer contains index of altered property, string is altered properties new
+        // state
+        HashMap<Integer, String> alteredProperties = view.getSelectedProperties();
+        if (alteredProperties == null) {
+            return;
+        }
+        System.out.println("hello");
+        for (var pair : alteredProperties.entrySet()) {
+            System.out.println("hello");
+            // if old status is different to new status, update database
+            String oldstate = regiProperties.get(pair.getKey()).getPropertyStatus();
+            if ((oldstate != pair.getValue())) {
+                // update database with new state(pair.getValue()) should also update properties
+                // arraylist by calling getAllProperties after loop
+                model.changePropertyListing(regiProperties.get(pair.getKey()).getPropertyId(), pair.getValue());
+            }
+        }
+
+    }
+
+    public void payFees() {
+        // key is index in arraylist for property, string is property id
+        HashMap<Integer, String> paidFees = view.getPaymentProperties();
+        if (paidFees == null) {
+            return;
+        }
+        for (var pair : paidFees.entrySet()) {
+            // use the pair.getkey() to get property id and update accoridinly
         }
 
     }

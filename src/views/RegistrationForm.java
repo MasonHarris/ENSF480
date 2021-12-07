@@ -1,7 +1,10 @@
 package views;
 
 import javax.swing.JPanel;
-import javax.swing.JTextArea;
+import javax.swing.JTextField;
+
+import java.awt.Dimension;
+
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -9,51 +12,86 @@ import javax.swing.JLabel;
 
 public class RegistrationForm extends JPanel {
     JButton register;
-    JTextArea addressNumber;
-    JTextArea addressName;
-    JTextArea bathrooms;
-    JTextArea bedrooms;
+    JTextField addressNumber;
+    JTextField addressName;
+    JTextField bathrooms;
+    JTextField bedrooms;
     JComboBox<String> quadrant;
     JComboBox<String> furnished;
-    JTextArea propertyType;
+    JTextField propertyType;
     JLabel errorLabel;
 
     public RegistrationForm() {
         register = new JButton("Register");
-        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        addressNumber = new JTextArea();
-        bathrooms = new JTextArea();
-        bedrooms = new JTextArea();
-        addressName = new JTextArea();
+
+        addressNumber = new JTextField();
+
+        bathrooms = new JTextField();
+
+        bedrooms = new JTextField();
+
+        addressName = new JTextField();
+
         quadrant = new JComboBox<String>(new String[] { "NW", "NE", "SE", "SW" });
-        propertyType = new JTextArea();
+
+        propertyType = new JTextField();
+
         furnished = new JComboBox<String>(new String[] { "Furnished", "unfurnished" });
         errorLabel = new JLabel("");
+        setLayout(null);
     }
 
-    public void displayForm() {
+    public void displayForm(int width, int height) {
         JLabel address1Label = new JLabel("Address number");
+        address1Label.setBounds(10, (int) (height * 0.05), (int) (width * 0.1), (int) (height * 0.025));
+        addressNumber.setBounds(110, (int) (height * 0.05), (int) (width * 0.1), (int) (height * 0.025));
         add(address1Label);
         add(addressNumber);
+
         JLabel address2Label = new JLabel("Address name");
+        address2Label.setBounds(10, (int) (height * 0.08), (int) (width * 0.1), (int) (height * 0.025));
+        addressName.setBounds(110, (int) (height * 0.08), (int) (width * 0.1), (int) (height * 0.025));
         add(address2Label);
         add(addressName);
-        JLabel bathRoomsLabel = new JLabel("Number of bathrooms");
+
+        JLabel bathRoomsLabel = new JLabel("# of bathrooms");
+
+        bathRoomsLabel.setBounds(10, (int) (height * 0.11), (int) (width * 0.1), (int) (height * 0.03));
+        bathrooms.setBounds(110, (int) (height * 0.11), (int) (width * 0.1), (int) (height * 0.03));
         add(bathRoomsLabel);
         add(bathrooms);
-        JLabel bedRoomsLabel = new JLabel("Number of bedrooms");
+
+        JLabel bedRoomsLabel = new JLabel("# of bedrooms");
+        bedRoomsLabel.setBounds(10, (int) (height * 0.15), (int) (width * 0.1), (int) (height * 0.025));
+        bedrooms.setBounds(110, (int) (height * 0.15), (int) (width * 0.1), (int) (height * 0.025));
         add(bedRoomsLabel);
         add(bedrooms);
+
         JLabel propetyJLabel = new JLabel("Property type");
+        propetyJLabel.setBounds(10, (int) (height * 0.18), (int) (width * 0.1), (int) (height * 0.025));
+        propertyType.setBounds(110, (int) (height * 0.18), (int) (width * 0.1), (int) (height * 0.025));
         add(propetyJLabel);
         add(propertyType);
+
         JLabel quadrantLabel = new JLabel("Quadrant");
+        quadrantLabel.setLabelFor(quadrant);
+        quadrantLabel.setBounds(110, (int) (height * 0.21), (int) (width * 0.1), (int) (height * 0.025));
         add(quadrantLabel);
+        quadrant.setBounds(110, (int) (height * 0.23), (int) (width * 0.1), (int) (height * 0.025));
         add(quadrant);
+
         JLabel furnishedLabel = new JLabel("Furnished");
+        furnishedLabel.setLabelFor(furnished);
+        furnishedLabel.setBounds(110, (int) (height * 0.26), (int) (width * 0.1), (int) (height * 0.025));
+        furnished.setBounds(110, (int) (height * 0.29), (int) (width * 0.1), (int) (height * 0.025));
+
         add(furnishedLabel);
         add(furnished);
+        register.setBounds(110, (int) (height * 0.33), (int) (width * 0.1), (int) (height * 0.025));
+
         add(register);
+        errorLabel.setBounds(110, (int) (height * 0.45), (int) (width * 0.3), (int) (height * 0.025));
+
         add(errorLabel);
 
     }

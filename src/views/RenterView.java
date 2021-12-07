@@ -7,6 +7,7 @@ import views.TablePanel;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class RenterView extends GUIview {
 	JButton submitButton;
@@ -17,6 +18,8 @@ public class RenterView extends GUIview {
 	JComboBox<String> quadrant;
 	JComboBox<String> furnished;
 	JLabel errorLabel;
+	emailForm form;
+
 	// used to display search results
 	JPanel displayResults;
 
@@ -24,6 +27,7 @@ public class RenterView extends GUIview {
 		super(width, height);
 		intializeSearchPanel();
 		initalizeFrame(frameName);
+		form = new emailForm();
 		tPanel = new TablePanel(width, height, "Contact selected landlord");
 
 	}
@@ -101,6 +105,25 @@ public class RenterView extends GUIview {
 
 	}
 
+	public void displayForm() {
+		backButton.setBounds(250, (int) (0.61 * height), (int) (0.1 * width), (int) (0.025 * height));
+
+		form.displayEmail(width, height);
+		form.add(backButton);
+		frame.setContentPane(form);
+		frame.revalidate();
+
+	}
+
+	public void formListener(ActionListener listener) {
+		form.sendButton.addActionListener(listener);
+	}
+
+	public String getEmail() {
+		return form.getEmail();
+
+	}
+
 	// following get methods are used to extract the text entered in on gui
 	// textboxes/combo boxes
 	public String getBedRoomsText() {
@@ -137,8 +160,28 @@ public class RenterView extends GUIview {
 		panel.repaint();
 	}
 
+	public HashMap<Integer, String> getSelectedProperties() {
+		return tPanel.getSelectedProperties(0);
+	}
+
+	// displays search results that were previously computed, should not be used if
+	// displaySearch function was
+	// not used before hand
+	public void returnToSearchResults() {
+		backButton.setBounds((int) (width * 0.45), (int) (height * 0.55), (int) (width * 0.2),
+				(int) (height * 0.030));
+		tPanel.add(backButton);
+		frame.setContentPane(tPanel);
+		frame.revalidate();
+
+	}
+
 	public void displaySearch(ArrayList<Property> properties) {
+		backButton.setBounds((int) (width * 0.45), (int) (height * 0.55), (int) (width * 0.2),
+				(int) (height * 0.030));
+
 		tPanel.displayPropertyTableRenter(properties);
+		tPanel.add(backButton);
 		frame.setContentPane(tPanel);
 		frame.revalidate();
 	}

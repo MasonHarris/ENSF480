@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
-
+import java.util.HashMap;
 import models.Property;
 
 public class ManagerView extends GUIview {
@@ -17,12 +17,13 @@ public class ManagerView extends GUIview {
     JButton generateReportButton;
     JButton setFeesButton;
     TablePanel tPanel;
-    String options[] = { "active", "cancelled", "rented", "suspended", "unsuspended" };
+    feeForm form;
 
     public ManagerView(String frameName, int width, int height) {
         super(width, height);
         tPanel = new TablePanel(width, height, "save changes");
         initalizeFrame(frameName);
+        form = new feeForm();
     }
 
     // creates and saves dashboard elements into memory
@@ -77,12 +78,42 @@ public class ManagerView extends GUIview {
         setFeesButton.addActionListener(listener);
     }
 
-    public void listingChangesListener(ActionListener listener) {
+    public void TableButtonListener(ActionListener listener) {
         tPanel.submitButton.addActionListener(listener);
     }
 
+    public void FeesListener(ActionListener listener) {
+        form.submit.addActionListener(listener);
+
+    }
+
+    public void displayForm(int periodValue, int feesValue) {
+        backButton.setBounds(110, (int) (height * 0.20), (int) (width * 0.1), (int) (height * 0.025));
+        form.add(backButton);
+        form.displayFees(width, height, periodValue, feesValue);
+        frame.setContentPane(form);
+        frame.revalidate();
+    }
+
+    public void displayFormError(String error) {
+        form.displayError(error);
+    }
+
+    public String[] getFormFields() {
+        return form.getFields();
+    }
+
+    public HashMap<Integer, String> getSelectedProperties() {
+        return tPanel.getSelectedProperties(7);
+    }
+
     public void displayListingChanges(ArrayList<Property> properties) {
-        tPanel.displayPropertyTableChangeListing(properties, options);
+        backButton.setBounds((int) (width * 0.25), (int) (height * 0.55), (int) (width * 0.2),
+                (int) (height * 0.030));
+        tPanel.add(backButton);
+        tPanel.displayPropertyTableChangeListing(properties);
+        frame.setContentPane(tPanel);
+        frame.revalidate();
 
     }
 

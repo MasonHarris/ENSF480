@@ -52,6 +52,8 @@ public class RegisteredRenterController extends RenterController {
 		// gets notifications from database(as arraylist of properties)
 
 	}
+	public void subscribeRenter(){
+	}
 
 	public void unsubscribeRenter() {
 		// code to unsubscribe renter

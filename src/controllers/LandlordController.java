@@ -58,21 +58,21 @@ public class LandlordController extends GUIcontroller {
         // gets registration values in this order address number, addresss name,
         // bathrooms, bedrooms, property type, quadrant, furnished
         String value[] = view.getformFields();
-        int addressNumber;
         int bedrooms;
         int bathrooms;
-        for (String v : value) {
-            System.out.print(v + " ");
-        }
+        Boolean furnished = false;
         try {
-            addressNumber = Integer.parseInt(value[0]);
             bedrooms = Integer.parseInt(value[2]);
             bathrooms = Integer.parseInt(value[3]);
+            if(value[6].equals("furnished")){
+                furnished = true;
+            }
+            Property property = new Property(value[4], false, bedrooms, bathrooms, furnished, 
+            model.getRegisterPropertyID(), value[5], "Registered", value[0]+value[1], 0, 0, username, false);
+            model.registerProperty(property);
         } catch (NumberFormatException e) {
             view.formError("Non number put in number field");
-
             return;
-
         }
 
         if (!isStringAlpha(value[4]) || !isStringAlpha(value[1])) {

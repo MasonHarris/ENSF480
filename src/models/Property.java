@@ -13,10 +13,11 @@ public class Property {
 	private int listingPeriod;
 	private double amountOfFee;
 	private String landlordUsername;
+	private Boolean isPaid;
 
 	public Property(String propertyType, boolean isListed, int numOfBed, int numOfBath, boolean isFurnished,
 			int propertyId, String cityQuadrant, String propertyStatus, String address, int listingPeriod,
-			double amountOfFee, String landlordUsername) {
+			double amountOfFee, String landlordUsername, Boolean isPaid) {
 		this.propertyType = propertyType;
 		this.isListed = isListed;
 		this.numOfBed = numOfBed;
@@ -29,6 +30,10 @@ public class Property {
 		this.listingPeriod = listingPeriod;
 		this.amountOfFee = amountOfFee;
 		this.landlordUsername = landlordUsername;
+		this.isPaid = isPaid;
+	}
+	public Property(){
+		
 	}
 
 	public String getPropertyType() {
@@ -126,10 +131,18 @@ public class Property {
 	public void setAmountOfFee(double amountOfFee) {
 		this.amountOfFee = amountOfFee;
 	}
+	public Boolean getisPaid(){
+		return this.isPaid;
+	}
+	public void setisPaid(Boolean paid){
+		this.isPaid = paid;
+	}
 	public String getLandlordUsername(){
 		return this.landlordUsername;
 	}
-
+	public void setLandlordUsername(String user){
+		this.landlordUsername = user;
+	}
 	public void ListedProperties() {
 
 	}

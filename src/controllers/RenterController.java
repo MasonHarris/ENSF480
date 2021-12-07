@@ -73,11 +73,13 @@ public class RenterController extends GUIcontroller {
 		ArrayList<Property> properties = model.getAllProperties(); // change this
 		// later
 
-		// ArrayList<Property> dummy = new ArrayList<Property>();
-		// dummy.add(new Property("Apartment", true, 1, 1, true, 1, "SW", "Active",
-		// "123", 1, 8, "joe"));
-		// dummy.add(new Property("Apartment", true, 1, 1, true, 1, "NW", "Active",
-		// "123", 1, 8, "joe"));
+		/*
+		 * ArrayList<Property> dummy = new ArrayList<Property>();
+		 * dummy.add(new Property("Apartment", true, 1, 1, true, 1, "SW", "Active",
+		 * "123", 1, 8, "joe"));
+		 * dummy.add(new Property("Apartment", true, 1, 1, true, 1, "NW", "Active",
+		 * "123", 1, 8, "joe"));
+		 */
 		view.displaySearch(properties);
 
 	}
@@ -120,7 +122,7 @@ public class RenterController extends GUIcontroller {
 		final String id = propertyID;
 		view.formListener(e -> {
 			sendEmail(id, view.getEmail());
-			view.displaySearchPanel();
+			view.returnToSearchResults();
 		});
 
 	}

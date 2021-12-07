@@ -24,10 +24,13 @@ public class emailForm extends JPanel {
 
     public void displayEmail(int width, int height) {
         this.removeAll();
+        JLabel title = new JLabel("Contact form");
+        title.setBounds(110, (int) (0.05 * height), (int) (0.05 * width), (int) (0.05 * height));
+        add(title);
         JLabel addressLabel = new JLabel("Email Address");
-        addressLabel.setBounds(10, (int) (0.1 * height), (int) (0.2 * width), (int) (0.05 * height));
+        addressLabel.setBounds(10, (int) (0.1 * height), (int) (0.05 * width), (int) (0.05 * height));
         emailAddress = new JTextField();
-        emailAddress.setBounds(110, (int) (0.1 * height), (int) (0.05 * width), (int) (0.05 * height));
+        emailAddress.setBounds(110, (int) (0.1 * height), (int) (0.3 * width), (int) (0.25 * height));
         JLabel bodyLabel = new JLabel("Body");
         bodyLabel.setBounds(10, (int) (0.2 * height), (int) (0.05 * width), (int) (0.05 * height));
         emailBody = new JTextArea();

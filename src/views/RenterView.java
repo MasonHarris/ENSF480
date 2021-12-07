@@ -164,6 +164,18 @@ public class RenterView extends GUIview {
 		return tPanel.getSelectedProperties(0);
 	}
 
+	// displays search results that were previously computed, should not be used if
+	// displaySearch function was
+	// not used before hand
+	public void returnToSearchResults() {
+		backButton.setBounds((int) (width * 0.45), (int) (height * 0.55), (int) (width * 0.2),
+				(int) (height * 0.030));
+		tPanel.add(backButton);
+		frame.setContentPane(tPanel);
+		frame.revalidate();
+
+	}
+
 	public void displaySearch(ArrayList<Property> properties) {
 		backButton.setBounds((int) (width * 0.45), (int) (height * 0.55), (int) (width * 0.2),
 				(int) (height * 0.030));

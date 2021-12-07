@@ -29,9 +29,7 @@ public class LandlordController extends GUIcontroller {
 
         });
         view.formListener(e -> registerProperty());
-        ArrayList<Property> properties = new ArrayList<>();
-        properties.add(new Property("Apartment", true, 5, 5, false, 5, "NW", "Listed", "123 street", 5, 5.6, "gary"));
-        properties.add(new Property("House", true, 55, 59, false, 5, "SW", "Listed", "1234 street", 52, 5.62, "sandy"));
+        ArrayList<Property> properties = model.getLandlordProperties(username);
         view.addChangeListingListener(e -> {
             view.displayListingChanges(properties);
         });

@@ -46,34 +46,19 @@ public class LandlordController extends GUIcontroller {
        // view.addPayFeeListener(e -> view.displayFees());
         view.payFormListener(e -> payFees());
     }
-<<<<<<< HEAD
-    public void changeListing(int propertyiD, String newListing){
-        model.changePropertyListing(propertyiD, newListing);
-=======
 
     // used to fill properties arraylist
     public void getRegisteredProperties() {
 
->>>>>>> main
     }
 
     public void registerProperty() {
         // gets registration values in this order address number, addresss name,
         // bathrooms, bedrooms, property type, quadrant, furnished
-<<<<<<< HEAD
-        String value[] = view.getFormValues();
+        String value[] = view.getformFields();
         int bedrooms;
         int bathrooms;
         Boolean furnished = false;
-=======
-        String value[] = view.getformFields();
-        int addressNumber;
-        int bedrooms;
-        int bathrooms;
-        for (String v : value) {
-            System.out.print(v + " ");
-        }
->>>>>>> main
         try {
             bedrooms = Integer.parseInt(value[2]);
             bathrooms = Integer.parseInt(value[3]);

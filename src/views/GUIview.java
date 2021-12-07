@@ -42,6 +42,12 @@ public abstract class GUIview {
 
 	public void confirmation(String message) {
 		JDialog confirm = new JDialog(frame, message);
+		JLabel l = new JLabel(message);
+
+		confirm.add(l);
+
+		// setsize of dialog
+		confirm.setSize(400, 400);
 		confirm.setVisible(true);
 	}
 

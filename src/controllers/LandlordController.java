@@ -41,6 +41,10 @@ public class LandlordController extends GUIcontroller {
         });
         view.TableButtonListener(e -> changeListingState());
         view.registerFormListener(e -> registerProperty());
+        view.addRegisterListener(e -> view.displayRegisterProperty());
+        //displayFees needs an arraylist argument consisting of an arraylist of property objects that are unpaid for this landlord
+       // view.addPayFeeListener(e -> view.displayFees());
+        view.payFormListener(e -> payFees());
     }
 
     // used to fill properties arraylist
@@ -55,6 +59,9 @@ public class LandlordController extends GUIcontroller {
         int addressNumber;
         int bedrooms;
         int bathrooms;
+        for (String v : value) {
+            System.out.print(v + " ");
+        }
         try {
             addressNumber = Integer.parseInt(value[0]);
             bedrooms = Integer.parseInt(value[2]);
@@ -70,9 +77,8 @@ public class LandlordController extends GUIcontroller {
             view.formError("Non alphabetic character put in invalid field");
             return;
         }
-
-        view.confirmation("Registered property");
-        
+        view.formError("");
+        view.confirmation("registered property successfully");
 
     }
 
@@ -93,6 +99,18 @@ public class LandlordController extends GUIcontroller {
                 // arraylist by calling getAllProperties after loop
                 model.changePropertyListing(regiProperties.get(pair.getKey()).getPropertyId(), pair.getValue());
             }
+        }
+
+    }
+
+    public void payFees() {
+        // key is index in arraylist for property, string is property id
+        HashMap<Integer, String> paidFees = view.getPaymentProperties();
+        if (paidFees == null) {
+            return;
+        }
+        for (var pair : paidFees.entrySet()) {
+            // use the pair.getkey() to get property id and update accoridinly
         }
 
     }

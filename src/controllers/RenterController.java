@@ -21,6 +21,7 @@ public class RenterController extends GUIcontroller {
 	public void start() {
 		view.addSubmitListener(e -> propertySearch(this.view));
 		view.addBackListener(e -> view.displaySearchPanel());
+		view.addContactListener(e -> contactLandlord());
 		view.displaySearchPanel();
 
 	}
@@ -69,7 +70,14 @@ public class RenterController extends GUIcontroller {
 		view.displayError("");
 		// this should call a function to match the properties with the search
 		// information and return an arraylist of property objects
-		ArrayList<Property> properties = model.getAllProperties(); // change this later
+		ArrayList<Property> properties = model.getAllProperties(); // change this
+		// later
+
+		// ArrayList<Property> dummy = new ArrayList<Property>();
+		// dummy.add(new Property("Apartment", true, 1, 1, true, 1, "SW", "Active",
+		// "123", 1, 8, "joe"));
+		// dummy.add(new Property("Apartment", true, 1, 1, true, 1, "NW", "Active",
+		// "123", 1, 8, "joe"));
 		view.displaySearch(properties);
 
 	}
@@ -95,16 +103,31 @@ public class RenterController extends GUIcontroller {
 	}
 
 	public void contactLandlord() {
+
 		// int is entry in list,String is property id
 		HashMap<Integer, String> map = view.getSelectedProperties();
+		String propertyID = new String();
+		System.out.println("hello");
 		if (map == null) {
 			return;
 		}
+		System.out.println("hello2");
 		for (var pair : map.entrySet()) {
-			// gets landlord information from database
-			// then creates contact form
+			propertyID = pair.getValue();
 
 		}
+		view.displayForm();
+		final String id = propertyID;
+		view.formListener(e -> {
+			sendEmail(id, view.getEmail());
+			view.displaySearchPanel();
+		});
+
+	}
+
+	// updates database with email
+
+	public void sendEmail(String propertyID, String email) {
 
 	}
 

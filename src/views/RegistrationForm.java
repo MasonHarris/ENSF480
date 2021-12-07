@@ -55,7 +55,7 @@ public class RegistrationForm extends JPanel {
         add(addressName);
 
         JLabel bathRoomsLabel = new JLabel("# of bathrooms");
-        JTextField bathrooms = new JTextField();
+
         bathRoomsLabel.setBounds(10, (int) (height * 0.11), (int) (width * 0.1), (int) (height * 0.03));
         bathrooms.setBounds(110, (int) (height * 0.11), (int) (width * 0.1), (int) (height * 0.03));
         add(bathRoomsLabel);
@@ -90,7 +90,7 @@ public class RegistrationForm extends JPanel {
         register.setBounds(110, (int) (height * 0.33), (int) (width * 0.1), (int) (height * 0.025));
 
         add(register);
-        errorLabel.setBounds(110, (int) (height * 0.55), (int) (width * 0.3), (int) (height * 0.025));
+        errorLabel.setBounds(110, (int) (height * 0.45), (int) (width * 0.3), (int) (height * 0.025));
 
         add(errorLabel);
 

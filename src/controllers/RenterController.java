@@ -22,6 +22,10 @@ public class RenterController extends GUIcontroller {
 		view.addSubmitListener(e -> propertySearch(this.view));
 		view.addBackListener(e -> view.displaySearchPanel());
 		view.displaySearchPanel();
+		view.formListener(e -> {
+			sendEmail();
+
+		});
 
 	}
 
@@ -105,6 +109,23 @@ public class RenterController extends GUIcontroller {
 			// then creates contact form
 
 		}
+<<<<<<< Updated upstream
+=======
+		view.displayForm();
+
+	}
+
+	// updates database with email
+
+	public void sendEmail() {
+		// first value in array is email address, second value is email text
+		String[] values = view.getEmail();
+		if (values[0].length() == 0 || values[1].length() == 0) {
+			view.displayEmailError("Neither field can be left blank");
+			return;
+		}
+		view.displaySearchPanel();
+>>>>>>> Stashed changes
 
 	}
 

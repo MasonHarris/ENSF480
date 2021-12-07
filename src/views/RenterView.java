@@ -102,6 +102,28 @@ public class RenterView extends GUIview {
 
 	}
 
+<<<<<<< Updated upstream
+=======
+	public void displayForm() {
+		backButton.setBounds(250, (int) (0.61 * height), (int) (0.1 * width), (int) (0.025 * height));
+
+		form.displayEmail(width, height);
+		form.add(backButton);
+		frame.setContentPane(form);
+		frame.revalidate();
+
+	}
+
+	public void formListener(ActionListener listener) {
+		form.sendButton.addActionListener(listener);
+	}
+
+	public String[] getEmail() {
+		return form.getEmail();
+
+	}
+
+>>>>>>> Stashed changes
 	// following get methods are used to extract the text entered in on gui
 	// textboxes/combo boxes
 	public String getBedRoomsText() {
@@ -136,6 +158,10 @@ public class RenterView extends GUIview {
 	public void displayError(String error) {
 		errorLabel.setText(error);
 		panel.repaint();
+	}
+
+	public void displayEmailError(String error) {
+		form.displayError(error);
 	}
 
 	public HashMap<Integer, String> getSelectedProperties() {

@@ -38,6 +38,14 @@ public class LandlordController extends GUIcontroller {
         });
         view.TableButtonListener(e -> changeListingState());
         view.registerFormListener(e -> registerProperty());
+<<<<<<< Updated upstream
+=======
+        view.addRegisterListener(e -> view.displayRegisterProperty());
+        // displayFees needs an arraylist argument consisting of an arraylist of
+        // property objects that are unpaid for this landlord
+        // view.addPayFeeListener(e -> view.displayFees());
+        view.payFormListener(e -> payFees());
+>>>>>>> Stashed changes
     }
 
     // used to fill properties arraylist
@@ -46,9 +54,38 @@ public class LandlordController extends GUIcontroller {
     }
 
     public void registerProperty() {
+<<<<<<< Updated upstream
         String[] inputs = view.getformFields();
         // need to add error checking to inputs, if successful this should call a
         // function to update database
+=======
+        // gets registration values in this order address number, addresss name,
+        // bathrooms, bedrooms, property type, quadrant, furnished
+        String value[] = view.getformFields();
+        int addressNumber;
+        int bedrooms;
+        int bathrooms;
+        for (String v : value) {
+            System.out.print(v + " ");
+        }
+        try {
+            addressNumber = Integer.parseInt(value[0]);
+            bedrooms = Integer.parseInt(value[2]);
+            bathrooms = Integer.parseInt(value[3]);
+        } catch (NumberFormatException e) {
+            view.formError("Non number put in number field");
+
+            return;
+
+        }
+
+        if (!isStringAlpha(value[4])) {
+            view.formError("Non alphabetic character put in invalid field");
+            return;
+        }
+        view.formError("");
+        view.confirmation("registered property successfully");
+>>>>>>> Stashed changes
 
     }
 
@@ -73,4 +110,19 @@ public class LandlordController extends GUIcontroller {
 
     }
 
+<<<<<<< Updated upstream
+=======
+    public void payFees() {
+        // key is index in arraylist for property, string is property id
+        HashMap<Integer, String> paidFees = view.getPaymentProperties();
+        if (paidFees == null) {
+            return;
+        }
+        for (var pair : paidFees.entrySet()) {
+            // use the pair.getvalue() to get property id and update accoridinly
+        }
+
+    }
+
+>>>>>>> Stashed changes
 }

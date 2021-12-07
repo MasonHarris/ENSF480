@@ -102,6 +102,10 @@ public class TablePanel extends JPanel {
         table = new JTable(tableModel);
         table.setSelectionModel(new TableListSelection());
         table.setColumnSelectionAllowed(false);
+        table.getTableHeader().setReorderingAllowed(false);
+        table.getTableHeader().setResizingAllowed(false);
+        table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+
         TableColumnModel columns = table.getColumnModel();
         columns.getColumn(2).setPreferredWidth(160);
         columns.getColumn(3).setPreferredWidth(160);
@@ -115,6 +119,7 @@ public class TablePanel extends JPanel {
         statusColumn.setCellEditor(new DefaultCellEditor(comboBox));
         // prevents table from being edited
         table.setDefaultEditor(Object.class, null);
+        // adds data to table
         for (Property p : properties) {
             Object[] entry = { p.getPropertyId(), p.getAddress(), p.getNumOfBed(), p.getNumOfBath(),
                     p.getCityQuadrant(), p.getIsFurnished(), p.getPropertyType(), p.getPropertyStatus(),
@@ -181,7 +186,7 @@ public class TablePanel extends JPanel {
     // sends back multiple selected properties, integer represents the index number
     // of the property in the list
     // string represents the data in the col column of the table
-    public HashMap<Integer, String> getSelectedProperties(int col) {
+    public HashMap<Integer, String> getSelectedPropertiesMap(int col) {
 
         if (!table.getSelectionModel().isSelectionEmpty()) {
             HashMap<Integer, String> map = new HashMap<Integer, String>();
@@ -192,7 +197,26 @@ public class TablePanel extends JPanel {
             return map;
 
         } else {
-            System.out.println("nothing");
+            // System.out.println("nothing");
+            return null;
+        }
+
+    }
+
+    // gets the selected properties and returns their IDs in an int array
+    public int[] getSelectedPropertiesID() {
+
+        if (!table.getSelectionModel().isSelectionEmpty()) {
+
+            int[] selectedrows = table.getSelectedRows();
+            int[] IDarray = new int[selectedrows.length];
+            for (int i = 0; i < selectedrows.length; i++) {
+                IDarray[i] = (int) table.getValueAt(selectedrows[i], 0);
+            }
+            return IDarray;
+
+        } else {
+            // System.out.println("nothing");
             return null;
         }
 

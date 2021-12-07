@@ -38,6 +38,7 @@ public class RegisteredRenterController extends RenterController {
 		// then put that arraylist as the argument of view.displayNotificationsPanel()
 		// view.addNotificationsListener(e -> view.displayNotificationsPanel());
 		view.addBackListener(e -> view.displayDashboard());
+		view.addContactListener(e -> contactLandlord(this.view));
 	}
 
 	@Override

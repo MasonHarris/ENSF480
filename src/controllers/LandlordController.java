@@ -42,9 +42,11 @@ public class LandlordController extends GUIcontroller {
         view.TableButtonListener(e -> changeListingState());
         view.registerFormListener(e -> registerProperty());
         view.addRegisterListener(e -> view.displayRegisterProperty());
-        //displayFees needs an arraylist argument consisting of an arraylist of property objects that are unpaid for this landlord
-       // view.addPayFeeListener(e -> view.displayFees());
+        // displayFees needs an arraylist argument consisting of an arraylist of
+        // property objects that are unpaid for this landlord
+        // view.addPayFeeListener(e -> view.displayFees());
         view.payFormListener(e -> payFees());
+
     }
 
     // used to fill properties arraylist
@@ -104,12 +106,12 @@ public class LandlordController extends GUIcontroller {
     }
 
     public void payFees() {
-        // key is index in arraylist for property, string is property id
-        HashMap<Integer, String> paidFees = view.getPaymentProperties();
+        // array of property ID's that have been paid for
+        int[] paidFees = view.getPaymentProperties();
         if (paidFees == null) {
             return;
         }
-        for (var pair : paidFees.entrySet()) {
+        for (int propertyID : paidFees) {
             // use the pair.getkey() to get property id and update accoridinly
         }
 

@@ -160,8 +160,8 @@ public class RenterView extends GUIview {
 		panel.repaint();
 	}
 
-	public HashMap<Integer, String> getSelectedProperties() {
-		return tPanel.getSelectedProperties(0);
+	public int[] getSelectedProperties() {
+		return tPanel.getSelectedPropertiesID();
 	}
 
 	// displays search results that were previously computed, should not be used if

@@ -34,9 +34,6 @@ public class LandlordController extends GUIcontroller {
             view.displayListingChanges(properties);
         });
     }
-    public void registerProperty(Property property){
-        model.registerProperty(property);
-    }
     public void changeListing(int propertyiD, String newListing){
         model.changePropertyListing(propertyiD, newListing);
     }
@@ -45,18 +42,21 @@ public class LandlordController extends GUIcontroller {
         // gets registration values in this order address number, addresss name,
         // bathrooms, bedrooms, property type, quadrant, furnished
         String value[] = view.getFormValues();
-        int addressNumber;
         int bedrooms;
         int bathrooms;
+        Boolean furnished = false;
         try {
-            addressNumber = Integer.parseInt(value[0]);
             bedrooms = Integer.parseInt(value[2]);
             bathrooms = Integer.parseInt(value[3]);
+            if(value[6].equals("furnished")){
+                furnished = true;
+            }
+            Property property = new Property(value[4], false, bedrooms, bathrooms, furnished, 
+            0, value[5], "suspended", value[0]+value[1], 0, 0, username, false);
+            model.registerProperty(property);
         } catch (NumberFormatException e) {
             view.formError("Non number put in number field");
-
             return;
-
         }
 
         if (!isStringAlpha(value[4]) || !isStringAlpha(value[1])) {

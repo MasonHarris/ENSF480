@@ -66,7 +66,7 @@ public class LandlordController extends GUIcontroller {
                 furnished = true;
             }
             Property property = new Property(value[4], false, bedrooms, bathrooms, furnished, 
-            0, value[5], "suspended", value[0]+value[1], 0, 0, username, false);
+            model.getRegisterPropertyID(), value[5], "Registered", value[0]+value[1], 0, 0, username, false);
             model.registerProperty(property);
         } catch (NumberFormatException e) {
             view.formError("Non number put in number field");

@@ -32,6 +32,9 @@ public class Property {
 		this.landlordUsername = landlordUsername;
 		this.isPaid = isPaid;
 	}
+	public Property(){
+		
+	}
 
 	public String getPropertyType() {
 		return this.propertyType;

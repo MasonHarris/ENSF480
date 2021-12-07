@@ -64,7 +64,7 @@ public class RenterController extends GUIcontroller {
 		view.displayError("");
 		// this should call a function to match the properties with the search
 		// information and return an arraylist of property objects
-		ArrayList<Property> properties = model.getAllProperties(); // change this later
+		ArrayList<Property> properties = model.getAllProperties(); /////// change this later
 		view.displaySearch(properties);
 
 	}

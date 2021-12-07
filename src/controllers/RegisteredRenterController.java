@@ -33,10 +33,13 @@ public class RegisteredRenterController extends RenterController {
 		view.addUnsubscribeListener(e -> unsubscribeRenter());
 		view.addNotificationsListener(e -> view.displayNotificationsPanel());
 	}
+	public void subscribeRenter(){
+	}
 
 	public void unsubscribeRenter() {
 		// code to unsubscribe renter
 		// if renter unsubscribed
+		model.unsubscribeNotification(username);
 		view.unsubscribeConfirmation();
 
 	}

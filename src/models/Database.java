@@ -82,7 +82,7 @@ public class Database {
 				list.add(new Property(res.getString("propertyType"), res.getBoolean("isListed"), res.getInt("noOfBedrooms"), 
 				res.getInt("noOfBathrooms"), res.getBoolean("Furnished"), res.getInt("propertyID"), res.getString("cityQuadrant"), 
 				res.getString("listingState"), res.getString("address"), res.getInt("listingPeriod"), res.getDouble("amountofFee"), 
-				res.getString("landlordUsername")));
+				res.getString("landlordUsername"), res.getBoolean("isPaid")));
 			}
 			return list;
 		}
@@ -103,7 +103,7 @@ public class Database {
 				list.add(new Property(res.getString("propertyType"), res.getBoolean("isListed"), res.getInt("noOfBedrooms"), 
 				res.getInt("noOfBathrooms"), res.getBoolean("Furnished"), res.getInt("propertyID"), res.getString("cityQuadrant"), 
 				res.getString("listingState"), res.getString("address"), res.getInt("listingPeriod"), res.getDouble("amountofFee"), 
-				res.getString("landlordUsername")));
+				res.getString("landlordUsername"), res.getBoolean("isPaid")));
 			}
 			return list;
 		}
@@ -162,8 +162,23 @@ public class Database {
 			System.exit(0);
 		}
 	}
-	public void subscribeNotification(String user, int noOfBath, int noOfBed, Boolean Furnished, String cityQuaString, String propertyType){
-
+	public void subscribeNotification(String user, int noOfBath, int noOfBed, Boolean Furnished, String cityQuadString, String propertyType){
+		try{
+			String query = "INSERT INTO PROPERTY(username, noOfBedrooms, noOfBathrooms, Furnished, cityQuadrant, propertyType)";
+			query = query + "Values(?,?,?,?,?,?)";
+			PreparedStatement statement = connection.prepareStatement(query);
+			statement.setString(1, user);
+			statement.setInt(2, noOfBath);
+			statement.setInt(3, noOfBed);
+			statement.setBoolean(4, Furnished);
+			statement.setString(5, cityQuadString);
+			statement.setString(6, propertyType);
+			statement.executeUpdate();
+		}
+		catch(SQLException e){
+			System.out.println(e);
+			System.exit(0);
+		}
 	}
 	public void unsubscribeNotification(String user){
 		try{
@@ -175,6 +190,26 @@ public class Database {
 		catch(SQLException e){
 			System.out.println(e);
 			System.exit(0);
+		}
+	}
+	public ArrayList<String> checkNotification(String user, int noOfBath, int noOfBed, Boolean Furnished, String cityQuadString, String propertyType){
+		try{
+			String query = "SELECT * FROM NOTIFICATION";
+			ArrayList<String> users = new ArrayList<String>();
+			PreparedStatement statement = connection.prepareStatement(query);
+			ResultSet res = statement.executeQuery();
+			while(res.next()){
+				if((res.getInt("noOfBathrooms") == noOfBath) &&(res.getInt("noOfBedrooms") == noOfBed) && (res.getBoolean("Furnished") == Furnished)
+				&& (res.getString("cityQuadrant").equals(cityQuadString))&& (res.getString("propertyType").equals(propertyType))){
+					users.add(res.getString("username"));
+				}
+			}
+			return users;
+		}
+		catch(SQLException e){
+			System.out.println(e);
+			System.exit(0);
+			return new ArrayList<String>();
 		}
 	}
 	//the search property method should return an arraylist of property objects

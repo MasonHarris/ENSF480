@@ -6,6 +6,7 @@ import models.Database;
 import models.Landlord;
 import models.Property;
 import models.RegisteredRenter;
+import models.Subscription;
 import models.SummaryReport;
 import views.ManagerView;
 import java.util.HashMap;
@@ -44,8 +45,8 @@ public class ManagerController extends GUIcontroller {
         // someone should fill these in with the correct arraylist argument(these should
         // be created by the model)
         ArrayList<RegisteredRenter> renters = new ArrayList<RegisteredRenter>();
-        renters.add(new RegisteredRenter("miku", "nakano@email.com", "pass", 1));
-        renters.add(new RegisteredRenter("nino", "nakano@email.com", "pass", 31));
+        renters.add(new RegisteredRenter("miku", "nakano@email.com", "pass", 1, new Subscription()));
+        renters.add(new RegisteredRenter("nino", "nakano@email.com", "pass", 31, new Subscription()));
         ArrayList<Landlord> landlords = new ArrayList<Landlord>();
         landlords.add(new Landlord("ai", 1, "hayasaka", "hayasaka@gmail.com"));
         landlords.add(new Landlord("raiden", 18, "shogun", "raiden@gmail.com"));

@@ -5,12 +5,14 @@ public class RegisteredRenter extends Renter {
 	private String email;
 	private int ID;
 	private String password;
+	private Subscription subscription;
 
-	public RegisteredRenter(String username, String email, String password, int id) {
+	public RegisteredRenter(String username, String email, String password, int id, Subscription subscription) {
 		this.username = username;
 		this.email = email;
 		this.ID = id;
 		this.password = password;
+		this.subscription = subscription;
 	}
 	public RegisteredRenter(){
 		

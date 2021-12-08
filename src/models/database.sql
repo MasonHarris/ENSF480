@@ -109,7 +109,8 @@ LOCK TABLES `NOTIFICATION` WRITE;
 
 INSERT INTO `NOTIFICATION` (`Username`, `noOfBathrooms`, `noOfBedrooms`, `Furnished`, `cityQuadrant`, `propertyType`)
 VALUES
-	('jack23',4,3,0,'NE','Townhouse');
+	('jack23',4,3,0,'NE','Townhouse'),
+	('gary',1,1,1,'NW','Apartment');
 
 /*!40000 ALTER TABLE `NOTIFICATION` ENABLE KEYS */;
 UNLOCK TABLES;

@@ -70,11 +70,11 @@ public class Database {
 					return "Manager";
 				}
 			}
-			return "Renter";
+			return "RegisteredRenter";
 		} catch (SQLException e) {
 			System.out.println(e);
 			System.exit(0);
-			return "Renter";
+			return "RegisteredRenter";
 		}
 	}
 
@@ -135,17 +135,17 @@ public class Database {
 
 	public RegisteredRenter getRegisteredRenter(String user) {
 		try {
-			String query = "SELECT * FROM RENTER WHERE Username = ?";
+			String query = "SELECT * FROM RegisteredRenter WHERE Username = ?";
 			PreparedStatement statement = connection.prepareStatement(query);
 			statement.setString(1, user);
 			ResultSet res = statement.executeQuery();
-			RegisteredRenter renter = new RegisteredRenter();
+			RegisteredRenter RegisteredRenter = new RegisteredRenter();
 			while (res.next()) {
 				SimpleEntry<Integer, String> pair = getIDPassword(user);
-				renter = new RegisteredRenter(user, res.getString("email"), pair.getValue(), pair.getKey(),
+				RegisteredRenter = new RegisteredRenter(user, res.getString("email"), pair.getValue(), pair.getKey(),
 						getSubscription(user));
 			}
-			return renter;
+			return RegisteredRenter;
 		} catch (SQLException e) {
 			System.out.println(e);
 			System.exit(0);

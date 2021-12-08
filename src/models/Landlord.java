@@ -15,7 +15,7 @@ public class Landlord {
 	public Landlord() {
 	}
 
-	public Landlord(String username, int ID, String emailAddress, String password) {
+	public Landlord(String username, int ID, String emailAddress, String password, String string) {
 		this.username = username;
 		this.ID = ID;
 		this.emailAddress = emailAddress;

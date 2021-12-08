@@ -25,7 +25,7 @@ public class ManagerView extends GUIview {
     TablePanel tPanel;
     feeForm form;
     SummaryReportView reportView;
-    viewTablePanel viewTable;
+    managerTables viewTable;
 
     public ManagerView(String frameName, int width, int height) {
         super(width, height);
@@ -33,7 +33,7 @@ public class ManagerView extends GUIview {
         initalizeFrame(frameName);
         form = new feeForm();
         reportView = new SummaryReportView(width, height);
-        viewTable = new viewTablePanel(width, height);
+        viewTable = new managerTables(width, height);
     }
 
     // creates and saves dashboard elements into memory
@@ -114,8 +114,9 @@ public class ManagerView extends GUIview {
 
     public void displayForm(int periodValue, int feesValue) {
         backButton.setBounds(110, (int) (height * 0.20), (int) (width * 0.2), (int) (height * 0.025));
-        form.add(backButton);
+
         form.displayFees(width, height, periodValue, feesValue);
+        form.add(backButton);
         frame.setContentPane(form);
         frame.revalidate();
     }

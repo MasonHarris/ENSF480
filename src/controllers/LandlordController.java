@@ -35,29 +35,41 @@ public class LandlordController extends GUIcontroller {
         view.addBackListener(e -> view.displayDashboard());
 
         view.addChangeListingListener(e -> {
-            ArraayList<Property> paid;
-            for(var p : landlord_properties){
-                if(p.getisPaid()){
-                    paid.add(p);
-                }
-            }
-            view.displayListingChanges(paid);
+
+            view.displayListingChanges(getPaid());
         });
         view.TableButtonListener(e -> changeListingState());
         view.registerFormListener(e -> registerProperty());
         view.addRegisterListener(e -> view.displayRegisterProperty());
-        view.addNotificationsListener(e-> view.displayNotifications(model.getLandlordNotification(username)););
+        view.addNotificationsListener(e -> view.displayNotifications(model.getLandlordNotification(username)));
         // displayFees needs an arraylist argument consisting of an arraylist of
         // property objects that are unpaid for this landlord
-        
+
+        view.addPayFeeListener(e -> view.displayFees(getUnpaid()));
+        view.payFormListener(e -> payFees());
+
+    }
+
+    public ArrayList<Property> getPaid() {
+        ArrayList<Property> paid = new ArrayList<Property>();
+        for (var p : landlord_properties) {
+            if (p.getisPaid()) {
+                paid.add(p);
+            }
+        }
+
+        return paid;
+
+    }
+
+    public ArrayList<Property> getUnpaid() {
         ArrayList<Property> unpaid = new ArrayList<Property>();
         for (Property property : landlord_properties) {
             if (!property.getisPaid()) {
                 unpaid.add(property);
             }
         }
-        view.addPayFeeListener(e -> view.displayFees(unpaid));
-        view.payFormListener(e -> payFees());
+        return unpaid;
 
     }
 
@@ -76,6 +88,11 @@ public class LandlordController extends GUIcontroller {
         try {
             bedrooms = Integer.parseInt(value[2]);
             bathrooms = Integer.parseInt(value[3]);
+
+            if (bedrooms <= 0 || bathrooms <= 0) {
+                view.formError("Invalid number");
+                return;
+            }
             if (value[6].equals("furnished")) {
                 furnished = true;
             }
@@ -117,6 +134,7 @@ public class LandlordController extends GUIcontroller {
             }
         }
         landlord_properties = model.getLandlordProperties(username);
+        view.confirmation("Changes saved");
 
     }
 
@@ -130,8 +148,10 @@ public class LandlordController extends GUIcontroller {
             // use the pair.getkey() to get property id and update accoridinly
             model.payFee(propertyID);
         }
-
-        view.confirmation("Payment successful");
+        // Needs to be changed
+        view.confirmation(
+                "Payment successful, paid $" + paidFees.length * landlord_properties.get(0).getAmountOfFee());
+        view.displayDashboard();
 
     }
 

@@ -39,7 +39,7 @@ public class ManagerController extends GUIcontroller {
         view.TableButtonListener(e -> changeListingState());
         // needs to retrieve fees from database(please add this) random values hardcoded
         // for now
-        view.addSetFeesListner(e -> view.displayForm(100, 100));
+        view.addSetFeesListner(e -> view.displayForm(100, (double) allProperties.get(0).getAmountOfFee()));
         view.FeesListener(e -> changeFees());
         view.addReportListener(e -> summary());
         // someone should fill these in with the correct arraylist argument(these should
@@ -50,8 +50,7 @@ public class ManagerController extends GUIcontroller {
         // renters.add(new RegisteredRenter("nino", "nakano@email.com", "pass", 31, new
         // Subscription()));
         ArrayList<Landlord> landlords = new ArrayList<Landlord>();
-        landlords.add(new Landlord("ai", 1, "hayasaka", "hayasaka@gmail.com"));
-        landlords.add(new Landlord("raiden", 18, "shogun", "raiden@gmail.com"));
+       
 
         view.addAccessLandlordListener(e -> view.displayLandlordTable(landlords));
         view.addAccessRentersListener(e -> view.displayRenterTable(renters));
@@ -134,6 +133,7 @@ public class ManagerController extends GUIcontroller {
 
         }
         allProperties = model.getAllProperties();
+        view.confirmation("Changes saved");
 
     }
 

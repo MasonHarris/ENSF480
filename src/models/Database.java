@@ -5,6 +5,7 @@ import java.util.AbstractMap;
 //this should be a singleton
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.AbstractMap.SimpleEntry;
 import com.mysql.cj.xdevapi.Result;
 
@@ -142,8 +143,9 @@ public class Database {
 			RegisteredRenter RegisteredRenter = new RegisteredRenter();
 			while (res.next()) {
 				SimpleEntry<Integer, String> pair = getIDPassword(user);
-				RegisteredRenter = new RegisteredRenter(user, res.getString("email"), pair.getValue(), pair.getKey(),
-						getSubscription(user));
+				// RegisteredRenter = new RegisteredRenter(user, res.getString("email"),
+				// pair.getValue(), pair.getKey(),
+				// getSubscription(user));
 			}
 			return RegisteredRenter;
 		} catch (SQLException e) {
@@ -218,11 +220,11 @@ public class Database {
 			return new Property();
 		}
 	}
-	
-	public ArrayList<Property> searchForProperties(int bath,int bed, String prope,boolean fur,String quad) {
+
+	public ArrayList<Property> searchForProperties(int bath, int bed, String prope, boolean fur, String quad) {
 		try {
-			ArryList<Property> list = new ArrayList<Property>();
-			String query = "SELECT * FROM PROPERTY WHERE listingState = 1";
+			ArrayList<Property> list = new ArrayList<Property>();
+			String query = "SELECT * FROM PROPERTY WHERE isListed= 1";
 			PreparedStatement statement = connection.prepareStatement(query);
 			ResultSet res = statement.executeQuery();
 			while (res.next()) {
@@ -234,24 +236,30 @@ public class Database {
 						res.getDouble("amountofFee"),
 						res.getString("landlordUsername"), res.getBoolean("isPaid")));
 			}
+			System.out.println(list.size());
 			Iterator<Property> it = list.iterator();
 			while (it.hasNext()) {
 				Property property = it.next();
 				if (property.getNumOfBath() != bath) {
+					System.out.println(bath + " is not equal to " + property.getNumOfBath());
 					it.remove();
 				} else if (property.getNumOfBed() != bed) {
+					System.out.println(bed + " is not equal to " + property.getNumOfBed());
 					it.remove();
 				} else if (!property.getPropertyType().equals(prope)) {
+					System.out.println(prope + " is not equal to " + property.getPropertyType());
 					it.remove();
 				} else if (property.getIsFurnished() != fur) {
+					System.out.println(fur + " is not equal to " + property.getIsFurnished());
 					it.remove();
 				} else if (!property.getCityQuadrant().equals(quad)) {
+					System.out.println(quad + " is not equal to " + property.getCityQuadrant());
 					it.remove();
 				}
 			}
 			return list;
 		} catch (SQLException e) {
-			System.out.println(e);
+			System.out.println(e + " search error");
 			System.exit(0);
 			return new ArrayList<Property>();
 		}

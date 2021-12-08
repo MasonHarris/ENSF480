@@ -1,6 +1,7 @@
 package views;
 
 import java.util.ArrayList;
+import models.Subscription;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -38,6 +39,7 @@ public class managerTables extends JPanel {
         TableColumnModel columns = table.getColumnModel();
         columns.getColumn(1).setPreferredWidth(160);
         columns.getColumn(2).setPreferredWidth(200);
+        columns.getColumn(3).setPreferredWidth(160);
         columns.getColumn(4).setPreferredWidth(160);
         columns.getColumn(5).setPreferredWidth(160);
         for (Property p : properties) {
@@ -90,7 +92,8 @@ public class managerTables extends JPanel {
 
     public void displayRenters(ArrayList<RegisteredRenter> renters) {
         this.removeAll();
-        String[] colNames = { "Renter ID ", "Renter name", "Renter password" };
+        String[] colNames = { "Renter ID ", "Renter name", "Subscribed", "Number of bathrooms", "Number of bedrooms",
+                "Property type", "Furnished", "Quadrant" };
         DefaultTableModel model = new DefaultTableModel(colNames, 0);
         JTable table = new JTable(model);
         table.getTableHeader().setReorderingAllowed(false);
@@ -103,16 +106,42 @@ public class managerTables extends JPanel {
         columns.getColumn(0).setPreferredWidth(160);
         columns.getColumn(1).setPreferredWidth(160);
         columns.getColumn(2).setPreferredWidth(160);
+        columns.getColumn(3).setPreferredWidth(160);
+        columns.getColumn(4).setPreferredWidth(160);
+        columns.getColumn(5).setPreferredWidth(160);
+        columns.getColumn(6).setPreferredWidth(160);
+        columns.getColumn(7).setPreferredWidth(160);
 
         for (RegisteredRenter p : renters) {
-            Object[] entry = { p.getID(), p.getUsername(), p.getPassword() };
+            Subscription s = (Subscription) p.getSubscription();
+            Object[] entry;
+            if (s == null) {
+
+                entry = new Object[3];
+
+                entry[0] = p.getID();
+                entry[1] = p.getUsername();
+                entry[2] = false;
+
+            } else {
+                entry = new Object[8];
+                entry[0] = p.getID();
+                entry[1] = p.getUsername();
+                entry[2] = true;
+                entry[3] = s.getNoOfBathrooms();
+                entry[4] = s.getNoOfBedrooms();
+                entry[5] = s.getPropertyType();
+                entry[6] = s.getIsFurnished();
+                entry[7] = s.getCityQuadrant();
+
+            }
             model.addRow(entry);
         }
 
         JScrollPane scroll = new JScrollPane(table);
         JLabel label = new JLabel("Renters");
         label.setBounds((int) (width * 0.1), (int) (height * 0.01), (int) (width * 0.1), (int) (height * 0.05));
-        scroll.setBounds(0, (int) (height * 0.03), (int) (width * 0.7), (int) (height * 0.5));
+        scroll.setBounds(0, (int) (height * 0.03), (int) (width * 0.85), (int) (height * 0.5));
         add(scroll);
         add(label);
         repaint();

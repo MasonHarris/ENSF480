@@ -48,7 +48,7 @@ public class RegisteredRenterController extends RenterController {
 	@Override
 	public void propertySearch(RenterView view) {
 		int bathrooms;
-		int bedRooms;
+		int bedrooms;
 		// error checking
 		try {
 			if (view == null) {
@@ -59,20 +59,20 @@ public class RegisteredRenterController extends RenterController {
 				System.out.println("bedrooms is null");
 			}
 			bathrooms = Integer.parseInt(view.getBathRoomsText());
-			bedRooms = Integer.parseInt(view.getBedRoomsText());
+			bedrooms = Integer.parseInt(view.getBedRoomsText());
 
 		} catch (NumberFormatException e) {
 			view.displayError("Bedroom/bathroom number require a valid integer input");
 			return;
 
 		}
-		System.out.println("bathrooms " + bathrooms + " bedrooms " + bedRooms);
-		if (bathrooms <= 0 || bedRooms <= 0) {
+		System.out.println("bathrooms " + bathrooms + " bedrooms " + bedrooms);
+		if (bathrooms <= 0 || bedrooms <= 0) {
 			view.displayError("Bedroom/bathroom number cannot be equal to or less than 0");
 			return;
 
 		}
-		String propeString = view.getPropertyType().toLowerCase();
+		String propeString = view.getPropertyType();
 		if (!isStringAlpha(propeString)) {
 			view.displayError("Property type must contain only alphabetical characters");
 			return;
@@ -89,20 +89,23 @@ public class RegisteredRenterController extends RenterController {
 		view.displayError("");
 		// this should call a function to match the properties with the search
 		// information and return an arraylist of property objects
-		ArrayList<Property> properties = model.searchForProperties(bathrooms,bedrooms,propeString,furBool,quadString);
+		ArrayList<Property> properties = model.searchForProperties(bathrooms, bedrooms, propeString, furBool,
+				quadString);
 
-		/*ArrayList<Property> dummy = new ArrayList<Property>();
-		dummy.add(new Property("Apartment", true, 1, 1, true, 1, "SW", "Active",
-				"123", 1, 8, "joe", false));
-		dummy.add(new Property("Apartment", true, 1, 1, true, 79, "NW", "Active",
-				"123", 1, 8, "joe", false));*/
+		/*
+		 * ArrayList<Property> dummy = new ArrayList<Property>();
+		 * dummy.add(new Property("Apartment", true, 1, 1, true, 1, "SW", "Active",
+		 * "123", 1, 8, "joe", false));
+		 * dummy.add(new Property("Apartment", true, 1, 1, true, 79, "NW", "Active",
+		 * "123", 1, 8, "joe", false));
+		 */
 
 		view.displaySearch(properties);
 
 		if (furString.equals("furnished")) {
-			model.subscribeNotification(username, bathrooms, bedRooms, true, quadString, propeString);
+			model.subscribeNotification(username, bathrooms, bedrooms, true, quadString, propeString);
 		} else {
-			model.subscribeNotification(username, bathrooms, bedRooms, false, quadString, propeString);
+			model.subscribeNotification(username, bathrooms, bedrooms, false, quadString, propeString);
 		}
 
 	}

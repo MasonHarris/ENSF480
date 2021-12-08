@@ -22,6 +22,7 @@ public class ManagerView extends GUIview {
     JButton accessRenterButton;
     JButton generateReportButton;
     JButton setFeesButton;
+    JButton viewSubscriptions;
     TablePanel tPanel;
     feeForm form;
     SummaryReportView reportView;
@@ -46,6 +47,7 @@ public class ManagerView extends GUIview {
         accessRenterButton = new JButton("Access renter information ");
         submitButton = new JButton("Submit");
         setFeesButton = new JButton("Set or change fees");
+
         panel = new JPanel(new FlowLayout());
         panel.add(changeStateButton);
         panel.add(generateReportButton);
@@ -112,7 +114,7 @@ public class ManagerView extends GUIview {
 
     }
 
-    public void displayForm(int periodValue, int feesValue) {
+    public void displayForm(int periodValue, double feesValue) {
         backButton.setBounds(110, (int) (height * 0.20), (int) (width * 0.2), (int) (height * 0.025));
 
         form.displayFees(width, height, periodValue, feesValue);

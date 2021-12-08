@@ -74,6 +74,7 @@ public class SummaryReportView extends JPanel {
 
         TableColumnModel columns = table.getColumnModel();
         columns.getColumn(0).setPreferredWidth(160);
+        columns.getColumn(1).setPreferredWidth(200);
 
         for (Property p : properties) {
             Object[] entry = { p.getLandlordUsername(), p.getAddress(), p.getPropertyId() };

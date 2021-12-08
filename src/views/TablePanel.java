@@ -179,6 +179,12 @@ public class TablePanel extends JPanel {
         submitButton.setBounds((int) (width * 0.1), (int) (height * 0.55), (int) (width * 0.1),
                 (int) (height * 0.030));
 
+        if (properties.size() > 0) {
+            JLabel label2 = new JLabel("Fee per property " + properties.get(0).getAmountOfFee());
+            label2.setBounds((int) (width * 0.50), (int) (height * 0.55), (int) (width * 0.2),
+                    (int) (height * 0.030));
+            this.add(label2);
+        }
         this.add(label);
         this.add(submitButton);
         this.add(scroll);

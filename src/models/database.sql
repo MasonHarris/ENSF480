@@ -109,7 +109,6 @@ LOCK TABLES `NOTIFICATION` WRITE;
 
 INSERT INTO `NOTIFICATION` (`Username`, `noOfBathrooms`, `noOfBedrooms`, `Furnished`, `cityQuadrant`, `propertyType`)
 VALUES
-	('gary',1,1,1,'NW','Apartment'),
 	('jack23',4,3,0,'NE','Townhouse');
 
 /*!40000 ALTER TABLE `NOTIFICATION` ENABLE KEYS */;
@@ -123,16 +122,17 @@ DROP TABLE IF EXISTS `NOTIFICATION_LANDLORD`;
 
 CREATE TABLE `NOTIFICATION_LANDLORD` (
   `Username` varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
-  `renter_username` varchar(256) DEFAULT NULL,
+  `renter_email` varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   `property_id` int DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 LOCK TABLES `NOTIFICATION_LANDLORD` WRITE;
 /*!40000 ALTER TABLE `NOTIFICATION_LANDLORD` DISABLE KEYS */;
 
-INSERT INTO `NOTIFICATION_LANDLORD` (`Username`, `renter_username`, `property_id`)
+INSERT INTO `NOTIFICATION_LANDLORD` (`Username`, `renter_email`, `property_id`)
 VALUES
-	('doctor','gary',1);
+	('doctor','gary@123.com',1),
+	('doctor','hi@me.com',1);
 
 /*!40000 ALTER TABLE `NOTIFICATION_LANDLORD` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -186,12 +186,12 @@ LOCK TABLES `PROPERTY` WRITE;
 
 INSERT INTO `PROPERTY` (`propertyType`, `propertyID`, `isListed`, `noOfBedrooms`, `noOfBathrooms`, `Furnished`, `cityQuadrant`, `listingPeriod`, `landlordUsername`, `listingState`, `amountofFee`, `address`, `isPaid`)
 VALUES
-	('Apartment',1,1,1,1,1,'NW',40,'doctor','Active',50,'12 Ave',1),
-	('Townhouse',2,1,3,3,1,'SE',20,'sandy','Rented',40,'20 World Way',1),
-	('Apartment',3,1,2,2,0,'NW',10,'sandy','Active',30.54,'44 User Hwy',1),
-	('Attached House',4,0,5,3,0,'NE',30,'doctor','Cancelled',20.44,'81 Easter Ave',0),
-	('Detached House',5,0,2,1,0,'SE',15,'mike','Suspended',12.33,'45 Road Street',0),
-	('House',6,1,3,3,1,'NE',10,'mike','Active',20,'23 Hunter Hwy',1);
+	('Apartment',1,1,1,1,1,'NW',40,'doctor','Active',30.33,'12 Ave',1),
+	('Townhouse',2,1,3,3,1,'SE',20,'sandy','Rented',30.33,'20 World Way',1),
+	('Apartment',3,1,2,2,0,'NW',10,'sandy','Active',30.33,'44 User Hwy',1),
+	('Attached House',4,0,5,3,0,'NE',30,'doctor','Registered',30.33,'81 Easter Ave',0),
+	('Detached House',5,0,2,1,0,'SE',15,'mike','Suspended',30.33,'45 Road Street',0),
+	('House',6,1,3,3,1,'NE',10,'mike','Active',30.33,'23 Hunter Hwy',1);
 
 /*!40000 ALTER TABLE `PROPERTY` ENABLE KEYS */;
 UNLOCK TABLES;

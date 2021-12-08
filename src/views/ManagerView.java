@@ -10,17 +10,22 @@ import javax.swing.JPanel;
 import java.util.HashMap;
 import models.Property;
 import models.SummaryReport;
+import models.RegisteredRenter;
+import models.Landlord;
 
 public class ManagerView extends GUIview {
     JButton logoutButton;
     JButton changeStateButton;
     JButton submitButton;
-    JButton accessDatabaseButton;
+    JButton accessLandlordButton;
+    JButton accessPropertyButton;
+    JButton accessRenterButton;
     JButton generateReportButton;
     JButton setFeesButton;
     TablePanel tPanel;
     feeForm form;
     SummaryReportView reportView;
+    viewTablePanel viewTable;
 
     public ManagerView(String frameName, int width, int height) {
         super(width, height);
@@ -28,6 +33,7 @@ public class ManagerView extends GUIview {
         initalizeFrame(frameName);
         form = new feeForm();
         reportView = new SummaryReportView(width, height);
+        viewTable = new viewTablePanel(width, height);
     }
 
     // creates and saves dashboard elements into memory
@@ -35,13 +41,17 @@ public class ManagerView extends GUIview {
         changeStateButton = new JButton("Change listing state");
         logoutButton = new JButton("Logout");
         generateReportButton = new JButton("Generate periodical report");
-        accessDatabaseButton = new JButton("Access database");
+        accessLandlordButton = new JButton("Access landlord information");
+        accessPropertyButton = new JButton("Access Property information");
+        accessRenterButton = new JButton("Access renter information ");
         submitButton = new JButton("Submit");
         setFeesButton = new JButton("Set or change fees");
         panel = new JPanel(new FlowLayout());
         panel.add(changeStateButton);
         panel.add(generateReportButton);
-        panel.add(accessDatabaseButton);
+        panel.add(accessLandlordButton);
+        panel.add(accessPropertyButton);
+        panel.add(accessRenterButton);
         panel.add(setFeesButton);
         panel.add(logoutButton);
 
@@ -64,9 +74,17 @@ public class ManagerView extends GUIview {
 
     }
 
-    public void addAccessDBListener(ActionListener listener) {
-        accessDatabaseButton.addActionListener(listener);
+    public void addAccessLandlordListener(ActionListener listener) {
+        accessLandlordButton.addActionListener(listener);
 
+    }
+
+    public void addAccessPropertyListener(ActionListener listener) {
+        accessPropertyButton.addActionListener(listener);
+    }
+
+    public void addAccessRentersListener(ActionListener listener) {
+        accessRenterButton.addActionListener(listener);
     }
 
     public void addReportListener(ActionListener listener) {
@@ -131,6 +149,39 @@ public class ManagerView extends GUIview {
         reportView.add(backButton);
         frame.setContentPane(reportView);
         frame.revalidate();
+    }
+
+    public void displayRenterTable(ArrayList<RegisteredRenter> renters) {
+        backButton.setBounds(110, (int) (height * 0.6), (int) (width * 0.2), (int) (height * 0.03));
+        viewTable.displayRenters(renters);
+
+        viewTable.add(backButton);
+
+        frame.setContentPane(viewTable);
+        frame.revalidate();
+
+    }
+
+    public void displayLandlordTable(ArrayList<Landlord> landlords) {
+        backButton.setBounds(110, (int) (height * 0.6), (int) (width * 0.2), (int) (height * 0.03));
+        viewTable.displayLandlords(landlords);
+
+        viewTable.add(backButton);
+
+        frame.setContentPane(viewTable);
+        frame.revalidate();
+
+    }
+
+    public void displayPropertyTable(ArrayList<Property> properties) {
+        backButton.setBounds(110, (int) (height * 0.6), (int) (width * 0.2), (int) (height * 0.03));
+        viewTable.displayProperties(properties);
+
+        viewTable.add(backButton);
+        viewTable.repaint();
+        frame.setContentPane(viewTable);
+        frame.revalidate();
+
     }
 
 }

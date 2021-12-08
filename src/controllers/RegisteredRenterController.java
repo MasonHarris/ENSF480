@@ -14,6 +14,7 @@ public class RegisteredRenterController extends RenterController {
 			String username) {
 		super(model);
 		this.view = view;
+
 		this.login = login;
 		this.username = username;
 		// super.view = view;
@@ -52,7 +53,8 @@ public class RegisteredRenterController extends RenterController {
 		// gets notifications from database(as arraylist of properties)
 
 	}
-	public void subscribeRenter(){
+
+	public void subscribeRenter() {
 	}
 
 	public void unsubscribeRenter() {
@@ -62,5 +64,31 @@ public class RegisteredRenterController extends RenterController {
 		model.unsubscribeNotification(username);
 
 	}
+
+	public RegisteredRenterView getView() {
+		return this.view;
+	}
+
+	public void setView(RegisteredRenterView view) {
+		this.view = view;
+	}
+
+	public LoginController getLogin() {
+		return this.login;
+	}
+
+	public void setLogin(LoginController login) {
+		this.login = login;
+	}
+
+	public String getUsername() {
+		return this.username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+
 
 }

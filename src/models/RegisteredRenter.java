@@ -3,12 +3,12 @@ package models;
 public class RegisteredRenter extends Renter {
 	private String username;
 
-	private int id;
+	private int ID;
 	private String password;
 
 	public RegisteredRenter(String username, String password, int id) {
 		this.username = username;
-		this.id = id;
+		this.ID = id;
 		this.password = password;
 	}
 
@@ -20,12 +20,12 @@ public class RegisteredRenter extends Renter {
 		this.username = username;
 	}
 
-	public int getId() {
-		return this.id;
+	public int getID() {
+		return this.ID;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public void setId(int ID) {
+		this.ID = ID;
 	}
 
 	public String getPassword() {

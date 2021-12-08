@@ -3,7 +3,9 @@ package controllers;
 import java.util.ArrayList;
 
 import models.Database;
+import models.Landlord;
 import models.Property;
+import models.RegisteredRenter;
 import models.SummaryReport;
 import views.ManagerView;
 import java.util.HashMap;
@@ -39,7 +41,18 @@ public class ManagerController extends GUIcontroller {
         view.addSetFeesListner(e -> view.displayForm(100, 100));
         view.FeesListener(e -> changeFees());
         view.addReportListener(e -> summary());
+        // someone should fill these in with the correct arraylist argument(these should
+        // be created by the model)
+        ArrayList<RegisteredRenter> renters = new ArrayList<RegisteredRenter>();
+        renters.add(new RegisteredRenter("miku", "nakano", 1));
+        renters.add(new RegisteredRenter("nino", "nakano", 31));
+        ArrayList<Landlord> landlords = new ArrayList<Landlord>();
+        landlords.add(new Landlord("ai", 1, "hayasaka", "hayasaka@gmail.com"));
+        landlords.add(new Landlord("raiden", 18, "shogun", "raiden@gmail.com"));
 
+        view.addAccessLandlordListener(e -> view.displayLandlordTable(landlords));
+        view.addAccessRentersListener(e -> view.displayRenterTable(renters));
+        // view.addAccessPropertyListener(e -> view.displayPropertyTable());
     }
 
     public void summary() {

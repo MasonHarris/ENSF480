@@ -57,22 +57,21 @@ public class LoginController extends GUIcontroller {
 			// deal with valid login
 			System.out.println("valid");
 			view.dispose();
-			if(model.validateAccountType(username).equals("Landlord")){
+			if (model.validateAccountType(username).equals("Landlord")) {
 				LandlordController landlord = new LandlordController(model, new LandlordView("Landlord", 1200, 1200),
-					this, username);
-					landlord.start();
-			}
-			else if(model.validateAccountType(username).equals("Manager")){
-				ManagerController manager = new ManagerController(model, new ManagerView("Manager", 1200, 1200), this, username);
+						this, username);
+				landlord.start();
+			} else if (model.validateAccountType(username).equals("Manager")) {
+				ManagerController manager = new ManagerController(model, new ManagerView("Manager", 1200, 1200), this,
+						username);
 				manager.start();
-			}
-			else{
-				RegisteredRenterController registeredRenter = new RegisteredRenterController(model, new RegisteredRenterView(username, 1200, 1200),
-				this, username);
+			} else {
+				RegisteredRenterController registeredRenter = new RegisteredRenterController(model,
+						new RegisteredRenterView(username, 1200, 1200),
+						this, username);
 				registeredRenter.start();
 			}
-		} 
-		else {
+		} else {
 			view.displayLoginError();
 
 		}

@@ -14,6 +14,7 @@ import java.awt.LayoutManager;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+//this class should only be used for tables where rows can be selected, for view only tables, please go to viewTablePanels.java
 public class TablePanel extends JPanel {
     JTable table;
     JButton submitButton;
@@ -53,6 +54,7 @@ public class TablePanel extends JPanel {
 
     }
 
+    // single select table with no editable attributes
     public void displayPropertyTableRenter(ArrayList<Property> properties) {
         this.removeAll();
         String[] colNames = { "Property ID", "Address", "Number of bedrooms", "Number of bathrooms", "City quadrant",
@@ -90,7 +92,7 @@ public class TablePanel extends JPanel {
 
     }
 
-    // options represents the states the properties can be changed to
+    // multi select table with changeable combobox
     public void displayPropertyTableChangeListing(ArrayList<Property> properties) {
         this.removeAll();
         String[] colNames = { "Property ID", "Address", "Number of bedrooms", "Number of bathrooms", "City quadrant",
@@ -141,12 +143,12 @@ public class TablePanel extends JPanel {
 
     }
 
-    //
+    // single select table with no editable attributes
     public void displayPropertyPayFees(ArrayList<Property> properties) {
         this.removeAll();
         String[] colNames = { "Property ID", "Address", "Number of bedrooms", "Number of bathrooms", "City quadrant",
                 "Furnished", "Property type", "Status", "Listing period" };
-        // options for state changes
+        
 
         // model used to make table
         tableModel = new DefaultTableModel(colNames, 0);

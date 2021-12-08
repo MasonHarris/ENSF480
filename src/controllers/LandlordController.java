@@ -2,8 +2,6 @@ package controllers;
 
 import java.util.ArrayList;
 
-import javax.print.attribute.standard.RequestingUserName;
-
 import models.Database;
 import models.Property;
 import views.LandlordView;
@@ -71,11 +69,11 @@ public class LandlordController extends GUIcontroller {
         try {
             bedrooms = Integer.parseInt(value[2]);
             bathrooms = Integer.parseInt(value[3]);
-            if(value[6].equals("furnished")){
+            if (value[6].equals("furnished")) {
                 furnished = true;
             }
-            Property property = new Property(value[4], false, bedrooms, bathrooms, furnished, 
-            model.getRegisterPropertyID(), value[5], "Registered", value[0]+value[1], 0, 0, username, false);
+            Property property = new Property(value[4], false, bedrooms, bathrooms, furnished,
+                    model.getRegisterPropertyID(), value[5], "Registered", value[0] + value[1], 0, 0, username, false);
             model.registerProperty(property);
         } catch (NumberFormatException e) {
             view.formError("Non number put in number field");
@@ -122,6 +120,8 @@ public class LandlordController extends GUIcontroller {
             // use the pair.getkey() to get property id and update accoridinly
             model.payFee(propertyID);
         }
+
+        view.confirmation("Payment successful");
 
     }
 

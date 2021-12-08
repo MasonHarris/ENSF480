@@ -49,6 +49,14 @@ public class RegisteredRenterView extends RenterView {
 
 	}
 
+	@Override
+	public void intializeSearchPanel() {
+		super.intializeSearchPanel();
+
+		backButton.setBounds((int) (width * 0.5), (int) (height * 0.15), (int) (width * 0.3), (int) (height * 0.03));
+		panel.add(backButton);
+	}
+
 	// the following methods until the end add event listeners to all the buttons
 	public void addLogoutListener(ActionListener listener) {
 		logout.addActionListener(listener);

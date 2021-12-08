@@ -2,6 +2,9 @@ package models;
 import java.sql.*; 
 //this should be a singleton
 import java.util.ArrayList;
+import java.util.HashMap;
+
+import com.mysql.cj.xdevapi.Result;
 
 public class Database {
 	public static Database onlyInstance;
@@ -70,6 +73,42 @@ public class Database {
 			System.out.println(e);
 			System.exit(0);
 			return "Renter";
+		}
+	}
+	public Landlord getLandlord(String user){
+		try{
+			String query = "SELECT * FROM LANDLORD WHERE Username = ?";
+			PreparedStatement statement = connection.prepareStatement(query);
+			statement.setString(1, user);
+			ResultSet res = statement.executeQuery();
+			Landlord landlord = new Landlord();
+			while(res.next()){
+				landlord = new Landlord(user, res.getString("name"), res.getString("emailAddress"));
+			}
+			return landlord;
+		}
+		catch(SQLException e){
+			System.out.println(e);
+			System.exit(0);
+			return new Landlord();
+		}
+	}
+	public RegisteredRenter getRegisteredRenter(String user){
+		try{
+			String query = "SELECT * FROM RENTER WHERE Username = ?";
+			PreparedStatement statement = connection.prepareStatement(query);
+			statement.setString(1, user);
+			ResultSet res = statement.executeQuery();
+			RegisteredRenter renter = new RegisteredRenter();
+			while(res.next()){
+				renter = new RegisteredRenter(user, res.getString("email"));
+			}
+			return renter;
+		}
+		catch(SQLException e){
+			System.out.println(e);
+			System.exit(0);
+			return new RegisteredRenter();
 		}
 	}
 	public ArrayList<Property> getAllProperties(){
@@ -190,12 +229,23 @@ public class Database {
 			System.exit(0);
 		}
 	}
-	public void setFee(double feeAmount, int propety_id){
+	public void setFee(double feeAmount){
 		try{
-			String query = "UPDATE PROPERTY SET amountofFee = ? WHERE propertyID = ?";
+			String query = "UPDATE PROPERTY SET amountofFee = ?";
 			PreparedStatement statement = connection.prepareStatement(query);
 			statement.setDouble(1, feeAmount);
-			statement.setInt(2, propety_id);
+			statement.executeUpdate();
+		}
+		catch(SQLException e){
+			System.out.println(e);
+			System.exit(0);
+		}
+	}
+	public void setPeriod(int periodAmount){
+		try{
+			String query = "UPDATE PROPERTY SET listingPeriod = ?";
+			PreparedStatement statement = connection.prepareStatement(query);
+			statement.setInt(1, periodAmount);
 			statement.executeUpdate();
 		}
 		catch(SQLException e){
@@ -339,6 +389,25 @@ public class Database {
 		catch(SQLException e){
 			System.out.println(e);
 			System.exit(0);
+		}
+	}
+	public HashMap<String, Integer> getLandlordNotification(String user){
+		try{
+			String query = "SELECT * FROM NOTIFICATION_LANDLORD WHERE Username = ?";
+			HashMap<String, Integer> hash = new HashMap<>();
+			PreparedStatement statement = connection.prepareStatement(query);
+			statement.setString(1, user);
+			ResultSet res = statement.executeQuery();
+			while(res.next()){
+				String email = getRegisteredRenter(res.getString("Username")).getEmail();
+				hash.put(email, res.getInt("property_id"));
+			}
+			return hash;
+		}
+		catch(SQLException e){
+			System.out.println(e);
+			System.exit(0);
+			return new HashMap<>();
 		}
 	}
 	

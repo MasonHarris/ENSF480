@@ -44,12 +44,27 @@ public class ManagerController extends GUIcontroller {
 
     public void summary() {
         // add code here to get a summary report object from the database
-        ArrayList<Property> dummy = new ArrayList<Property>();
-        dummy.add(new Property("Apartment", true, 1, 1, true, 1, "SW", "Active",
-                "123", 1, 8, "joe"));
-        dummy.add(new Property("Apartment", true, 1, 1, true, 79, "NW", "Active",
-                "123", 1, 8, "joe"));
-        SummaryReport r = new SummaryReport(1, 1, 3, dummy);
+        ArrayList<Property> properties = model.getAllProperties();
+        int totalHousesListed = 0;
+        int totalHousesRented = 0;
+        int totalHousesActive = 0;
+        ArrayList<Property> rentedHouses = new ArrayList<>();
+        for(int i = 0; i<properties.size();i++){
+            if((properties.get(i).getListingPeriod() > 0) && (properties.get(i).getPropertyStatus().equals("Active"))){
+                totalHousesListed++;
+                totalHousesActive++;
+            }
+            if((properties.get(i).getListingPeriod() > 0) && (properties.get(i).getPropertyStatus().equals("Rented"))){
+                totalHousesListed++;
+                totalHousesRented++;
+                rentedHouses.add(properties.get(i));
+            }
+        }
+        // dummy.add(new Property("Apartment", true, 1, 1, true, 1, "SW", "Active",
+        //         "123", 1, 8, "joe", true));
+        // dummy.add(new Property("Apartment", true, 1, 1, true, 79, "NW", "Active",
+        //         "123", 1, 8, "joe", true));
+        SummaryReport r = new SummaryReport(totalHousesListed, totalHousesRented, totalHousesActive, rentedHouses);
         view.displaySummaryReport(r);
 
     }
@@ -68,6 +83,8 @@ public class ManagerController extends GUIcontroller {
         }
 
         // update database fee period and value code here
+        model.setFee(feeValue);
+        model.setPeriod(period);
         view.confirmation("Fees changed");
         view.displayDashboard();
 

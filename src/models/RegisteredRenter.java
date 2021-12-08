@@ -1,12 +1,16 @@
 package models;
 
-public class RegisteredRenter extends Renter{
+public class RegisteredRenter extends Renter {
 	private String username;
 	private String email;
+	private int ID;
+	private String password;
 
-	public RegisteredRenter(String user, String email){
-		this.username = user;
+	public RegisteredRenter(String username, String email, String password, int id) {
+		this.username = username;
 		this.email = email;
+		this.ID = id;
+		this.password = password;
 	}
 	public RegisteredRenter(){
 		
@@ -20,21 +24,37 @@ public class RegisteredRenter extends Renter{
 		this.username = username;
 	}
 
-	public String getEmail() {
-		return this.email;
+	public int getID() {
+		return this.ID;
 	}
 
-	public void setEmail(String email) {
+	public void setId(int ID) {
+		this.ID = ID;
+	}
+
+	public String getPassword() {
+		return this.password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	public String getEmail(){
+		return this.email;
+	}
+	public void setEmail(String email){
 		this.email = email;
 	}
 
 	public void login() {
-		
+
 	}
+
 	public void notified() {
-		
+
 	}
+
 	public void unsubscribe() {
-		
+
 	}
 }

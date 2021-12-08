@@ -1,9 +1,10 @@
 package models;
-import java.sql.*; 
+import java.sql.*;
+import java.util.AbstractMap;
 //this should be a singleton
 import java.util.ArrayList;
 import java.util.HashMap;
-
+import java.util.AbstractMap.SimpleEntry;
 import com.mysql.cj.xdevapi.Result;
 
 public class Database {
@@ -75,6 +76,24 @@ public class Database {
 			return "Renter";
 		}
 	}
+	public SimpleEntry<Integer,String> getIDPassword(String user){
+		try{
+			String query = "SELECT * FROM ACCOUNT WHERE Username = ?";
+			PreparedStatement statement = connection.prepareStatement(query);
+			statement.setString(1, user);
+			ResultSet res = statement.executeQuery();
+			SimpleEntry<Integer, String> pair = new SimpleEntry<>(0, "");
+			while(res.next()){
+				pair = new AbstractMap.SimpleEntry<Integer,String>(res.getInt("ID"), res.getString("Password"));
+			}
+			return pair;
+		}
+		catch(SQLException e){
+			System.out.println(e);
+			System.exit(0);
+			return new SimpleEntry<>(0, "");
+		}
+	}
 	public Landlord getLandlord(String user){
 		try{
 			String query = "SELECT * FROM LANDLORD WHERE Username = ?";
@@ -83,7 +102,8 @@ public class Database {
 			ResultSet res = statement.executeQuery();
 			Landlord landlord = new Landlord();
 			while(res.next()){
-				landlord = new Landlord(user, res.getString("name"), res.getString("emailAddress"));
+				SimpleEntry<Integer, String> pair = getIDPassword(user);
+				landlord = new Landlord(user, pair.getKey(), res.getString("emailAddress"), pair.getValue());
 			}
 			return landlord;
 		}
@@ -101,7 +121,8 @@ public class Database {
 			ResultSet res = statement.executeQuery();
 			RegisteredRenter renter = new RegisteredRenter();
 			while(res.next()){
-				renter = new RegisteredRenter(user, res.getString("email"));
+				SimpleEntry<Integer, String> pair = getIDPassword(user);
+				renter = new RegisteredRenter(user, res.getString("email"), pair.getValue(), pair.getKey());
 			}
 			return renter;
 		}

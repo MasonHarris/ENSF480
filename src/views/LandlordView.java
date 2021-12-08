@@ -21,6 +21,7 @@ public class LandlordView extends GUIview {
     TablePanel feePanel;
     TablePanel tPanel;
     RegistrationForm form;
+    viewLandlordNotifications n;
     String options[] = { "Suspended", "Unsuspended", "Cancelled", "Rented" };
 
     public LandlordView(String frameName, int width, int height) {
@@ -28,7 +29,9 @@ public class LandlordView extends GUIview {
         tPanel = new TablePanel(width, height, "Save changes");
         form = new RegistrationForm();
         feePanel = new TablePanel(width, height, "Pay fees");
+        n = new viewLandlordNotifications(width, height);
         initalizeFrame(frameName);
+
     }
 
     // creates and saves dashboard elements into memory
@@ -95,6 +98,14 @@ public class LandlordView extends GUIview {
 
     public void formError(String error) {
         form.displayError(error);
+    }
+
+    public void displayNotifications(HashMap<String, Integer> notifications) {
+        n.displayNotifications(notifications);
+        backButton.setBounds(110, (int) (height * 0.62), (int) (width * 0.2), (int) (height * 0.03));
+        n.add(backButton);
+        frame.setContentPane(n);
+        frame.revalidate();
     }
 
     public void displayFees(ArrayList<Property> properties) {

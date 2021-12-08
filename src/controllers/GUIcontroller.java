@@ -27,10 +27,15 @@ public abstract class GUIcontroller {
 		for (int i = 0; i < check.length(); i++) {
 			if (check.charAt(i) == ' ') {
 				spaceCounter++;
-			}
-			if (!Character.isLetter(check.charAt(i)) && spaceCounter > 1) {
-				System.out.println("This is not a letter " + (int) check.charAt(i));
+				if (spaceCounter > 1) {
+					System.out.println(
+							"This is not a letter " + (int) check.charAt(i) + " space counter " + spaceCounter);
+					return false;
+				}
+			} else if (!Character.isLetter(check.charAt(i))) {
+				System.out.println("This is not a letter " + (int) check.charAt(i) + " space counter " + spaceCounter);
 				return false;
+
 			}
 		}
 		return true;

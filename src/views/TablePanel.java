@@ -109,6 +109,7 @@ public class TablePanel extends JPanel {
         table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
         TableColumnModel columns = table.getColumnModel();
+        columns.getColumn(1).setPreferredWidth(200);
         columns.getColumn(2).setPreferredWidth(160);
         columns.getColumn(3).setPreferredWidth(160);
         table.getTableHeader().setReorderingAllowed(false);
@@ -132,7 +133,7 @@ public class TablePanel extends JPanel {
         JScrollPane scroll = new JScrollPane(table);
         JLabel label = new JLabel("Properties");
         label.setBounds((int) (width * 0.1), 0, (int) (width * 0.1), (int) (height * 0.05));
-        scroll.setBounds(0, (int) (height * 0.035), (int) (width * 0.7), (int) (height * 0.5));
+        scroll.setBounds(0, (int) (height * 0.035), (int) (width * 0.8), (int) (height * 0.5));
         submitButton.setBounds((int) (width * 0.1), (int) (height * 0.55), (int) (width * 0.1),
                 (int) (height * 0.030));
 
@@ -148,7 +149,6 @@ public class TablePanel extends JPanel {
         this.removeAll();
         String[] colNames = { "Property ID", "Address", "Number of bedrooms", "Number of bathrooms", "City quadrant",
                 "Furnished", "Property type", "Status", "Listing period" };
-        
 
         // model used to make table
         tableModel = new DefaultTableModel(colNames, 0);
@@ -156,6 +156,7 @@ public class TablePanel extends JPanel {
         table.setSelectionModel(new TableListSelection());
         table.setColumnSelectionAllowed(false);
         TableColumnModel columns = table.getColumnModel();
+        columns.getColumn(1).setPreferredWidth(200);
         columns.getColumn(2).setPreferredWidth(160);
         columns.getColumn(3).setPreferredWidth(160);
         table.getTableHeader().setReorderingAllowed(false);
@@ -174,7 +175,7 @@ public class TablePanel extends JPanel {
         JScrollPane scroll = new JScrollPane(table);
         JLabel label = new JLabel("Properties");
         label.setBounds((int) (width * 0.1), 0, (int) (width * 0.1), (int) (height * 0.05));
-        scroll.setBounds(0, (int) (height * 0.035), (int) (width * 0.7), (int) (height * 0.5));
+        scroll.setBounds(0, (int) (height * 0.035), (int) (width * 0.8), (int) (height * 0.5));
         submitButton.setBounds((int) (width * 0.1), (int) (height * 0.55), (int) (width * 0.1),
                 (int) (height * 0.030));
 

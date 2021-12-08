@@ -20,6 +20,7 @@ public class feeForm extends JPanel {
     }
 
     public void displayFees(int width, int height, int periodValue, double feesValue) {
+        this.removeAll();
         fee = new JTextField(Double.toString(feesValue));
 
         period = new JTextField(Integer.toString(periodValue));

@@ -1,6 +1,8 @@
 package models;
 
-public class RegisteredRenter extends Renter {
+import java.util.concurrent.Flow.Subscription;
+
+public class RegisteredRenter {
 	private String username;
 	private String email;
 	private int ID;
@@ -16,7 +18,16 @@ public class RegisteredRenter extends Renter {
 	}
 
 	public RegisteredRenter() {
+		subscription = null;
 
+	}
+
+	public RegisteredRenter(String user, String string, String value, Integer key, models.Subscription subscription2) {
+	}
+
+	public RegisteredRenter(String user, String email) {
+		this.username = user;
+		this.email = email;
 	}
 
 	public String getUsername() {
@@ -49,6 +60,14 @@ public class RegisteredRenter extends Renter {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public void setSubscription(Subscription s) {
+		this.subscription = s;
+	}
+
+	public Subscription getSubscription() {
+		return this.subscription;
 	}
 
 	public void login() {

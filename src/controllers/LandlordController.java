@@ -8,7 +8,7 @@ import views.LandlordView;
 import java.util.HashMap;
 
 public class LandlordController extends GUIcontroller {
-    private ArrayList<Property> regiProperties;
+    private ArrayList<Property> landlord_properties;
     private LandlordView view;
     private LoginController login;
     private String username;
@@ -18,8 +18,8 @@ public class LandlordController extends GUIcontroller {
         this.view = view;
         this.login = login;
         this.username = username;
-        regiProperties = new ArrayList<Property>();
-        regiProperties = model.getLandlordProperties(this.username);
+        landlord_properties = new ArrayList<Property>();
+        landlord_properties = model.getLandlordProperties(this.username);
 
     }
 
@@ -35,14 +35,21 @@ public class LandlordController extends GUIcontroller {
         view.addBackListener(e -> view.displayDashboard());
 
         view.addChangeListingListener(e -> {
-            view.displayListingChanges(regiProperties);
+            ArraayList<Property> paid;
+            for(var p : landlord_properties){
+                if(p.getisPaid()){
+                    paid.add(p);
+                }
+            }
+            view.displayListingChanges(paid);
         });
         view.TableButtonListener(e -> changeListingState());
         view.registerFormListener(e -> registerProperty());
         view.addRegisterListener(e -> view.displayRegisterProperty());
+        view.addNotificationsListener(e-> view.displayNotifications(model.getLandlordNotification(username)););
         // displayFees needs an arraylist argument consisting of an arraylist of
         // property objects that are unpaid for this landlord
-        ArrayList<Property> landlord_properties = model.getLandlordProperties(username);
+        
         ArrayList<Property> unpaid = new ArrayList<Property>();
         for (Property property : landlord_properties) {
             if (!property.getisPaid()) {
@@ -56,7 +63,7 @@ public class LandlordController extends GUIcontroller {
 
     // used to fill properties arraylist
     public void getRegisteredProperties() {
-        regiProperties = model.getLandlordProperties(username);
+        landlord_properties = model.getLandlordProperties(username);
     }
 
     public void registerProperty() {
@@ -73,7 +80,6 @@ public class LandlordController extends GUIcontroller {
                 furnished = true;
             }
 
-            
         } catch (NumberFormatException e) {
             view.formError("Non number put in number field");
             return;
@@ -88,7 +94,7 @@ public class LandlordController extends GUIcontroller {
         model.registerProperty(property);
         view.formError("");
         view.confirmation("registered property successfully");
-        regiProperties.add(property);
+        landlord_properties.add(property);
 
     }
 
@@ -103,14 +109,14 @@ public class LandlordController extends GUIcontroller {
         for (var pair : alteredProperties.entrySet()) {
             System.out.println("hello");
             // if old status is different to new status, update database
-            String oldstate = regiProperties.get(pair.getKey()).getPropertyStatus();
+            String oldstate = landlord_properties.get(pair.getKey()).getPropertyStatus();
             if ((oldstate != pair.getValue())) {
                 // update database with new state(pair.getValue()) should also update properties
                 // arraylist by calling getAllProperties after loop
-                model.changePropertyListing(regiProperties.get(pair.getKey()).getPropertyId(), pair.getValue());
+                model.changePropertyListing(landlord_properties.get(pair.getKey()).getPropertyId(), pair.getValue());
             }
         }
-        regiProperties = model.getLandlordProperties(username);
+        landlord_properties = model.getLandlordProperties(username);
 
     }
 

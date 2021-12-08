@@ -116,22 +116,20 @@ public class Database {
 		}
 	}
 
-	public static Renter getAllRenters(String user) {
+	public ArrayList<RegisteredRenter> getAllRenters() {
 		try {
-			ArrayList<Renter>list=new ArrayList<Renter>();
-			String query = "SELECT * FROM RENTER WHERE Username = ?";
+			ArrayList<RegisteredRenter> list = new ArrayList<RegisteredRenter>();
+			String query = "SELECT * FROM RENTER";
 			PreparedStatement statement = connection.prepareStatement(query);
-			statement.setString(1, user);
 			ResultSet res = statement.executeQuery();
-			Renter renter = new Renter();
 			while (res.next()) {
-				renter = new Renter(user, res.getString("email");
+				list.add(new RegisteredRenter(res.getString("Username"), res.getString("email")));
 			}
-			return renter;
+			return list;
 		} catch (SQLException e) {
 			System.out.println(e);
 			System.exit(0);
-			return new Renter();
+			return new ArrayList<RegisteredRenter>();
 		}
 	}
 

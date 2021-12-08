@@ -15,7 +15,7 @@ public class RegisteredRenter extends Renter {
 		this.subscription = subscription;
 	}
 
-	public RegisteredRenter() {
+	public RegisteredRenter(String string, String string2) {
 
 	}
 

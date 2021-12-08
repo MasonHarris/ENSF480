@@ -12,8 +12,9 @@ public class RegisteredRenter extends Renter {
 		this.ID = id;
 		this.password = password;
 	}
-	public RegisteredRenter(){
-		
+
+	public RegisteredRenter() {
+
 	}
 
 	public String getUsername() {
@@ -39,10 +40,12 @@ public class RegisteredRenter extends Renter {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public String getEmail(){
+
+	public String getEmail() {
 		return this.email;
 	}
-	public void setEmail(String email){
+
+	public void setEmail(String email) {
 		this.email = email;
 	}
 

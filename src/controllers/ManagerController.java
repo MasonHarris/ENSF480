@@ -22,7 +22,7 @@ public class ManagerController extends GUIcontroller {
         this.login = login;
         this.username = username;
         allProperties = new ArrayList<Property>();
-        // allProperties = model.getAllProperties();
+        allProperties = model.getAllProperties();
     }
 
     public void start() {
@@ -62,21 +62,23 @@ public class ManagerController extends GUIcontroller {
         int totalHousesRented = 0;
         int totalHousesActive = 0;
         ArrayList<Property> rentedHouses = new ArrayList<>();
-        for(int i = 0; i<properties.size();i++){
-            if((properties.get(i).getListingPeriod() > 0) && (properties.get(i).getPropertyStatus().equals("Active"))){
+        for (int i = 0; i < properties.size(); i++) {
+            if ((properties.get(i).getListingPeriod() > 0)
+                    && (properties.get(i).getPropertyStatus().equals("Active"))) {
                 totalHousesListed++;
                 totalHousesActive++;
             }
-            if((properties.get(i).getListingPeriod() > 0) && (properties.get(i).getPropertyStatus().equals("Rented"))){
+            if ((properties.get(i).getListingPeriod() > 0)
+                    && (properties.get(i).getPropertyStatus().equals("Rented"))) {
                 totalHousesListed++;
                 totalHousesRented++;
                 rentedHouses.add(properties.get(i));
             }
         }
         // dummy.add(new Property("Apartment", true, 1, 1, true, 1, "SW", "Active",
-        //         "123", 1, 8, "joe", true));
+        // "123", 1, 8, "joe", true));
         // dummy.add(new Property("Apartment", true, 1, 1, true, 79, "NW", "Active",
-        //         "123", 1, 8, "joe", true));
+        // "123", 1, 8, "joe", true));
         SummaryReport r = new SummaryReport(totalHousesListed, totalHousesRented, totalHousesActive, rentedHouses);
         view.displaySummaryReport(r);
 
@@ -126,7 +128,9 @@ public class ManagerController extends GUIcontroller {
                 System.out.println("Property " + pair.getKey() + " has a new status of  " + pair.getValue());
                 model.changePropertyListing(allProperties.get(pair.getKey()).getPropertyId(), pair.getValue());
             }
+
         }
+        allProperties = model.getAllProperties();
 
     }
 

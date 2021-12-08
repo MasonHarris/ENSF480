@@ -44,8 +44,8 @@ public class LandlordController extends GUIcontroller {
         // property objects that are unpaid for this landlord
         ArrayList<Property> landlord_properties = model.getLandlordProperties(username);
         ArrayList<Property> unpaid = new ArrayList<Property>();
-        for(Property property: landlord_properties){
-            if(!property.getisPaid()){
+        for (Property property : landlord_properties) {
+            if (!property.getisPaid()) {
                 unpaid.add(property);
             }
         }
@@ -72,9 +72,8 @@ public class LandlordController extends GUIcontroller {
             if (value[6].equals("furnished")) {
                 furnished = true;
             }
-            Property property = new Property(value[4], false, bedrooms, bathrooms, furnished,
-                    model.getRegisterPropertyID(), value[5], "Registered", value[0] + value[1], 0, 0, username, false);
-            model.registerProperty(property);
+
+            
         } catch (NumberFormatException e) {
             view.formError("Non number put in number field");
             return;
@@ -84,8 +83,12 @@ public class LandlordController extends GUIcontroller {
             view.formError("Non alphabetic character put in invalid field");
             return;
         }
+        Property property = new Property(value[4], false, bedrooms, bathrooms, furnished,
+                model.getRegisterPropertyID(), value[5], "Registered", value[0] + value[1], 0, 0, username, false);
+        model.registerProperty(property);
         view.formError("");
         view.confirmation("registered property successfully");
+        regiProperties.add(property);
 
     }
 
@@ -107,6 +110,7 @@ public class LandlordController extends GUIcontroller {
                 model.changePropertyListing(regiProperties.get(pair.getKey()).getPropertyId(), pair.getValue());
             }
         }
+        regiProperties = model.getLandlordProperties(username);
 
     }
 

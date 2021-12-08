@@ -75,9 +75,9 @@ public class RenterController extends GUIcontroller {
 
 		ArrayList<Property> dummy = new ArrayList<Property>();
 		dummy.add(new Property("Apartment", true, 1, 1, true, 1, "SW", "Active",
-				"123", 1, 8, "joe"));
+				"123", 1, 8, "joe",true));
 		dummy.add(new Property("Apartment", true, 1, 1, true, 79, "NW", "Active",
-				"123", 1, 8, "joe"));
+				"123", 1, 8, "joe",false));
 
 		view.displaySearch(dummy);
 

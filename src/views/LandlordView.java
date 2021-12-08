@@ -122,11 +122,11 @@ public class LandlordView extends GUIview {
     }
 
     public HashMap<Integer, String> getSelectedProperties() {
-        return tPanel.getSelectedProperties(7);
+        return tPanel.getSelectedPropertiesMap(7);
     }
 
-    public HashMap<Integer, String> getPaymentProperties() {
-        return feePanel.getSelectedProperties(0);
+    public int[] getPaymentProperties() {
+        return feePanel.getSelectedPropertiesID();
     }
 
     public void displayRegisterProperty() {
@@ -135,6 +135,10 @@ public class LandlordView extends GUIview {
         form.displayForm(width, height);
         frame.setContentPane(form);
         frame.revalidate();
+    }
+
+    public HashMap<Integer, String> getPaymentPropertiesID() {
+        return null;
     }
 
 }

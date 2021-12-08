@@ -1,5 +1,6 @@
 package views;
 
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -8,6 +9,7 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import java.util.HashMap;
 import models.Property;
+import models.SummaryReport;
 
 public class ManagerView extends GUIview {
     JButton logoutButton;
@@ -18,12 +20,14 @@ public class ManagerView extends GUIview {
     JButton setFeesButton;
     TablePanel tPanel;
     feeForm form;
+    SummaryReportView reportView;
 
     public ManagerView(String frameName, int width, int height) {
         super(width, height);
         tPanel = new TablePanel(width, height, "save changes");
         initalizeFrame(frameName);
         form = new feeForm();
+        reportView = new SummaryReportView(width, height);
     }
 
     // creates and saves dashboard elements into memory
@@ -83,12 +87,15 @@ public class ManagerView extends GUIview {
     }
 
     public void FeesListener(ActionListener listener) {
+        if (form.submit == null) {
+            System.out.println("submit is null");
+        }
         form.submit.addActionListener(listener);
 
     }
 
     public void displayForm(int periodValue, int feesValue) {
-        backButton.setBounds(110, (int) (height * 0.20), (int) (width * 0.1), (int) (height * 0.025));
+        backButton.setBounds(110, (int) (height * 0.20), (int) (width * 0.2), (int) (height * 0.025));
         form.add(backButton);
         form.displayFees(width, height, periodValue, feesValue);
         frame.setContentPane(form);
@@ -104,17 +111,26 @@ public class ManagerView extends GUIview {
     }
 
     public HashMap<Integer, String> getSelectedProperties() {
-        return tPanel.getSelectedProperties(7);
+        return tPanel.getSelectedPropertiesMap(7);
     }
 
     public void displayListingChanges(ArrayList<Property> properties) {
         backButton.setBounds((int) (width * 0.25), (int) (height * 0.55), (int) (width * 0.2),
                 (int) (height * 0.030));
-        tPanel.add(backButton);
+
         tPanel.displayPropertyTableChangeListing(properties);
+        tPanel.add(backButton);
         frame.setContentPane(tPanel);
         frame.revalidate();
 
+    }
+
+    public void displaySummaryReport(SummaryReport r) {
+        reportView.displayReport(width, height, r);
+        backButton.setBounds(110, (int) (height * 0.62), (int) (width * 0.2), (int) (height * 0.03));
+        reportView.add(backButton);
+        frame.setContentPane(reportView);
+        frame.revalidate();
     }
 
 }

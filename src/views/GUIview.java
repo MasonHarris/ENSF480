@@ -47,7 +47,7 @@ public abstract class GUIview {
 		confirm.add(l);
 
 		// setsize of dialog
-		confirm.setSize(400, 400);
+		confirm.setSize(200, 100);
 		confirm.setVisible(true);
 	}
 

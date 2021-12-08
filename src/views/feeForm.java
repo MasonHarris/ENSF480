@@ -15,6 +15,7 @@ public class feeForm extends JPanel {
 
     public feeForm() {
         setLayout(null);
+        submit = new JButton("Submit");
 
     }
 
@@ -22,14 +23,17 @@ public class feeForm extends JPanel {
         fee = new JTextField(Double.toString(feesValue));
 
         period = new JTextField(Integer.toString(periodValue));
-        submit = new JButton("Submit");
-        fee.setBounds(110, (int) (height * 0.05), (int) (width * 0.1), (int) (height * 0.025));
-        JLabel feeLabel = new JLabel("Fees");
+        int distance = (int) (width * 0.08);
+        int boxWidth = (int) (width * 0.09);
+        fee.setBounds(distance, (int) (height * 0.05), boxWidth, (int) (height * 0.025));
+        JLabel feeLabel = new JLabel("Fees(dollars)");
         feeLabel.setBounds(10, (int) (height * 0.05), (int) (width * 0.1), (int) (height * 0.025));
-        JLabel periodLabel = new JLabel("Period");
-        period.setBounds(110, (int) (height * 0.10), (int) (width * 0.1), (int) (height * 0.025));
+        JLabel periodLabel = new JLabel("Period(days)");
+        period.setBounds(distance, (int) (height * 0.10), boxWidth, (int) (height * 0.025));
         periodLabel.setBounds(10, (int) (height * 0.10), (int) (width * 0.1), (int) (height * 0.025));
         submit.setBounds(110, (int) (height * 0.15), (int) (width * 0.1), (int) (height * 0.025));
+
+        errorLabel = new JLabel("");
         errorLabel.setBounds(110, (int) (height * 0.20), (int) (width * 0.1), (int) (height * 0.025));
         add(period);
         add(periodLabel);

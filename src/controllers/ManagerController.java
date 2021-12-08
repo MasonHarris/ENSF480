@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import models.Database;
 import models.Property;
+import models.SummaryReport;
 import views.ManagerView;
 import java.util.HashMap;
 
@@ -19,7 +20,7 @@ public class ManagerController extends GUIcontroller {
         this.login = login;
         this.username = username;
         allProperties = new ArrayList<Property>();
-        allProperties = model.getAllProperties();
+        // allProperties = model.getAllProperties();
     }
 
     public void start() {
@@ -37,6 +38,19 @@ public class ManagerController extends GUIcontroller {
         // for now
         view.addSetFeesListner(e -> view.displayForm(100, 100));
         view.FeesListener(e -> changeFees());
+        view.addReportListener(e -> summary());
+
+    }
+
+    public void summary() {
+        // add code here to get a summary report object from the database
+        ArrayList<Property> dummy = new ArrayList<Property>();
+        dummy.add(new Property("Apartment", true, 1, 1, true, 1, "SW", "Active",
+                "123", 1, 8, "joe"));
+        dummy.add(new Property("Apartment", true, 1, 1, true, 79, "NW", "Active",
+                "123", 1, 8, "joe"));
+        SummaryReport r = new SummaryReport(1, 1, 3, dummy);
+        view.displaySummaryReport(r);
 
     }
 
@@ -55,6 +69,7 @@ public class ManagerController extends GUIcontroller {
 
         // update database fee period and value code here
         view.confirmation("Fees changed");
+        view.displayDashboard();
 
     }
 

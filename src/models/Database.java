@@ -1,7 +1,11 @@
 package models;
-import java.sql.*; 
+import java.sql.*;
+import java.util.AbstractMap;
 //this should be a singleton
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.AbstractMap.SimpleEntry;
+import com.mysql.cj.xdevapi.Result;
 
 public class Database {
 	public static Database onlyInstance;
@@ -70,6 +74,62 @@ public class Database {
 			System.out.println(e);
 			System.exit(0);
 			return "Renter";
+		}
+	}
+	public SimpleEntry<Integer,String> getIDPassword(String user){
+		try{
+			String query = "SELECT * FROM ACCOUNT WHERE Username = ?";
+			PreparedStatement statement = connection.prepareStatement(query);
+			statement.setString(1, user);
+			ResultSet res = statement.executeQuery();
+			SimpleEntry<Integer, String> pair = new SimpleEntry<>(0, "");
+			while(res.next()){
+				pair = new AbstractMap.SimpleEntry<Integer,String>(res.getInt("ID"), res.getString("Password"));
+			}
+			return pair;
+		}
+		catch(SQLException e){
+			System.out.println(e);
+			System.exit(0);
+			return new SimpleEntry<>(0, "");
+		}
+	}
+	public Landlord getLandlord(String user){
+		try{
+			String query = "SELECT * FROM LANDLORD WHERE Username = ?";
+			PreparedStatement statement = connection.prepareStatement(query);
+			statement.setString(1, user);
+			ResultSet res = statement.executeQuery();
+			Landlord landlord = new Landlord();
+			while(res.next()){
+				SimpleEntry<Integer, String> pair = getIDPassword(user);
+				landlord = new Landlord(user, pair.getKey(), res.getString("emailAddress"), pair.getValue());
+			}
+			return landlord;
+		}
+		catch(SQLException e){
+			System.out.println(e);
+			System.exit(0);
+			return new Landlord();
+		}
+	}
+	public RegisteredRenter getRegisteredRenter(String user){
+		try{
+			String query = "SELECT * FROM RENTER WHERE Username = ?";
+			PreparedStatement statement = connection.prepareStatement(query);
+			statement.setString(1, user);
+			ResultSet res = statement.executeQuery();
+			RegisteredRenter renter = new RegisteredRenter();
+			while(res.next()){
+				SimpleEntry<Integer, String> pair = getIDPassword(user);
+				renter = new RegisteredRenter(user, res.getString("email"), pair.getValue(), pair.getKey());
+			}
+			return renter;
+		}
+		catch(SQLException e){
+			System.out.println(e);
+			System.exit(0);
+			return new RegisteredRenter();
 		}
 	}
 	public ArrayList<Property> getAllProperties(){
@@ -190,12 +250,23 @@ public class Database {
 			System.exit(0);
 		}
 	}
-	public void setFee(double feeAmount, int propety_id){
+	public void setFee(double feeAmount){
 		try{
-			String query = "UPDATE PROPERTY SET amountofFee = ? WHERE propertyID = ?";
+			String query = "UPDATE PROPERTY SET amountofFee = ?";
 			PreparedStatement statement = connection.prepareStatement(query);
 			statement.setDouble(1, feeAmount);
-			statement.setInt(2, propety_id);
+			statement.executeUpdate();
+		}
+		catch(SQLException e){
+			System.out.println(e);
+			System.exit(0);
+		}
+	}
+	public void setPeriod(int periodAmount){
+		try{
+			String query = "UPDATE PROPERTY SET listingPeriod = ?";
+			PreparedStatement statement = connection.prepareStatement(query);
+			statement.setInt(1, periodAmount);
 			statement.executeUpdate();
 		}
 		catch(SQLException e){
@@ -339,6 +410,25 @@ public class Database {
 		catch(SQLException e){
 			System.out.println(e);
 			System.exit(0);
+		}
+	}
+	public HashMap<String, Integer> getLandlordNotification(String user){
+		try{
+			String query = "SELECT * FROM NOTIFICATION_LANDLORD WHERE Username = ?";
+			HashMap<String, Integer> hash = new HashMap<>();
+			PreparedStatement statement = connection.prepareStatement(query);
+			statement.setString(1, user);
+			ResultSet res = statement.executeQuery();
+			while(res.next()){
+				String email = getRegisteredRenter(res.getString("Username")).getEmail();
+				hash.put(email, res.getInt("property_id"));
+			}
+			return hash;
+		}
+		catch(SQLException e){
+			System.out.println(e);
+			System.exit(0);
+			return new HashMap<>();
 		}
 	}
 	

@@ -42,14 +42,21 @@ public class LandlordController extends GUIcontroller {
         view.addRegisterListener(e -> view.displayRegisterProperty());
         // displayFees needs an arraylist argument consisting of an arraylist of
         // property objects that are unpaid for this landlord
-        // view.addPayFeeListener(e -> view.displayFees());
+        ArrayList<Property> landlord_properties = model.getLandlordProperties(username);
+        ArrayList<Property> unpaid = new ArrayList<Property>();
+        for(Property property: landlord_properties){
+            if(!property.getisPaid()){
+                unpaid.add(property);
+            }
+        }
+        view.addPayFeeListener(e -> view.displayFees(unpaid));
         view.payFormListener(e -> payFees());
 
     }
 
     // used to fill properties arraylist
     public void getRegisteredProperties() {
-
+        regiProperties = model.getLandlordProperties(username);
     }
 
     public void registerProperty() {
@@ -111,6 +118,7 @@ public class LandlordController extends GUIcontroller {
         }
         for (int propertyID : paidFees) {
             // use the pair.getkey() to get property id and update accoridinly
+            model.payFee(propertyID);
         }
 
         view.confirmation("Payment successful");

@@ -44,8 +44,8 @@ public class ManagerController extends GUIcontroller {
         // someone should fill these in with the correct arraylist argument(these should
         // be created by the model)
         ArrayList<RegisteredRenter> renters = new ArrayList<RegisteredRenter>();
-        renters.add(new RegisteredRenter("miku", "nakano", 1));
-        renters.add(new RegisteredRenter("nino", "nakano", 31));
+        renters.add(new RegisteredRenter("miku", "nakano@email.com", "pass", 1));
+        renters.add(new RegisteredRenter("nino", "nakano@email.com", "pass", 31));
         ArrayList<Landlord> landlords = new ArrayList<Landlord>();
         landlords.add(new Landlord("ai", 1, "hayasaka", "hayasaka@gmail.com"));
         landlords.add(new Landlord("raiden", 18, "shogun", "raiden@gmail.com"));
@@ -57,12 +57,27 @@ public class ManagerController extends GUIcontroller {
 
     public void summary() {
         // add code here to get a summary report object from the database
-        ArrayList<Property> dummy = new ArrayList<Property>();
-        dummy.add(new Property("Apartment", true, 1, 1, true, 1, "SW", "Active",
-                "123", 1, 8, "joe", true));
-        dummy.add(new Property("Apartment", true, 1, 1, true, 79, "NW", "Active",
-                "123", 1, 8, "joe", false));
-        SummaryReport r = new SummaryReport(1, 1, 3, dummy);
+        ArrayList<Property> properties = model.getAllProperties();
+        int totalHousesListed = 0;
+        int totalHousesRented = 0;
+        int totalHousesActive = 0;
+        ArrayList<Property> rentedHouses = new ArrayList<>();
+        for(int i = 0; i<properties.size();i++){
+            if((properties.get(i).getListingPeriod() > 0) && (properties.get(i).getPropertyStatus().equals("Active"))){
+                totalHousesListed++;
+                totalHousesActive++;
+            }
+            if((properties.get(i).getListingPeriod() > 0) && (properties.get(i).getPropertyStatus().equals("Rented"))){
+                totalHousesListed++;
+                totalHousesRented++;
+                rentedHouses.add(properties.get(i));
+            }
+        }
+        // dummy.add(new Property("Apartment", true, 1, 1, true, 1, "SW", "Active",
+        //         "123", 1, 8, "joe", true));
+        // dummy.add(new Property("Apartment", true, 1, 1, true, 79, "NW", "Active",
+        //         "123", 1, 8, "joe", true));
+        SummaryReport r = new SummaryReport(totalHousesListed, totalHousesRented, totalHousesActive, rentedHouses);
         view.displaySummaryReport(r);
 
     }
@@ -81,6 +96,8 @@ public class ManagerController extends GUIcontroller {
         }
 
         // update database fee period and value code here
+        model.setFee(feeValue);
+        model.setPeriod(period);
         view.confirmation("Fees changed");
         view.displayDashboard();
 

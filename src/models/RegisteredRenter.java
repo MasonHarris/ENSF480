@@ -17,17 +17,10 @@ public class RegisteredRenter {
 		this.subscription = subscription;
 	}
 
-<<<<<<< HEAD
-	public RegisteredRenter(String string, String string2) {
-=======
 	public RegisteredRenter() {
 		subscription = null;
 
 	}
-
-	public RegisteredRenter(String user, String string, String value, Integer key, models.Subscription subscription2) {
-	}
->>>>>>> 912c729f65d0dcf88f7cdf96d83d1700f82b7b6e
 
 	public RegisteredRenter(String user, String email) {
 		this.username = user;

@@ -78,27 +78,31 @@ public class RegisteredRenterController extends RenterController {
 			return;
 		}
 		String furString = view.getFurnishingInfo().toLowerCase();
+		boolean furBool;
+		if (furString.equals("furnished")) {
+			furBool = true;
+		} else {
+			furBool = false;
+		}
 		String quadString = view.getQuadrant();
 		// clear any previous errors
 		view.displayError("");
 		// this should call a function to match the properties with the search
 		// information and return an arraylist of property objects
-		// ArrayList<Property> properties = model.getAllProperties(); // change this
-		// later
+		ArrayList<Property> properties = model.searchForProperties(bathrooms,bedrooms,propeString,furBool,quadString);
 
-		ArrayList<Property> dummy = new ArrayList<Property>();
+		/*ArrayList<Property> dummy = new ArrayList<Property>();
 		dummy.add(new Property("Apartment", true, 1, 1, true, 1, "SW", "Active",
 				"123", 1, 8, "joe", false));
 		dummy.add(new Property("Apartment", true, 1, 1, true, 79, "NW", "Active",
-				"123", 1, 8, "joe", false));
+				"123", 1, 8, "joe", false));*/
 
-		view.displaySearch(dummy);
+		view.displaySearch(properties);
 
 		if (furString.equals("furnished")) {
 			model.subscribeNotification(username, bathrooms, bedRooms, true, quadString, propeString);
 		} else {
 			model.subscribeNotification(username, bathrooms, bedRooms, false, quadString, propeString);
-
 		}
 
 	}

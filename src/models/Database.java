@@ -218,6 +218,44 @@ public class Database {
 			return new Property();
 		}
 	}
+	
+	public ArrayList<Property> searchForProperties(int bath,int bed, String prope,boolean fur,String quad) {
+		try {
+			ArryList<Property> list = new ArrayList<Property>();
+			String query = "SELECT * FROM PROPERTY WHERE listingState = 1";
+			PreparedStatement statement = connection.prepareStatement(query);
+			ResultSet res = statement.executeQuery();
+			while (res.next()) {
+				list.add(new Property(res.getString("propertyType"), res.getBoolean("isListed"),
+						res.getInt("noOfBedrooms"),
+						res.getInt("noOfBathrooms"), res.getBoolean("Furnished"), res.getInt("propertyID"),
+						res.getString("cityQuadrant"),
+						res.getString("listingState"), res.getString("address"), res.getInt("listingPeriod"),
+						res.getDouble("amountofFee"),
+						res.getString("landlordUsername"), res.getBoolean("isPaid")));
+			}
+			Iterator<Property> it = list.iterator();
+			while (it.hasNext()) {
+				Property property = it.next();
+				if (property.getNumOfBath() != bath) {
+					it.remove();
+				} else if (property.getNumOfBed() != bed) {
+					it.remove();
+				} else if (!property.getPropertyType().equals(prope)) {
+					it.remove();
+				} else if (property.getIsFurnished() != fur) {
+					it.remove();
+				} else if (!property.getCityQuadrant().equals(quad)) {
+					it.remove();
+				}
+			}
+			return list;
+		} catch (SQLException e) {
+			System.out.println(e);
+			System.exit(0);
+			return new ArrayList<Property>();
+		}
+	}
 
 	public ArrayList<Property> getLandlordProperties(String username) {
 		try {

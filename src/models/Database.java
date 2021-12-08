@@ -398,12 +398,12 @@ public class Database {
 			System.exit(0);
 		}
 	}
-	public void registerLandlordNotification(String land_user, String renter_user, int property_id){
+	public void registerLandlordNotification(String land_user, String renter_email, int property_id){
 		try{
-			String query = "INSERT INTO NOTIFICATION_LANDLORD(Username, renter_username, property_id) Values(?,?,?)";
+			String query = "INSERT INTO NOTIFICATION_LANDLORD(Username, renter_email, property_id) Values(?,?,?)";
 			PreparedStatement statement = connection.prepareStatement(query);
 			statement.setString(1, land_user);
-			statement.setString(2, renter_user);
+			statement.setString(2, renter_email);
 			statement.setInt(3, property_id);
 			statement.executeUpdate();
 		}
@@ -420,8 +420,7 @@ public class Database {
 			statement.setString(1, user);
 			ResultSet res = statement.executeQuery();
 			while(res.next()){
-				String email = getRegisteredRenter(res.getString("Username")).getEmail();
-				hash.put(email, res.getInt("property_id"));
+				hash.put(res.getString("renter_email"), res.getInt("property_id"));
 			}
 			return hash;
 		}

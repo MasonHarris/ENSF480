@@ -122,7 +122,7 @@ public class Database {
 			RegisteredRenter renter = new RegisteredRenter();
 			while(res.next()){
 				SimpleEntry<Integer, String> pair = getIDPassword(user);
-				renter = new RegisteredRenter(user, res.getString("email"), pair.getValue(), pair.getKey());
+				renter = new RegisteredRenter(user, res.getString("email"), pair.getValue(), pair.getKey(), getSubscription(user));
 			}
 			return renter;
 		}
@@ -130,6 +130,25 @@ public class Database {
 			System.out.println(e);
 			System.exit(0);
 			return new RegisteredRenter();
+		}
+	}
+	public Subscription getSubscription(String user){
+		try{
+			String query = "SELECT * FROM NOTIFICATION WHERE Username = ?";
+			PreparedStatement statement = connection.prepareStatement(query);
+			statement.setString(1, user);
+			ResultSet res = statement.executeQuery();
+			Subscription subscription = new Subscription();
+			while(res.next()){
+				subscription = new Subscription(user, res.getInt("noOfBedrooms"), res.getInt("noOfBathrooms"), 
+				res.getBoolean("Furnished"), res.getString("cityQuadrant"), res.getString("propertyType"));
+			}
+			return subscription;
+		}
+		catch(SQLException e){
+			System.out.println(e);
+			System.exit(0);
+			return new Subscription();
 		}
 	}
 	public ArrayList<Property> getAllProperties(){

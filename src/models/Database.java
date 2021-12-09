@@ -224,8 +224,9 @@ public class Database {
 	public ArrayList<Property> searchForProperties(int bath, int bed, String prope, boolean fur, String quad) {
 		try {
 			ArrayList<Property> list = new ArrayList<Property>();
-			String query = "SELECT * FROM PROPERTY WHERE isListed= 1";
+			String query = "SELECT * FROM PROPERTY WHERE listingState = ?";
 			PreparedStatement statement = connection.prepareStatement(query);
+			statement.setString(1,"Active");
 			ResultSet res = statement.executeQuery();
 			while (res.next()) {
 				list.add(new Property(res.getString("propertyType"), res.getBoolean("isListed"),
@@ -246,7 +247,7 @@ public class Database {
 				} else if (property.getNumOfBed() != bed) {
 					System.out.println(bed + " is not equal to " + property.getNumOfBed());
 					it.remove();
-				} else if (!property.getPropertyType().equals(prope)) {
+				} else if (!property.getPropertyType().toLowerCase().equals(prope)) {
 					System.out.println(prope + " is not equal to " + property.getPropertyType());
 					it.remove();
 				} else if (property.getIsFurnished() != fur) {

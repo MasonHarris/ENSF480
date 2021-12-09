@@ -7,7 +7,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 
 public class ViewLandlordNotifications extends JPanel {
     int width;
@@ -18,8 +18,8 @@ public class ViewLandlordNotifications extends JPanel {
         this.height = height;
         setLayout(null);
     }
-    //integer key is property id, string value[0] is renter email, string value[1] is address
-    public void displayNotifications(HashMap<Integer, String[]> notifications) {
+    //each array == {property id, renter email , address}
+    public void displayNotifications(ArrayList<String[]> notifications) {
         this.removeAll();
         String[] colNames = { "Property ID", "Renter email", "Property address" };
         DefaultTableModel model = new DefaultTableModel(colNames, 0);
@@ -35,9 +35,9 @@ public class ViewLandlordNotifications extends JPanel {
         columns.getColumn(1).setPreferredWidth(160);
         columns.getColumn(2).setPreferredWidth(160);
 
-        for (var n : notifications.entrySet()) {
-            String arr[] = n.getValue();
-            Object[] entry = { n.getKey(), arr[0], arr[1] };
+        for (var n : notifications) {
+            
+            Object[] entry = { n[0], n[1], n[2] };
             model.addRow(entry);
         }
 

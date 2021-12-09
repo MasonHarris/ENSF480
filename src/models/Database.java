@@ -580,23 +580,24 @@ public class Database {
 		}
 	}
 	// get landlordnotifications given a landlord username, 
-	// returns hashmap<renter_email, property_id>
-	public HashMap<Integer,String[]> getLandlordNotification(String user) {
+	// returns arraylist string array = { property id, renter email , address}
+	public ArrayList<String[]> getLandlordNotification(String user) {
 		try {
 			String query = "SELECT * FROM NOTIFICATION_LANDLORD WHERE Username = ?";
-			HashMap<Integer, String[]> hash = new HashMap<>();
+			ArrayList<String[]> arr = new ArrayList<String[]>();
 			PreparedStatement statement = connection.prepareStatement(query);
 			statement.setString(1, user);
 			ResultSet res = statement.executeQuery();
 			while (res.next()) {
 				int id = res.getInt("property_id");
-				hash.put(id, new String[]{res.getString("renter_email"), getProperty(id).getAddress()} );
+				
+				arr.add(new String[]{Integer.toString(id),res.getString("renter_email"),getProperty(id).getAddress()});
 			}
-			return hash;
+			return arr;
 		} catch (SQLException e) {
 			System.out.println(e);
 			System.exit(0);
-			return new HashMap<>();
+			return new ArrayList<String[]> ();
 		}
 	}
 	// returns a SimpleEntry(Pair) of the current Listing period and current fees for all properties

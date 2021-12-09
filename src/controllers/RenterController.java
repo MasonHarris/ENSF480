@@ -11,10 +11,18 @@ import models.Property;
 
 public class RenterController extends GUIcontroller {
 	private RenterView view;
+	//used to return to login
+	LoginController login;
 
-	public RenterController(Database model, RenterView view) {
+	public RenterController(Database model, RenterView view, LoginController login) {
 		super(model);
 		this.view = view;
+		this.login = login;
+
+	}
+	public RenterController(Database model, LoginController login) {
+		super(model);
+		this.login = login;
 
 	}
 
@@ -23,13 +31,14 @@ public class RenterController extends GUIcontroller {
 		view.addBackListener(e -> view.displaySearchPanel());
 		view.addContactListener(e -> contactLandlord(this.view, ""));
 		view.displaySearchPanel();
+		view.endSession(e-> {
+			view.dispose();
+			login.start();
+		});
 
 	}
 
-	public RenterController(Database model) {
-		super(model);
-
-	}
+	
 
 	// deals with property search. Takes in view as an argument so that this method
 	// can be used with registered renter as well
@@ -119,7 +128,7 @@ public class RenterController extends GUIcontroller {
 	// updates database with email
 
 	public void sendEmail(int propertyID, String email) {
-		System.out.println("PropertyID " + propertyID + " got an email from " + email);
+		model.registerLandlordNotification(model.getProperty(propertyID).getLandlordUsername(), email, propertyID);
 
 	}
 

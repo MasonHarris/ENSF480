@@ -65,6 +65,7 @@ public class TablePanel extends JPanel {
         table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         table.setColumnSelectionAllowed(false);
         TableColumnModel columns = table.getColumnModel();
+        columns.getColumn(1).setPreferredWidth(200);
         columns.getColumn(2).setPreferredWidth(160);
         columns.getColumn(3).setPreferredWidth(160);
         table.getTableHeader().setReorderingAllowed(false);
@@ -81,7 +82,7 @@ public class TablePanel extends JPanel {
         JScrollPane scroll = new JScrollPane(table);
         JLabel label = new JLabel("Properties");
         label.setBounds((int) (width * 0.1), 0, (int) (width * 0.1), (int) (height * 0.05));
-        scroll.setBounds(0, (int) (height * 0.035), (int) (width * 0.7), (int) (height * 0.5));
+        scroll.setBounds(0, (int) (height * 0.035), (int) (width * 0.75), (int) (height * 0.5));
         submitButton.setBounds((int) (width * 0.1), (int) (height * 0.55), (int) (width * 0.2),
                 (int) (height * 0.030));
 

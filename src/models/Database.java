@@ -317,7 +317,6 @@ public class Database {
 			return new ArrayList<Property>();
 		}
 	}
-	// registers new property into the Database, given Property object p
 	public void registerProperty(Property p) {
 		try {
 			String query = "INSERT INTO PROPERTY(propertyType, propertyID, isListed, noOfBedrooms, noOfBathrooms, Furnished, cityQuadrant, listingPeriod, landlordUsername, listingState, amountofFee, address, isPaid)";
@@ -337,8 +336,27 @@ public class Database {
 			statement.setString(12, p.getAddress());
 			statement.setBoolean(13, p.getisPaid());
 			statement.executeUpdate();
+			// notify applicable renters
+
+			String query2 = "SELECT * FROM NOTIFICATION WHERE noOfBathrooms = ? AND noOfBedrooms = ? AND FURNISHED = ? AND cityQuadrant = ? AND propertyType = ?";
+			PreparedStatement statement2 = connection.prepareStatement(query2);
+			statement2.setInt(1, p.getNumOfBath());
+			statement2.setInt(2, p.getNumOfBed());
+			statement2.setBoolean(3, p.getIsFurnished());
+			statement2.setString(4, p.getCityQuadrant());
+			statement2.setString(5, p.getPropertyType());
+			ResultSet res = statement2.executeQuery();
+			while (res.next()) {
+				String update = "INSERT INTO NOTIFICATION_RENTER(Username, property_id)Values(?,?)";
+				PreparedStatement statement3 = connection.prepareStatement(update);
+				statement3.setString(1, res.getString("Username"));
+				statement3.setInt(2, p.getPropertyId());
+				statement3.executeUpdate();
+
+			}
+				
 		} catch (SQLException e) {
-			System.out.println(e);
+			System.out.println(e + "happened here ");
 			System.exit(0);
 		}
 	}
@@ -438,6 +456,8 @@ public class Database {
 	public void subscribeNotification(String user, int noOfBath, int noOfBed, Boolean Furnished, String cityQuadString,
 			String propertyType) {
 		try {
+			//removes previous subscription
+			unsubscribeNotification(user);
 			String query = "INSERT INTO NOTIFICATION(Username, noOfBedrooms, noOfBathrooms, Furnished, cityQuadrant, propertyType)";
 			query = query + "Values(?,?,?,?,?,?)";
 			PreparedStatement statement = connection.prepareStatement(query);
@@ -560,22 +580,24 @@ public class Database {
 		}
 	}
 	// get landlordnotifications given a landlord username, 
-	// returns hashmap<renter_email, property_id>
-	public HashMap<String, Integer> getLandlordNotification(String user) {
+	// returns arraylist string array = { property id, renter email , address}
+	public ArrayList<String[]> getLandlordNotification(String user) {
 		try {
 			String query = "SELECT * FROM NOTIFICATION_LANDLORD WHERE Username = ?";
-			HashMap<String, Integer> hash = new HashMap<>();
+			ArrayList<String[]> arr = new ArrayList<String[]>();
 			PreparedStatement statement = connection.prepareStatement(query);
 			statement.setString(1, user);
 			ResultSet res = statement.executeQuery();
 			while (res.next()) {
-				hash.put(res.getString("renter_email"), res.getInt("property_id"));
+				int id = res.getInt("property_id");
+				
+				arr.add(new String[]{Integer.toString(id),res.getString("renter_email"),getProperty(id).getAddress()});
 			}
-			return hash;
+			return arr;
 		} catch (SQLException e) {
 			System.out.println(e);
 			System.exit(0);
-			return new HashMap<>();
+			return new ArrayList<String[]> ();
 		}
 	}
 	// returns a SimpleEntry(Pair) of the current Listing period and current fees for all properties

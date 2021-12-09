@@ -14,7 +14,7 @@ public class RegisteredRenterController extends RenterController {
 
 	public RegisteredRenterController(Database model, RegisteredRenterView view, LoginController login,
 			String username) {
-		super(model);
+		super(model,login);
 		this.view = view;
 
 		this.login = login;

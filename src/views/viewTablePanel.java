@@ -70,10 +70,10 @@ public class ViewTablePanel extends JPanel {
         columns.getColumn(0).setPreferredWidth(160);
         columns.getColumn(1).setPreferredWidth(160);
         columns.getColumn(2).setPreferredWidth(160);
-        columns.getColumn(3).setPreferredWidth(160);
+       
 
         for (Landlord p : landlords) {
-            Object[] entry = { p.getID(), p.getUsername(), p.getPassword(), p.getEmailAddress() };
+            Object[] entry = { p.getID(), p.getUsername(),  p.getEmailAddress() };
             model.addRow(entry);
         }
 
@@ -89,7 +89,7 @@ public class ViewTablePanel extends JPanel {
 
     public void displayRenters(ArrayList<RegisteredRenter> renters) {
         this.removeAll();
-        String[] colNames = { "Renter ID ", "Renter name", "Renter password" };
+        String[] colNames = { "Renter ID ", "Renter name", "Renter email" };
         DefaultTableModel model = new DefaultTableModel(colNames, 0);
         JTable table = new JTable(model);
         table.getTableHeader().setReorderingAllowed(false);
@@ -104,7 +104,7 @@ public class ViewTablePanel extends JPanel {
         columns.getColumn(2).setPreferredWidth(160);
 
         for (RegisteredRenter p : renters) {
-            Object[] entry = { p.getID(), p.getUsername()};
+            Object[] entry = { p.getID(), p.getUsername(), p.getEmail() };
             model.addRow(entry);
         }
 

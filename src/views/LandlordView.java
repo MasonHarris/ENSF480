@@ -100,7 +100,7 @@ public class LandlordView extends GUIview {
         form.displayError(error);
     }
 
-    public void displayNotifications(HashMap<String, Integer> notifications) {
+    public void displayNotifications(ArrayList<String[]> notifications) {
         n.displayNotifications(notifications);
         backButton.setBounds(110, (int) (height * 0.62), (int) (width * 0.2), (int) (height * 0.03));
         n.add(backButton);
@@ -142,8 +142,9 @@ public class LandlordView extends GUIview {
 
     public void displayRegisterProperty() {
         backButton.setBounds(110, (int) (height * 0.40), (int) (width * 0.1), (int) (height * 0.025));
-        form.add(backButton);
+        
         form.displayForm(width, height);
+        form.add(backButton);
         frame.setContentPane(form);
         frame.revalidate();
     }

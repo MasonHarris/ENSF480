@@ -18,10 +18,10 @@ public class ViewLandlordNotifications extends JPanel {
         this.height = height;
         setLayout(null);
     }
-
-    public void displayNotifications(HashMap<String, Integer> notifications) {
+    //integer key is property id, string value[0] is renter email, string value[1] is address
+    public void displayNotifications(HashMap<Integer, String[]> notifications) {
         this.removeAll();
-        String[] colNames = { "Property ID", "Renter email" };
+        String[] colNames = { "Property ID", "Renter email", "Property address" };
         DefaultTableModel model = new DefaultTableModel(colNames, 0);
         JTable table = new JTable(model);
         table.getTableHeader().setReorderingAllowed(false);
@@ -33,9 +33,11 @@ public class ViewLandlordNotifications extends JPanel {
         TableColumnModel columns = table.getColumnModel();
 
         columns.getColumn(1).setPreferredWidth(160);
+        columns.getColumn(2).setPreferredWidth(160);
 
         for (var n : notifications.entrySet()) {
-            Object[] entry = { n.getValue(), n.getKey() };
+            String arr[] = n.getValue();
+            Object[] entry = { n.getKey(), arr[0], arr[1] };
             model.addRow(entry);
         }
 

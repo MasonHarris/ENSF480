@@ -100,7 +100,7 @@ public class LandlordView extends GUIview {
         form.displayError(error);
     }
 
-    public void displayNotifications(HashMap<String, Integer> notifications) {
+    public void displayNotifications(HashMap<Integer, String[]> notifications) {
         n.displayNotifications(notifications);
         backButton.setBounds(110, (int) (height * 0.62), (int) (width * 0.2), (int) (height * 0.03));
         n.add(backButton);

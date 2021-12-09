@@ -581,15 +581,16 @@ public class Database {
 	}
 	// get landlordnotifications given a landlord username, 
 	// returns hashmap<renter_email, property_id>
-	public HashMap<String, Integer> getLandlordNotification(String user) {
+	public HashMap<Integer,String[]> getLandlordNotification(String user) {
 		try {
 			String query = "SELECT * FROM NOTIFICATION_LANDLORD WHERE Username = ?";
-			HashMap<String, Integer> hash = new HashMap<>();
+			HashMap<Integer, String[]> hash = new HashMap<>();
 			PreparedStatement statement = connection.prepareStatement(query);
 			statement.setString(1, user);
 			ResultSet res = statement.executeQuery();
 			while (res.next()) {
-				hash.put(res.getString("renter_email"), res.getInt("property_id"));
+				int id = res.getInt("property_id");
+				hash.put(id, new String[]{res.getString("renter_email"), getProperty(id).getAddress()} );
 			}
 			return hash;
 		} catch (SQLException e) {

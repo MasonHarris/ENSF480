@@ -9,11 +9,11 @@ import javax.swing.table.TableColumnModel;
 
 import java.util.ArrayList;
 
-public class viewLandlordNotifications extends JPanel {
+public class ViewLandlordNotifications extends JPanel {
     int width;
     int height;
 
-    public viewLandlordNotifications(int width, int height) {
+    public ViewLandlordNotifications(int width, int height) {
         this.width = width;
         this.height = height;
         setLayout(null);

@@ -6,11 +6,14 @@ import models.Database;
 import views.RegisteredRenterView;
 import views.RenterView;
 import models.Property;
+import models.Subscription;
 
 public class RegisteredRenterController extends RenterController {
 	private RegisteredRenterView view;
 	private LoginController login;
 	private String username;
+	//stores renter subscription
+	private Subscription s;
 
 	public RegisteredRenterController(Database model, RegisteredRenterView view, LoginController login,
 			String username) {
@@ -43,6 +46,7 @@ public class RegisteredRenterController extends RenterController {
 		view.addNotificationsListener(e -> view.displayNotificationsPanel(model.getRenterNotifications(username)));
 		view.addBackListener(e -> view.displayDashboard());
 		view.addContactListener(e -> contactLandlord(this.view, model.getRegisteredRenter(username).getEmail()));
+		view.subscribeListener(e-> subscribeRenter());
 	}
 
 	@Override
@@ -103,9 +107,10 @@ public class RegisteredRenterController extends RenterController {
 		view.displaySearch(properties);
 
 		if (furString.equals("furnished")) {
-			model.subscribeNotification(username, bathrooms, bedrooms, true, quadString, propeString);
+			
+			s = new Subscription(username, bedrooms, bathrooms, true, quadString, propeString);
 		} else {
-			model.subscribeNotification(username, bathrooms, bedrooms, false, quadString, propeString);
+			s = new Subscription(username, bedrooms, bathrooms, true, quadString, propeString);
 		}
 
 	}
@@ -117,6 +122,13 @@ public class RegisteredRenterController extends RenterController {
 	 * 
 	 * }
 	 */
+
+	 public void subscribeRenter(){
+		if(s != null){
+		model.subscribeNotification(username, s.getNoOfBathrooms(), s.getNoOfBedrooms(), s.getIsFurnished(), s.getCityQuadrant(), s.getPropertyType());
+		view.confirmation("You have been subscribed for this search");
+		}
+	 }
 
 	public void unsubscribeRenter() {
 		// code to unsubscribe renter

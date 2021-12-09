@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import java.util.HashMap;
+import java.util.AbstractMap.SimpleEntry;
+
 import models.Property;
 
 public class LandlordView extends GUIview {
@@ -107,10 +109,10 @@ public class LandlordView extends GUIview {
         frame.revalidate();
     }
 
-    public void displayFees(ArrayList<Property> properties) {
+    public void displayFees(ArrayList<Property> properties, SimpleEntry<Integer, Double> feePair) {
         backButton.setBounds((int) (width * 0.25), (int) (height * 0.55), (int) (width * 0.2),
                 (int) (height * 0.030));
-        feePanel.displayPropertyPayFees(properties);
+        feePanel.displayPropertyPayFees(properties,feePair);
         feePanel.add(backButton);
         frame.setContentPane(feePanel);
         frame.revalidate();

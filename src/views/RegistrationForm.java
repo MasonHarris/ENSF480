@@ -22,8 +22,17 @@ public class RegistrationForm extends JPanel {
     public RegistrationForm() {
         register = new JButton("Register");
 
-        addressNumber = new JTextField();
+       
 
+        
+        setLayout(null);
+    }
+
+    public void displayForm(int width, int height) {
+        this.removeAll();
+
+        addressNumber = new JTextField();
+        
         bathrooms = new JTextField();
 
         bedrooms = new JTextField();
@@ -34,13 +43,10 @@ public class RegistrationForm extends JPanel {
 
         propertyType = new JTextField();
 
-        furnished = new JComboBox<String>(new String[] { "Furnished", "unfurnished" });
-        errorLabel = new JLabel("");
-        setLayout(null);
-    }
+        furnished = new JComboBox<String>(new String[] { "Furnished", "Unfurnished" });
 
-    public void displayForm(int width, int height) {
-        this.removeAll();
+        errorLabel = new JLabel("");
+
         JLabel address1Label = new JLabel("Address number");
         address1Label.setBounds(10, (int) (height * 0.05), (int) (width * 0.1), (int) (height * 0.025));
         addressNumber.setBounds(110, (int) (height * 0.05), (int) (width * 0.1), (int) (height * 0.025));

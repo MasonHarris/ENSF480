@@ -4,6 +4,7 @@ import java.awt.FlowLayout;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
@@ -16,7 +17,7 @@ public class RegisteredRenterView extends RenterView {
 	JButton search;
 	JPanel dashBoardPanel;
 	JPanel notificationsPanel;
-
+	JButton subscribe;
 	public RegisteredRenterView(String frameName, int width, int height) {
 		super(frameName, width, height);
 
@@ -40,7 +41,7 @@ public class RegisteredRenterView extends RenterView {
 		viewNotifications = new JButton("View Notificiatons");
 		unsubscribe = new JButton("Unsubscribe");
 		search = new JButton("Search");
-
+		subscribe = new JButton("Subscribe");
 		dashBoardPanel.add(search);
 		dashBoardPanel.add(viewNotifications);
 		dashBoardPanel.add(unsubscribe);
@@ -80,7 +81,22 @@ public class RegisteredRenterView extends RenterView {
 	// switches to display notifications optionsPanel on frame
 	public void displayNotificationsPanel(ArrayList<Property> notifications) {
 		super.displaySearch(notifications);
+		
+
+	}
+	@Override
+	public void displaySearch(ArrayList<Property> properties) {
+		super.displaySearch(properties);
+		subscribe.setBounds((int) (width * 0.75), (int) (height * 0.55), (int) (width * 0.1),
+				(int) (height * 0.030));
+		tPanel.add(subscribe);
+
 
 	}
 
+	public void subscribeListener(ActionListener listener){
+		subscribe.addActionListener(listener);
+	}
+
 }
+

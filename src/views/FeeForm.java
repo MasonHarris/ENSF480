@@ -1,5 +1,7 @@
 package views;
 
+import java.util.AbstractMap.SimpleEntry;
+
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -19,11 +21,11 @@ public class FeeForm extends JPanel {
 
     }
 
-    public void displayFees(int width, int height, int periodValue, double feesValue) {
+    public void displayFees(int width, int height, SimpleEntry<Integer, Double> feePair) {
         this.removeAll();
-        fee = new JTextField(Double.toString(feesValue));
+        fee = new JTextField(Double.toString(feePair.getValue()));
 
-        period = new JTextField(Integer.toString(periodValue));
+        period = new JTextField(Integer.toString(feePair.getKey()));
         int distance = (int) (width * 0.08);
         int boxWidth = (int) (width * 0.09);
         fee.setBounds(distance, (int) (height * 0.05), boxWidth, (int) (height * 0.025));

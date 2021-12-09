@@ -2,7 +2,7 @@ package views;
 
 import models.Property;
 
-
+import javax.print.DocFlavor.INPUT_STREAM;
 import javax.swing.*;
 import javax.swing.table.*;
 
@@ -10,6 +10,7 @@ import java.util.ArrayList;
 
 
 import java.util.HashMap;
+import java.util.AbstractMap.SimpleEntry;
 
 //this class should only be used for tables where rows can be selected, for view only tables, please go to viewTablePanels.java
 public class TablePanel extends JPanel {
@@ -65,6 +66,7 @@ public class TablePanel extends JPanel {
         columns.getColumn(1).setPreferredWidth(200);
         columns.getColumn(2).setPreferredWidth(160);
         columns.getColumn(3).setPreferredWidth(160);
+        columns.getColumn(6).setPreferredWidth(160);
         table.getTableHeader().setReorderingAllowed(false);
         table.getTableHeader().setResizingAllowed(false);
         table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
@@ -110,6 +112,7 @@ public class TablePanel extends JPanel {
         columns.getColumn(1).setPreferredWidth(200);
         columns.getColumn(2).setPreferredWidth(160);
         columns.getColumn(3).setPreferredWidth(160);
+        columns.getColumn(6).setPreferredWidth(160);
         table.getTableHeader().setReorderingAllowed(false);
         table.getTableHeader().setResizingAllowed(false);
         table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
@@ -143,7 +146,7 @@ public class TablePanel extends JPanel {
     }
 
     // single select table with no editable attributes
-    public void displayPropertyPayFees(ArrayList<Property> properties) {
+    public void displayPropertyPayFees(ArrayList<Property> properties, SimpleEntry<Integer,Double> feePair){
         this.removeAll();
         String[] colNames = { "Property ID", "Address", "Number of bedrooms", "Number of bathrooms", "City quadrant",
                 "Furnished", "Property type", "Status", "Listing period" };
@@ -178,9 +181,13 @@ public class TablePanel extends JPanel {
                 (int) (height * 0.030));
 
         if (properties.size() > 0) {
-            JLabel label2 = new JLabel("Fee per property " + properties.get(0).getAmountOfFee());
+            JLabel label2 = new JLabel("Fee per property(dollars) " + feePair.getValue());
             label2.setBounds((int) (width * 0.50), (int) (height * 0.55), (int) (width * 0.2),
                     (int) (height * 0.030));
+            JLabel label3 = new JLabel("LISTING PERIOD(days) " + feePair.getKey());
+            label3.setBounds((int) (width * 0.70), (int) (height * 0.55), (int) (width * 0.2),
+            (int) (height * 0.030));
+            this.add(label3);
             this.add(label2);
         }
         this.add(label);

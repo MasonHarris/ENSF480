@@ -403,8 +403,17 @@ public class Database {
 			statement.setString(1, listing);
 			statement.setInt(2, id);
 			statement.executeUpdate();
+			//changes isListed based on state change
 			if (listing.equals("Active")) {
 				String query2 = "UPDATE PROPERTY SET isListed = 1 WHERE propertyID = ?";
+				PreparedStatement statement2 = connection.prepareStatement(query2);
+				statement2.setInt(1, id);
+				statement2.executeUpdate();
+
+			}
+
+			else {
+				String query2 = "UPDATE PROPERTY SET isListed = 0 WHERE propertyID = ?";
 				PreparedStatement statement2 = connection.prepareStatement(query2);
 				statement2.setInt(1, id);
 				statement2.executeUpdate();

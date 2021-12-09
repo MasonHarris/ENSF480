@@ -45,7 +45,7 @@ public class LandlordController extends GUIcontroller {
         // displayFees needs an arraylist argument consisting of an arraylist of
         // property objects that are unpaid for this landlord
 
-        view.addPayFeeListener(e -> view.displayFees(getUnpaid()));
+        view.addPayFeeListener(e -> view.displayFees(getUnpaid(),model.getListingPeriodFee()));
         view.payFormListener(e -> payFees());
 
     }
@@ -94,7 +94,7 @@ public class LandlordController extends GUIcontroller {
                 view.formError("Invalid number");
                 return;
             }
-            if (value[6].equals("furnished")) {
+            if (value[6].equals("Furnished")) {
                 furnished = true;
             }
 
@@ -154,8 +154,9 @@ public class LandlordController extends GUIcontroller {
 
         landlord_properties = model.getLandlordProperties(username);
         // Needs to be changed
+        
         view.confirmation(
-                "Payment successful, paid $" + paidFees.length * landlord_properties.get(0).getAmountOfFee());
+                "Payment successful, paid $" + paidFees.length * model.getListingPeriodFee().getValue());
         view.displayDashboard();
 
     }

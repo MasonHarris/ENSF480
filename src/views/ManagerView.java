@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import java.util.HashMap;
+import java.util.AbstractMap.SimpleEntry;
+
 import models.Property;
 import models.SummaryReport;
 import models.RegisteredRenter;
@@ -113,10 +115,10 @@ public class ManagerView extends GUIview {
 
     }
 
-    public void displayForm(int periodValue, double feesValue) {
+    public void displayForm(SimpleEntry<Integer,Double> feePair) {
         backButton.setBounds(110, (int) (height * 0.20), (int) (width * 0.2), (int) (height * 0.025));
 
-        form.displayFees(width, height, periodValue, feesValue);
+        form.displayFees(width, height, feePair );
         form.add(backButton);
         frame.setContentPane(form);
         frame.revalidate();

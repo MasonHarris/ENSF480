@@ -34,7 +34,9 @@ public class Database {
 		}
 		return onlyInstance;
 	}
-
+	// checks if given username and password is a valid account
+	// returns true if it is
+	// else false
 	public boolean validateLogin(String user, String password) {
 		try {
 			String query = "SELECT * FROM ACCOUNT";
@@ -52,7 +54,10 @@ public class Database {
 			return false;
 		}
 	}
-
+	// Checks the type of user given the username
+	// returns Manager if Account is manager
+	// returns Landlord if Account is landlord
+	// returns RegisteredRenter if Account is Registered Renter
 	public String validateAccountType(String user) {
 		try {
 			String query = "SELECT * FROM LANDLORD";
@@ -78,7 +83,7 @@ public class Database {
 			return "RegisteredRenter";
 		}
 	}
-
+	//helper function that gets ID and Password of a user
 	public SimpleEntry<Integer, String> getIDPassword(String user) {
 		try {
 			String query = "SELECT * FROM ACCOUNT WHERE Username = ?";
@@ -96,7 +101,7 @@ public class Database {
 			return new SimpleEntry<>(0, "");
 		}
 	}
-
+	// returns a Landlord object from the Database, given its username
 	public Landlord getLandlord(String Username) {
 		try {
 			String query = "SELECT * FROM LANDLORD WHERE Username = ?";
@@ -116,7 +121,7 @@ public class Database {
 			return new Landlord();
 		}
 	}
-
+	// Returns a list of all renters in the Database
 	public ArrayList<RegisteredRenter> getAllRenters() {
 		try {
 			ArrayList<RegisteredRenter> list = new ArrayList<RegisteredRenter>();
@@ -133,7 +138,7 @@ public class Database {
 			return new ArrayList<RegisteredRenter>();
 		}
 	}
-
+	// returns RegisteredRenter given its username
 	public RegisteredRenter getRegisteredRenter(String user) {
 		try {
 			String query = "SELECT * FROM RegisteredRenter WHERE Username = ?";
@@ -154,7 +159,7 @@ public class Database {
 			return new RegisteredRenter();
 		}
 	}
-
+	// gets a RegisteredRenter's subscription, given thier username
 	public Subscription getSubscription(String user) {
 		try {
 			String query = "SELECT * FROM NOTIFICATION WHERE Username = ?";
@@ -173,7 +178,7 @@ public class Database {
 			return new Subscription();
 		}
 	}
-
+	//Returns an arraylist of all properties in the Database 
 	public ArrayList<Property> getAllProperties() {
 		try {
 			ArrayList<Property> list = new ArrayList<Property>();
@@ -196,7 +201,7 @@ public class Database {
 			return new ArrayList<Property>();
 		}
 	}
-
+	// returns a Property object from the Database, given its property id
 	public Property getProperty(int property_id) {
 		try {
 			String query = "SELECT * FROM PROPERTY WHERE propertyID = ?";
@@ -220,7 +225,8 @@ public class Database {
 			return new Property();
 		}
 	}
-
+	//searches for properties with given search filters
+	//returns a list of Property objects that fit the search filter
 	public ArrayList<Property> searchForProperties(int bath, int bed, String prope, boolean fur, String quad) {
 		try {
 			ArrayList<Property> list = new ArrayList<Property>();
@@ -265,7 +271,7 @@ public class Database {
 			return new ArrayList<Property>();
 		}
 	}
-
+	// returns an arraylist of a landlord properties, given its username
 	public ArrayList<Property> getLandlordProperties(String username) {
 		try {
 			ArrayList<Property> list = new ArrayList<Property>();
@@ -289,7 +295,7 @@ public class Database {
 			return new ArrayList<Property>();
 		}
 	}
-
+	// registers new property into the Database, given Property object p
 	public void registerProperty(Property p) {
 		try {
 			String query = "INSERT INTO PROPERTY(propertyType, propertyID, isListed, noOfBedrooms, noOfBathrooms, Furnished, cityQuadrant, listingPeriod, landlordUsername, listingState, amountofFee, address, isPaid)";
@@ -332,7 +338,7 @@ public class Database {
 			return -1;
 		}
 	}
-
+	//changes a property listing given property id and string of new listing
 	public void changePropertyListing(int id, String listing) {
 		try {
 			String query = "UPDATE PROPERTY SET listingState = ? WHERE propertyID = ?";
@@ -345,7 +351,7 @@ public class Database {
 			System.exit(0);
 		}
 	}
-
+	//Sets fee of all properties in Database
 	public void setFee(double feeAmount) {
 		try {
 			String query = "UPDATE PROPERTY SET amountofFee = ?";
@@ -357,7 +363,7 @@ public class Database {
 			System.exit(0);
 		}
 	}
-
+	//sets period of all properties in Database
 	public void setPeriod(int periodAmount) {
 		try {
 			String query = "UPDATE PROPERTY SET listingPeriod = ?";
@@ -369,7 +375,7 @@ public class Database {
 			System.exit(0);
 		}
 	}
-
+	// pays Fee of property, given property_id
 	public void payFee(int propety_id) {
 		try {
 			String query = "UPDATE PROPERTY SET isPaid = 1 WHERE propertyID = ?";
@@ -381,7 +387,7 @@ public class Database {
 			System.exit(0);
 		}
 	}
-
+	// registers user into ACCOUNT table in database
 	public void registerUser(String user, String password) {
 		try {
 			String query = "INSERT INTO ACCOUNT(Username, Password) Values(?,?)";
@@ -394,11 +400,12 @@ public class Database {
 			System.exit(0);
 		}
 	}
-
+	//Registers RegisteredRenter into Notification Table in Database when they subscribe
+	// given username of RegisteredRenter and property attributes noOfBath, noOfBed, Furnished, cityQuadrant and propertyType
 	public void subscribeNotification(String user, int noOfBath, int noOfBed, Boolean Furnished, String cityQuadString,
 			String propertyType) {
 		try {
-			String query = "INSERT INTO PROPERTY(Username, noOfBedrooms, noOfBathrooms, Furnished, cityQuadrant, propertyType)";
+			String query = "INSERT INTO NOTIFICATION(Username, noOfBathrooms, noOfBedrooms, Furnished, cityQuadrant, propertyType)";
 			query = query + "Values(?,?,?,?,?,?)";
 			PreparedStatement statement = connection.prepareStatement(query);
 			statement.setString(1, user);
@@ -413,7 +420,8 @@ public class Database {
 			System.exit(0);
 		}
 	}
-
+	//removes RegisteredRenter from Notification Table when they want to subscribe
+	// given username of RegisteredRenter
 	public void unsubscribeNotification(String user) {
 		try {
 			String query = "DELETE FROM NOTIFICATION WHERE Username = ?";
@@ -429,7 +437,9 @@ public class Database {
 			System.exit(0);
 		}
 	}
-
+	// checks if a property's attributes meet a registeredrenter's subscription
+	// given username of RegisteredRenter
+	// returns a list of usernames of RegisteredRenter that meet thier subscription
 	public ArrayList<String> checkNotification(String user, int noOfBath, int noOfBed, Boolean Furnished,
 			String cityQuadString, String propertyType) {
 		try {
@@ -452,7 +462,8 @@ public class Database {
 			return new ArrayList<String>();
 		}
 	}
-
+	// gets a list of properties from the renter's notifications
+	// given renter's username
 	public ArrayList<Property> getRenterNotifications(String username) {
 		try {
 			String query = "SELECT * FROM NOTIFICATION_RENTER WHERE Username = ?";
@@ -487,7 +498,8 @@ public class Database {
 		}
 
 	}
-
+	//register a notification to a registeredrenter about a property that matches their subscription
+	// given registered renter username and property id
 	public void registerPropertyNotification(String user, int property_id) {
 		try {
 			String query = "INSERT INTO NOTIFICATION_RENTER(Username, property_id) Values(?,?)";
@@ -500,7 +512,7 @@ public class Database {
 			System.exit(0);
 		}
 	}
-
+	//registers a notification to landlord given landlord username, renter email and property id
 	public void registerLandlordNotification(String land_user, String renter_email, int property_id) {
 		try {
 			String query = "INSERT INTO NOTIFICATION_LANDLORD(Username, renter_email, property_id) Values(?,?,?)";
@@ -514,7 +526,8 @@ public class Database {
 			System.exit(0);
 		}
 	}
-
+	// get landlordnotifications given a landlord username, 
+	// returns hashmap<renter_email, property_id>
 	public HashMap<String, Integer> getLandlordNotification(String user) {
 		try {
 			String query = "SELECT * FROM NOTIFICATION_LANDLORD WHERE Username = ?";
@@ -532,6 +545,10 @@ public class Database {
 			return new HashMap<>();
 		}
 	}
+	// returns a SimpleEntry(Pair) of the current Listing period and current fees for all properties
+	// SimpleEntry<listingPeriod, fee>
+	// public SimpleEntry<Integer, Double> getListingPeriodFee(){
 
-	// the search property method should return an arraylist of property objects
+	// }
+
 }

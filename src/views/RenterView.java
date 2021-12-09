@@ -105,12 +105,10 @@ public class RenterView extends GUIview {
 
 	}
 
-
-	public void displayForm() {
+	public void displayForm(String email) {
 		backButton.setBounds(250, (int) (0.61 * height), (int) (0.1 * width), (int) (0.025 * height));
 
-		form.displayEmail(width, height);
-
+		form.displayEmail(width, height, email);
 		form.add(backButton);
 		frame.setContentPane(form);
 		frame.revalidate();
@@ -121,14 +119,10 @@ public class RenterView extends GUIview {
 		form.sendButton.addActionListener(listener);
 	}
 
-
-	
-	public String[] getEmail() {
-
+	public String getEmail() {
 		return form.getEmail();
 
 	}
-
 
 	// following get methods are used to extract the text entered in on gui
 	// textboxes/combo boxes
@@ -168,12 +162,7 @@ public class RenterView extends GUIview {
 
 	public int[] getSelectedProperties() {
 		return tPanel.getSelectedPropertiesID();
-
-	public void displayEmailError(String error) {
-		form.displayError(error);
 	}
-
-	
 
 	// displays search results that were previously computed, should not be used if
 	// displaySearch function was

@@ -10,27 +10,55 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 //form class for a form with 2 fields
-public lass
-
+public class EmailForm extends JPanel {
     JTextField emailAddress;
-        JTe
-        JButton sendButton;
-            JLa
-        el errorLa 
-        public emailForm() {
-            sendButton = ne
-            setLayout(null
+    JTextArea emailBody;
+    JButton sendButton;
+    JLabel errorLabel;
 
-            }
+    public EmailForm() {
+        sendButton = new JButton("Send");
+        setLayout(null);
 
-    
-    pub
+    }
 
+    public void displayEmail(int width, int height) {
         this.removeAll();
+        JLabel title = new JLabel("Contact form");
+        title.setBounds(110, (int) (0.05 * height), (int) (0.12 * width), (int) (0.05 * height));
+        add(title);
         JLabel addressLabel = new JLabel("Email Address");
-        addressLabel.setBounds(10, (int) (0.1 * height), (int) (0.2 * width), (int) (0.05 * height));
+        addressLabel.setBounds(10, (int) (0.1 * height), (int) (0.1 * width), (int) (0.025 * height));
         emailAddress = new JTextField();
-        emailAddress.setBounds(110, (int) (0.1 * height), (int) (0.05 * width), (int) (0.05 * height));
+        emailAddress.setBounds(110, (int) (0.1 * height), (int) (0.3 * width), (int) (0.025 * height));
+        JLabel bodyLabel = new JLabel("Body");
+        bodyLabel.setBounds(10, (int) (0.2 * height), (int) (0.05 * width), (int) (0.05 * height));
+        emailBody = new JTextArea();
+        emailBody.setBounds(110, (int) (0.2 * height), (int) (0.4 * width), (int) (0.4 * height));
+
+        JLabel errorLabel = new JLabel();
+        sendButton.setBounds(110, (int) (0.61 * height), (int) (0.1 * width), (int) (0.025 * height));
+        errorLabel.setBounds(110, (int) (0.67 * height), (int) (0.1 * width), (int) (0.05 * height));
+
+        add(addressLabel);
+        add(emailAddress);
+        add(bodyLabel);
+        add(emailBody);
+        add(sendButton);
+        add(errorLabel);
+
+    }
+    // allows email to be provided
+
+    public void displayEmail(int width, int height, String email) {
+        this.removeAll();
+        JLabel title = new JLabel("Contact form");
+        title.setBounds(110, (int) (0.05 * height), (int) (0.12 * width), (int) (0.05 * height));
+        add(title);
+        JLabel addressLabel = new JLabel("Email Address");
+        addressLabel.setBounds(10, (int) (0.1 * height), (int) (0.1 * width), (int) (0.025 * height));
+        emailAddress = new JTextField(email);
+        emailAddress.setBounds(110, (int) (0.1 * height), (int) (0.3 * width), (int) (0.025 * height));
         JLabel bodyLabel = new JLabel("Body");
         bodyLabel.setBounds(10, (int) (0.2 * height), (int) (0.05 * width), (int) (0.05 * height));
         emailBody = new JTextArea();
@@ -54,19 +82,8 @@ public lass
         repaint();
     }
 
-    // first value in array is email address, second value is email text
-    public String[] getEmail() {
-        return new String[] { emailAddress.getText(), emailBody.getText() };
+    public String getEmail() {
+        return emailAddress.getText();
     }
 
 }
-        
-
-        
-            
-            
-        
-
-        
-
-    

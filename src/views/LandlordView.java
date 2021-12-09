@@ -142,8 +142,8 @@ public class LandlordView extends GUIview {
 
     public void displayRegisterProperty() {
         backButton.setBounds(110, (int) (height * 0.40), (int) (width * 0.1), (int) (height * 0.025));
-        form.displayForm(width, height);
         form.add(backButton);
+        form.displayForm(width, height);
         frame.setContentPane(form);
         frame.revalidate();
     }

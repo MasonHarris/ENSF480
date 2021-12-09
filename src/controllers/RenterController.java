@@ -23,10 +23,6 @@ public class RenterController extends GUIcontroller {
 		view.addBackListener(e -> view.displaySearchPanel());
 		view.addContactListener(e -> contactLandlord(this.view, ""));
 		view.displaySearchPanel();
-		view.formListener(e -> {
-			sendEmail();
-
-		});
 
 	}
 
@@ -122,15 +118,9 @@ public class RenterController extends GUIcontroller {
 
 	// updates database with email
 
-
 	public void sendEmail(int propertyID, String email) {
 		System.out.println("PropertyID " + propertyID + " got an email from " + email);
 
-		}
-
-		view.displayForm();
-
 	}
-
 
 }

@@ -40,7 +40,6 @@ public class LandlordController extends GUIcontroller {
         });
         view.TableButtonListener(e -> changeListingState());
         view.registerFormListener(e -> registerProperty());
-
         view.addRegisterListener(e -> view.displayRegisterProperty());
         view.addNotificationsListener(e -> view.displayNotifications(model.getLandlordNotification(username)));
         // displayFees needs an arraylist argument consisting of an arraylist of
@@ -72,13 +71,6 @@ public class LandlordController extends GUIcontroller {
         }
         return unpaid;
 
-
-        view.addRegisterListener(e -> view.displayRegisterProperty());
-        // displayFees needs an arraylist argument consisting of an arraylist of
-        // property objects that are unpaid for this landlord
-        // view.addPayFeeListener(e -> view.displayFees());
-        view.payFormListener(e -> payFees());
-
     }
 
     // used to fill properties arraylist
@@ -87,7 +79,6 @@ public class LandlordController extends GUIcontroller {
     }
 
     public void registerProperty() {
-
         // gets registration values in this order address number, addresss name,
         // bathrooms, bedrooms, property type, quadrant, furnished
         String value[] = view.getformFields();
@@ -123,9 +114,6 @@ public class LandlordController extends GUIcontroller {
         view.formError("");
         view.confirmation("registered property successfully");
         landlord_properties.add(property);
-
-       
-        
 
     }
 
@@ -171,9 +159,5 @@ public class LandlordController extends GUIcontroller {
         view.displayDashboard();
 
     }
-
-
- 
-
 
 }

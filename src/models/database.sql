@@ -37,8 +37,7 @@ VALUES
 	('jake','world123',6),
 	('ice','belowfreezing',7),
 	('mike','celesius111',8),
-	('yori122','renter111',12),
-  ("ai", "hayasaka",13);
+	('yori122','renter111',12);
 
 /*!40000 ALTER TABLE `ACCOUNT` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -63,8 +62,7 @@ INSERT INTO `LANDLORD` (`Username`, `name`, `emailAddress`)
 VALUES
 	('doctor','Howl','howl@me.com'),
 	('mike','Mike','miku@me.com'),
-	('sandy','Sandy','sandy1234@gmail.com'),
-  ("ai", "hayasaka", "ai@yahoo.com");
+	('sandy','Sandy','sandy1234@gmail.com');
 
 /*!40000 ALTER TABLE `LANDLORD` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -159,6 +157,27 @@ VALUES
 	('gary',1);
 
 /*!40000 ALTER TABLE `NOTIFICATION_RENTER` ENABLE KEYS */;
+UNLOCK TABLES;
+
+
+# Dump of table PERIOD_FEE
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `PERIOD_FEE`;
+
+CREATE TABLE `PERIOD_FEE` (
+  `startListingPeriod` int DEFAULT NULL,
+  `fee` double DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+LOCK TABLES `PERIOD_FEE` WRITE;
+/*!40000 ALTER TABLE `PERIOD_FEE` DISABLE KEYS */;
+
+INSERT INTO `PERIOD_FEE` (`startListingPeriod`, `fee`)
+VALUES
+	(40,30.03);
+
+/*!40000 ALTER TABLE `PERIOD_FEE` ENABLE KEYS */;
 UNLOCK TABLES;
 
 

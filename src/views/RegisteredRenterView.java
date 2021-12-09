@@ -3,7 +3,6 @@ package views;
 import java.awt.FlowLayout;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.Properties;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;

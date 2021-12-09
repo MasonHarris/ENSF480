@@ -3,11 +3,8 @@ package views;
 import javax.swing.*;
 
 import models.Property;
-import views.TablePanel;
-import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class RenterView extends GUIview {
 	JButton submitButton;

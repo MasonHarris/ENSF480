@@ -3,9 +3,7 @@ package views;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import java.awt.Dimension;
 
-import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;

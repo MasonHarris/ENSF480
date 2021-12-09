@@ -42,12 +42,11 @@ public abstract class GUIview {
 
 	public void confirmation(String message) {
 		JDialog confirm = new JDialog(frame, message);
-		JLabel l = new JLabel(message);
-
+		JLabel l = new JLabel("<html> " + message + "<br/><br/>Close this Dialog Box to continue</html>");
 		confirm.add(l);
-
 		// setsize of dialog
-		confirm.setSize(200, 100);
+		confirm.setSize(400, 200);
+		confirm.setModal(true);
 		confirm.setVisible(true);
 	}
 

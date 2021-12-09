@@ -13,11 +13,11 @@ import models.Landlord;
 import models.Property;
 import models.RegisteredRenter;
 
-public class viewTablePanel extends JPanel {
+public class ViewTablePanel extends JPanel {
     int width;
     int height;
 
-    public viewTablePanel(int width, int height) {
+    public ViewTablePanel(int width, int height) {
         setLayout(null);
         this.width = width;
         this.height = height;
@@ -104,7 +104,7 @@ public class viewTablePanel extends JPanel {
         columns.getColumn(2).setPreferredWidth(160);
 
         for (RegisteredRenter p : renters) {
-            Object[] entry = { p.getID(), p.getUsername(), p.getPassword() };
+            Object[] entry = { p.getID(), p.getUsername()};
             model.addRow(entry);
         }
 

@@ -2,16 +2,13 @@ package views;
 
 import models.Property;
 
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
+
 import javax.swing.*;
 import javax.swing.table.*;
 
 import java.util.ArrayList;
 
-import java.awt.*;
-import java.awt.LayoutManager;
-import java.util.ArrayList;
+
 import java.util.HashMap;
 
 //this class should only be used for tables where rows can be selected, for view only tables, please go to viewTablePanels.java

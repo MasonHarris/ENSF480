@@ -4,10 +4,8 @@ import java.sql.*;
 import java.util.AbstractMap;
 //this should be a singleton
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.AbstractMap.SimpleEntry;
-import com.mysql.cj.xdevapi.Result;
 
 public class Database {
 	public static Database onlyInstance;
@@ -46,6 +44,25 @@ public class Database {
 				if (res.getString("Username").equals(user) && res.getString("Password").equals(password)) {
 					return true;
 				}
+			}
+			return false;
+		} catch (SQLException e) {
+			System.out.println(e);
+			System.exit(0);
+			return false;
+		}
+	}
+	// checks if given username is in the database
+	// returns true if it is 
+	// else false
+	public boolean validateAccount(String user) {
+		try {
+			String query = "SELECT * FROM ACCOUNT WHERE Username = ?";
+			PreparedStatement statement = connection.prepareStatement(query);
+			statement.setString(1, user);
+			ResultSet res = statement.executeQuery();
+			if(res.next()){
+				return true;
 			}
 			return false;
 		} catch (SQLException e) {
@@ -111,7 +128,7 @@ public class Database {
 			Landlord landlord = new Landlord();
 			while (res.next()) {
 				SimpleEntry<Integer, String> pair = getIDPassword(Username);
-
+				landlord = new Landlord(res.getString("Username"), res.getString("emailAddress"), pair.getKey());
 			}
 			return landlord;
 		} catch (SQLException e) {
@@ -405,6 +422,10 @@ public class Database {
 			PreparedStatement statement = connection.prepareStatement(query);
 			statement.setDouble(1, feeAmount);
 			statement.executeUpdate();
+			query = "UPDATE PERIOD_FEE SET fee = ?";
+			statement = connection.prepareStatement(query);
+			statement.setDouble(1, feeAmount);
+			statement.executeUpdate();
 		} catch (SQLException e) {
 			System.out.println(e);
 			System.exit(0);
@@ -415,6 +436,10 @@ public class Database {
 		try {
 			String query = "UPDATE PROPERTY SET listingPeriod = ?";
 			PreparedStatement statement = connection.prepareStatement(query);
+			statement.setInt(1, periodAmount);
+			statement.executeUpdate();
+			query = "UPDATE PERIOD_FEE SET startListingPeriod = ?";
+			statement = connection.prepareStatement(query);
 			statement.setInt(1, periodAmount);
 			statement.executeUpdate();
 		} catch (SQLException e) {
@@ -602,8 +627,21 @@ public class Database {
 	}
 	// returns a SimpleEntry(Pair) of the current Listing period and current fees for all properties
 	// SimpleEntry<listingPeriod, fee>
-	// public SimpleEntry<Integer, Double> getListingPeriodFee(){
-
-	// }
+	public SimpleEntry<Integer, Double> getListingPeriodFee(){
+		try {
+			String query = "SELECT * FROM PERIOD_FEE";
+			SimpleEntry<Integer, Double> pair = new SimpleEntry<>(0, 0.0);
+			PreparedStatement statement = connection.prepareStatement(query);
+			ResultSet res = statement.executeQuery();
+			while (res.next()) {
+				pair = new SimpleEntry<Integer, Double>(res.getInt("startListingPeriod"), res.getDouble("fee"));
+			}
+			return pair;
+		} catch (SQLException e) {
+			System.out.println(e);
+			System.exit(0);
+			return new SimpleEntry<Integer, Double>(0, 0.0);
+		}
+	}
 
 }

@@ -32,10 +32,31 @@ public class LoginController extends GUIcontroller {
 		});
 
 		view.addSelectSignupListener(e -> view.signUpPanel());
-		view.addSignupListener(e -> signup());
+		view.addSignupListener(e -> signup(view.getUserText(), view.getPasswordText()));
 	}
 
-	public void signup() {
+	public void signup(String username, String password) {
+
+		if(username.isEmpty() && password.isEmpty()){
+			view.displayEmptyTextError("Username and Password");
+			return;
+		}
+		if(username.isEmpty()){
+			view.displayEmptyTextError("Username");
+			return;
+		}
+		if(password.isEmpty()){
+			view.displayEmptyTextError("Password");
+			return;
+		}
+		if(model.validateAccount(username)){
+			view.displaySignupError();
+			return;
+		}
+		model.registerUser(username, password);
+		view.confirmation("Signup Successful");
+		view.dispose();
+		start();
 
 	}
 

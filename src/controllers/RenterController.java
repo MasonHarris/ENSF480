@@ -21,7 +21,7 @@ public class RenterController extends GUIcontroller {
 	public void start() {
 		view.addSubmitListener(e -> propertySearch(this.view));
 		view.addBackListener(e -> view.displaySearchPanel());
-		view.addContactListener(e -> contactLandlord(this.view));
+		view.addContactListener(e -> contactLandlord(this.view, ""));
 		view.displaySearchPanel();
 
 	}
@@ -91,7 +91,7 @@ public class RenterController extends GUIcontroller {
 
 	}
 
-	public void contactLandlord(RenterView view) {
+	public void contactLandlord(RenterView view, String email) {
 
 		// array of propertyIDs contacted
 		int[] propertyIDs = view.getSelectedProperties();
@@ -107,7 +107,7 @@ public class RenterController extends GUIcontroller {
 			propertyID = value;
 
 		}
-		view.displayForm();
+		view.displayForm(email);
 		final int p = propertyID;
 		view.formListener(e -> {
 			sendEmail(p, view.getEmail());

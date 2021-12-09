@@ -42,6 +42,7 @@ public class RegistrationForm extends JPanel {
     }
 
     public void displayForm(int width, int height) {
+        this.removeAll();
         JLabel address1Label = new JLabel("Address number");
         address1Label.setBounds(10, (int) (height * 0.05), (int) (width * 0.1), (int) (height * 0.025));
         addressNumber.setBounds(110, (int) (height * 0.05), (int) (width * 0.1), (int) (height * 0.025));

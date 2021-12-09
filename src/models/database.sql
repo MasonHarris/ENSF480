@@ -37,7 +37,8 @@ VALUES
 	('jake','world123',6),
 	('ice','belowfreezing',7),
 	('mike','celesius111',8),
-	('yori122','renter111',12);
+	('yori122','renter111',12),
+  ("ai", "hayasaka",13);
 
 /*!40000 ALTER TABLE `ACCOUNT` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -62,7 +63,8 @@ INSERT INTO `LANDLORD` (`Username`, `name`, `emailAddress`)
 VALUES
 	('doctor','Howl','howl@me.com'),
 	('mike','Mike','miku@me.com'),
-	('sandy','Sandy','sandy1234@gmail.com');
+	('sandy','Sandy','sandy1234@gmail.com'),
+  ("ai", "hayasaka", "ai@yahoo.com");
 
 /*!40000 ALTER TABLE `LANDLORD` ENABLE KEYS */;
 UNLOCK TABLES;

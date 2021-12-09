@@ -86,10 +86,11 @@ public class LandlordController extends GUIcontroller {
         int bathrooms;
         Boolean furnished = false;
         try {
+            int addressNumber = Integer.parseInt(value[0]);
             bedrooms = Integer.parseInt(value[2]);
             bathrooms = Integer.parseInt(value[3]);
 
-            if (bedrooms <= 0 || bathrooms <= 0) {
+            if (bedrooms <= 0 || bathrooms <= 0 || addressNumber < 0) {
                 view.formError("Invalid number");
                 return;
             }
@@ -107,7 +108,8 @@ public class LandlordController extends GUIcontroller {
             return;
         }
         Property property = new Property(value[4], false, bedrooms, bathrooms, furnished,
-                model.getRegisterPropertyID(), value[5], "Registered", value[0] + value[1], 0, 0, username, false);
+                model.getRegisterPropertyID(), value[5], "Registered", value[0] + " " + value[1], 0, 0, username,
+                false);
         model.registerProperty(property);
         view.formError("");
         view.confirmation("registered property successfully");
@@ -147,7 +149,9 @@ public class LandlordController extends GUIcontroller {
         for (int propertyID : paidFees) {
             // use the pair.getkey() to get property id and update accoridinly
             model.payFee(propertyID);
+            model.changePropertyListing(propertyID, "Active");
         }
+
         landlord_properties = model.getLandlordProperties(username);
         // Needs to be changed
         view.confirmation(

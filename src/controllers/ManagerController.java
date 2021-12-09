@@ -126,6 +126,10 @@ public class ManagerController extends GUIcontroller {
                 // update database with new state(pair.getValue()) should also update properties
                 // arraylist by calling getAllProperties after loop
                 System.out.println("Property " + pair.getKey() + " has a new status of  " + pair.getValue());
+                // pays off property
+                if (pair.getValue() == "Active" && oldstate == "Registered") {
+                    model.payFee(allProperties.get(pair.getKey()).getPropertyId());
+                }
                 model.changePropertyListing(allProperties.get(pair.getKey()).getPropertyId(), pair.getValue());
             }
 

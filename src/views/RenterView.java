@@ -105,10 +105,10 @@ public class RenterView extends GUIview {
 
 	}
 
-	public void displayForm() {
+	public void displayForm(String email) {
 		backButton.setBounds(250, (int) (0.61 * height), (int) (0.1 * width), (int) (0.025 * height));
 
-		form.displayEmail(width, height);
+		form.displayEmail(width, height, email);
 		form.add(backButton);
 		frame.setContentPane(form);
 		frame.revalidate();

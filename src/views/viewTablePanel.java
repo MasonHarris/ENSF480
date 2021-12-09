@@ -13,11 +13,11 @@ import models.Landlord;
 import models.Property;
 import models.RegisteredRenter;
 
-public class viewTablePanel extends JPanel {
+public class ViewTablePanel extends JPanel {
     int width;
     int height;
 
-    public viewTablePanel(int width, int height) {
+    public ViewTablePanel(int width, int height) {
         setLayout(null);
         this.width = width;
         this.height = height;

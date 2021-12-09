@@ -148,6 +148,7 @@ public class LandlordController extends GUIcontroller {
             // use the pair.getkey() to get property id and update accoridinly
             model.payFee(propertyID);
         }
+        landlord_properties = model.getLandlordProperties(username);
         // Needs to be changed
         view.confirmation(
                 "Payment successful, paid $" + paidFees.length * landlord_properties.get(0).getAmountOfFee());

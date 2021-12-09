@@ -15,11 +15,10 @@ public class Landlord {
 	public Landlord() {
 	}
 
-	public Landlord(String username, int ID, String emailAddress, String password, String string) {
+	public Landlord(String username, String emailAddress, int ID) {
 		this.username = username;
 		this.ID = ID;
 		this.emailAddress = emailAddress;
-		this.password = password;
 
 	}
 

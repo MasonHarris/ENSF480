@@ -44,16 +44,14 @@ public class ManagerController extends GUIcontroller {
         view.addReportListener(e -> summary());
         // someone should fill these in with the correct arraylist argument(these should
         // be created by the model)
-        ArrayList<RegisteredRenter> renters = new ArrayList<RegisteredRenter>();
+
         // renters.add(new RegisteredRenter("miku", "nakano@email.com", "pass", 1, new
         // Subscription()));
         // renters.add(new RegisteredRenter("nino", "nakano@email.com", "pass", 31, new
         // Subscription()));
-        ArrayList<Landlord> landlords = new ArrayList<Landlord>();
-       
 
-        view.addAccessLandlordListener(e -> view.displayLandlordTable(landlords));
-        view.addAccessRentersListener(e -> view.displayRenterTable(renters));
+        view.addAccessLandlordListener(e -> view.displayLandlordTable(model.getAllLandlords()));
+        view.addAccessRentersListener(e -> view.displayRenterTable(model.getAllRenters()));
         view.addAccessPropertyListener(e -> view.displayPropertyTable(model.getAllProperties()));
     }
 

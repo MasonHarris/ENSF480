@@ -1,20 +1,18 @@
 package models;
 
-import java.util.concurrent.Flow.Subscription;
-
 public class RegisteredRenter {
 	private String username;
 	private String email;
 	private int ID;
-	private String password;
+
 	private Subscription subscription;
 
-	public RegisteredRenter(String username, String email, String password, int id, Subscription subscription) {
+	public RegisteredRenter(String username, String email, int i, models.Subscription subscription2) {
 		this.username = username;
 		this.email = email;
-		this.ID = id;
-		this.password = password;
-		this.subscription = subscription;
+		this.ID = i;
+
+		this.subscription = subscription2;
 	}
 
 	public RegisteredRenter() {
@@ -41,14 +39,6 @@ public class RegisteredRenter {
 
 	public void setId(int ID) {
 		this.ID = ID;
-	}
-
-	public String getPassword() {
-		return this.password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
 	}
 
 	public String getEmail() {

@@ -84,7 +84,7 @@ public class SummaryReportView extends JPanel {
         JScrollPane scroll = new JScrollPane(table);
         JLabel label = new JLabel("Properties rented");
         label.setBounds((int) (width * 0.1), (int) (height * 0.07), (int) (width * 0.1), (int) (height * 0.05));
-        scroll.setBounds(10, (int) (height * 0.1), (int) (width * 0.3), (int) (height * 0.5));
+        scroll.setBounds(10, (int) (height * 0.1), (int) (width * 0.6), (int) (height * 0.5));
         add(scroll);
         add(label);
         repaint();

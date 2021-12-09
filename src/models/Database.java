@@ -106,8 +106,7 @@ public class Database {
 			Landlord landlord = new Landlord();
 			while (res.next()) {
 				SimpleEntry<Integer, String> pair = getIDPassword(Username);
-				landlord = new Landlord(Username, pair.getKey(), res.getString("emailAddress"), res.getString("name"),
-						pair.getValue());
+
 			}
 			return landlord;
 		} catch (SQLException e) {
@@ -124,7 +123,9 @@ public class Database {
 			PreparedStatement statement = connection.prepareStatement(query);
 			ResultSet res = statement.executeQuery();
 			while (res.next()) {
-				list.add(new RegisteredRenter(res.getString("Username"), res.getString("email")));
+				SimpleEntry<Integer, String> pair = getIDPassword(res.getString("Username"));
+				list.add(new RegisteredRenter(res.getString("Username"), res.getString("email"), pair.getKey(),
+						getSubscription(res.getString("Username"))));
 			}
 			return list;
 		} catch (SQLException e) {
@@ -132,6 +133,25 @@ public class Database {
 			System.exit(0);
 			return new ArrayList<RegisteredRenter>();
 		}
+	}
+
+	public ArrayList<Landlord> getAllLandlords() {
+		try {
+			ArrayList<Landlord> list = new ArrayList<Landlord>();
+			String query = "SELECT * FROM RENTER";
+			PreparedStatement statement = connection.prepareStatement(query);
+			ResultSet res = statement.executeQuery();
+			while (res.next()) {
+				SimpleEntry<Integer, String> pair = getIDPassword(res.getString("Username"));
+				list.add(new Landlord(res.getString("Username"), res.getString("Email"), pair.getKey()));
+			}
+			return list;
+		} catch (SQLException e) {
+			System.out.println(e);
+			System.exit(0);
+			return new ArrayList<Landlord>();
+		}
+
 	}
 
 	public RegisteredRenter getRegisteredRenter(String user) {
@@ -170,7 +190,7 @@ public class Database {
 		} catch (SQLException e) {
 			System.out.println(e);
 			System.exit(0);
-			return new Subscription();
+			return null;
 		}
 	}
 
@@ -224,9 +244,8 @@ public class Database {
 	public ArrayList<Property> searchForProperties(int bath, int bed, String prope, boolean fur, String quad) {
 		try {
 			ArrayList<Property> list = new ArrayList<Property>();
-			String query = "SELECT * FROM PROPERTY WHERE listingState = ?";
+			String query = "SELECT * FROM PROPERTY WHERE listingState = 1";
 			PreparedStatement statement = connection.prepareStatement(query);
-			statement.setString(1,"Active");
 			ResultSet res = statement.executeQuery();
 			while (res.next()) {
 				list.add(new Property(res.getString("propertyType"), res.getBoolean("isListed"),
@@ -237,7 +256,6 @@ public class Database {
 						res.getDouble("amountofFee"),
 						res.getString("landlordUsername"), res.getBoolean("isPaid")));
 			}
-			System.out.println(list.size());
 			Iterator<Property> it = list.iterator();
 			while (it.hasNext()) {
 				Property property = it.next();
@@ -247,7 +265,7 @@ public class Database {
 				} else if (property.getNumOfBed() != bed) {
 					System.out.println(bed + " is not equal to " + property.getNumOfBed());
 					it.remove();
-				} else if (!property.getPropertyType().toLowerCase().equals(prope)) {
+				} else if (!property.getPropertyType().equals(prope)) {
 					System.out.println(prope + " is not equal to " + property.getPropertyType());
 					it.remove();
 				} else if (property.getIsFurnished() != fur) {

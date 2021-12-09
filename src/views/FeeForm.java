@@ -9,13 +9,13 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-public class FeeForm extends JPanel {
+public class feeForm extends JPanel {
     JButton submit;
     JTextField fee;
     JTextField period;
     JLabel errorLabel;
 
-    public FeeForm() {
+    public feeForm() {
         setLayout(null);
         submit = new JButton("Submit");
 

@@ -14,11 +14,11 @@ import models.Landlord;
 import models.Property;
 import models.RegisteredRenter;
 
-public class ManagerTables extends JPanel {
+public class managerTables extends JPanel {
     int width;
     int height;
 
-    public ManagerTables(int width, int height) {
+    public managerTables(int width, int height) {
         setLayout(null);
         this.width = width;
         this.height = height;

@@ -2,7 +2,7 @@ package views;
 
 import models.Property;
 
-import javax.print.DocFlavor.INPUT_STREAM;
+
 import javax.swing.*;
 import javax.swing.table.*;
 

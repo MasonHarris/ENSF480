@@ -3,11 +3,11 @@ package controllers;
 import models.Database;
 import views.RenterView;
 import java.util.ArrayList;
-import java.util.HashMap;
+
 
 import models.Property;
 
-import models.Property;
+
 
 public class RenterController extends GUIcontroller {
 	private RenterView view;

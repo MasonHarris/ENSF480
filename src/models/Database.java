@@ -395,6 +395,25 @@ public class Database {
 			return -1;
 		}
 	}
+
+	public int getManagerID(){
+		try {
+			String query = "SELECT MAX(id) FROM Manager";
+			PreparedStatement statement = connection.prepareStatement(query);
+			ResultSet res = statement.executeQuery();
+			int result = 0;
+			while (res.next()) {
+				result = res.getInt("MAX(id)");
+			}
+			return result + 1;
+		} catch (SQLException e) {
+			System.out.println(e);
+			System.exit(0);
+			return -1;
+		}
+
+
+	}
 	//changes a property listing given property id and string of new listing
 	public void changePropertyListing(int id, String listing) {
 		try {
@@ -473,13 +492,40 @@ public class Database {
 		}
 	}
 	// registers user into ACCOUNT table in database
-	public void registerUser(String user, String password) {
+	public void registerUser(String user, String password, String email, String userType) {
 		try {
 			String query = "INSERT INTO ACCOUNT(Username, Password) Values(?,?)";
 			PreparedStatement statement = connection.prepareStatement(query);
 			statement.setString(1, user);
 			statement.setString(2, password);
 			statement.executeUpdate();
+			if(userType.equals("Renter")){
+				query = "INSERT INTO RENTER(Username, email)Value(?,?)";
+				statement = connection.prepareStatement(query);
+				statement.setString(1, user);
+			    statement.setString(2, email);
+				statement.executeUpdate();
+
+			}
+			else if(userType.equals("Landlord")){
+				query = "INSERT INTO LANDLORD(Username, name, emailAddress)Value(?,?,?)";
+				PreparedStatement statement2 = connection.prepareStatement(query);
+				statement2.setString(1, user);
+			    statement2.setString(2, user);
+				statement2.setString(3,email);
+				statement2.executeUpdate();
+
+			}
+			else if(userType.equals("Manager")){
+				query = "INSERT INTO MANAGER(id,Username)Value(?,?)";
+				PreparedStatement statement2 = connection.prepareStatement(query);
+				statement2.setInt(1,getManagerID());
+				statement2.setString(2, user);
+				statement2.executeUpdate();
+
+			
+
+			}
 		} catch (SQLException e) {
 			System.out.println(e);
 			System.exit(0);

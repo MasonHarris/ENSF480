@@ -2,11 +2,11 @@ package views;
 
 import java.util.AbstractMap.SimpleEntry;
 
-import javax.swing.BoxLayout;
+
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextArea;
+
 import javax.swing.JTextField;
 
 public class FeeForm extends JPanel {

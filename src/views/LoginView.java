@@ -15,10 +15,13 @@ public class LoginView extends GUIview {
 	JButton selectSignUpButton;
 	JButton signupButton;
 	JLabel error = null;
+	JTextField emailText;
+	JComboBox<String> options;
 
 	public LoginView(String frameName, int width, int height) {
 
 		super(width, height);
+		 options = new JComboBox<String>(new String[]{"Renter", "Manager", "Landlord"});
 		intializeDashboard();
 
 	}
@@ -92,8 +95,21 @@ public class LoginView extends GUIview {
 		passwordText.setBounds((int) (width * 0.25), (int) (height * 0.25), (int) (width * 0.41),
 				(int) (height * 0.125));
 
-		signupButton.setBounds((int) (width * 0.25), (int) (height * 0.40), (int) (width * 0.41),
+		
+
+		emailText = new JTextField(20);
+		JLabel emailLabel = new JLabel("Email");
+		emailText.setBounds((int) (width * 0.25), (int) (height * 0.55), (int) (width * 0.41),
+		(int) (height * 0.125));
+		emailLabel.setBounds((int) (width * 0.025), (int) (height * 0.55), (int) (width * 0.41),
+		(int) (height * 0.125));
+		options.setBounds((int) (width * 0.25), (int) (height * 0.40), (int) (width * 0.41),
+		(int) (height * 0.125));
+		signupButton.setBounds((int) (width * 0.25), (int) (height * 0.70), (int) (width * 0.41),
 				(int) (height * 0.125));
+		signupPanel.add(emailLabel);
+		signupPanel.add(emailText);
+		signupPanel.add(options);
 		signupPanel.add(user);
 		signupPanel.add(usernameText);
 		signupPanel.add(password);
@@ -134,6 +150,17 @@ public class LoginView extends GUIview {
 
 	public String getPasswordText() {
 		return new String(passwordText.getPassword());
+	}
+
+	public String getOptionsText(){
+		return (String) options.getSelectedItem();
+	}
+
+	public String getEmail(){
+		if(emailText != null){
+			return emailText.getText();
+		}
+		return null;
 	}
 
 	public void displayLoginError() {

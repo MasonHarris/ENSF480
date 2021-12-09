@@ -6,7 +6,7 @@ import models.Database;
 import models.Landlord;
 import models.Property;
 import models.RegisteredRenter;
-import models.Subscription;
+
 import models.SummaryReport;
 import views.ManagerView;
 import java.util.HashMap;

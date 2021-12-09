@@ -49,11 +49,18 @@ public class LoginController extends GUIcontroller {
 			view.displayEmptyTextError("Password");
 			return;
 		}
+
+		if(view.getEmail().length() == 0){
+			view.displayEmptyTextError("Password");
+			return;
+
+		}
+
 		if(model.validateAccount(username)){
 			view.displaySignupError();
 			return;
 		}
-		model.registerUser(username, password);
+		model.registerUser(username, password,view.getEmail(), view.getOptionsText());
 		view.confirmation("Signup Successful");
 		view.dispose();
 		start();

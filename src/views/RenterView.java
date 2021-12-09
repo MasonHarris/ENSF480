@@ -15,7 +15,7 @@ public class RenterView extends GUIview {
 	JComboBox<String> quadrant;
 	JComboBox<String> furnished;
 	JLabel errorLabel;
-	EmailForm form;
+	emailForm form;
 	JButton endSession;
 	// used to display search results
 	JPanel displayResults;
@@ -24,7 +24,7 @@ public class RenterView extends GUIview {
 		super(width, height);
 		intializeSearchPanel();
 		initalizeFrame(frameName);
-		form = new EmailForm();
+		form = new emailForm();
 		tPanel = new TablePanel(width, height, "Contact selected landlord");
 		endSession = new JButton("Return to login screen");
 		

@@ -10,13 +10,13 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 
 //form class for a form with 2 fields
-public class EmailForm extends JPanel {
+public class emailForm extends JPanel {
     JTextField emailAddress;
     JTextArea emailBody;
     JButton sendButton;
     JLabel errorLabel;
 
-    public EmailForm() {
+    public emailForm() {
         sendButton = new JButton("Send");
         setLayout(null);
         errorLabel = new JLabel();

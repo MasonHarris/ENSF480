@@ -22,7 +22,7 @@ public class LandlordView extends GUIview {
     TablePanel feePanel;
     TablePanel tPanel;
     RegistrationForm form;
-    ViewLandlordNotifications n;
+    viewLandlordNotifications n;
     String options[] = { "Suspended", "Unsuspended", "Cancelled", "Rented" };
 
     public LandlordView(String frameName, int width, int height) {
@@ -30,7 +30,7 @@ public class LandlordView extends GUIview {
         tPanel = new TablePanel(width, height, "Save changes");
         form = new RegistrationForm();
         feePanel = new TablePanel(width, height, "Pay fees");
-        n = new ViewLandlordNotifications(width, height);
+        n = new viewLandlordNotifications(width, height);
         initalizeFrame(frameName);
 
     }

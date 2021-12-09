@@ -44,16 +44,14 @@ public class ManagerController extends GUIcontroller {
         view.addReportListener(e -> summary());
         // someone should fill these in with the correct arraylist argument(these should
         // be created by the model)
-        ArrayList<RegisteredRenter> renters = new ArrayList<RegisteredRenter>();
+
         // renters.add(new RegisteredRenter("miku", "nakano@email.com", "pass", 1, new
         // Subscription()));
         // renters.add(new RegisteredRenter("nino", "nakano@email.com", "pass", 31, new
         // Subscription()));
-        ArrayList<Landlord> landlords = new ArrayList<Landlord>();
-       
 
-        view.addAccessLandlordListener(e -> view.displayLandlordTable(landlords));
-        view.addAccessRentersListener(e -> view.displayRenterTable(renters));
+        view.addAccessLandlordListener(e -> view.displayLandlordTable(model.getAllLandlords()));
+        view.addAccessRentersListener(e -> view.displayRenterTable(model.getAllRenters()));
         view.addAccessPropertyListener(e -> view.displayPropertyTable(model.getAllProperties()));
     }
 
@@ -128,6 +126,10 @@ public class ManagerController extends GUIcontroller {
                 // update database with new state(pair.getValue()) should also update properties
                 // arraylist by calling getAllProperties after loop
                 System.out.println("Property " + pair.getKey() + " has a new status of  " + pair.getValue());
+                // pays off property
+                if (pair.getValue() == "Active" && oldstate == "Registered") {
+                    model.payFee(allProperties.get(pair.getKey()).getPropertyId());
+                }
                 model.changePropertyListing(allProperties.get(pair.getKey()).getPropertyId(), pair.getValue());
             }
 

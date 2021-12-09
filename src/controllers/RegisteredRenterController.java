@@ -42,7 +42,7 @@ public class RegisteredRenterController extends RenterController {
 
 		view.addNotificationsListener(e -> view.displayNotificationsPanel(model.getRenterNotifications(username)));
 		view.addBackListener(e -> view.displayDashboard());
-		view.addContactListener(e -> contactLandlord(this.view));
+		view.addContactListener(e -> contactLandlord(this.view, model.getRegisteredRenter(username).getEmail()));
 	}
 
 	@Override

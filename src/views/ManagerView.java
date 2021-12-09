@@ -24,17 +24,17 @@ public class ManagerView extends GUIview {
     JButton setFeesButton;
     JButton viewSubscriptions;
     TablePanel tPanel;
-    feeForm form;
+    FeeForm form;
     SummaryReportView reportView;
-    managerTables viewTable;
+    ManagerTables viewTable;
 
     public ManagerView(String frameName, int width, int height) {
         super(width, height);
         tPanel = new TablePanel(width, height, "save changes");
         initalizeFrame(frameName);
-        form = new feeForm();
+        form = new FeeForm();
         reportView = new SummaryReportView(width, height);
-        viewTable = new managerTables(width, height);
+        viewTable = new ManagerTables(width, height);
     }
 
     // creates and saves dashboard elements into memory

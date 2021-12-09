@@ -14,11 +14,11 @@ import models.Landlord;
 import models.Property;
 import models.RegisteredRenter;
 
-public class managerTables extends JPanel {
+public class ManagerTables extends JPanel {
     int width;
     int height;
 
-    public managerTables(int width, int height) {
+    public ManagerTables(int width, int height) {
         setLayout(null);
         this.width = width;
         this.height = height;
@@ -73,7 +73,7 @@ public class managerTables extends JPanel {
         columns.getColumn(0).setPreferredWidth(160);
         columns.getColumn(1).setPreferredWidth(160);
         columns.getColumn(2).setPreferredWidth(160);
-        columns.getColumn(3).setPreferredWidth(160);
+        
 
         for (Landlord p : landlords) {
             Object[] entry = { p.getID(), p.getUsername(), p.getEmailAddress() };
@@ -92,7 +92,8 @@ public class managerTables extends JPanel {
 
     public void displayRenters(ArrayList<RegisteredRenter> renters) {
         this.removeAll();
-        String[] colNames = { "Renter ID ", "Renter name", "Subscribed", "Number of bathrooms", "Number of bedrooms",
+        String[] colNames = { "Renter ID ", "Renter name", "Email", "Subscribed", "Number of bathrooms",
+                "Number of bedrooms",
                 "Property type", "Furnished", "Quadrant" };
         DefaultTableModel model = new DefaultTableModel(colNames, 0);
         JTable table = new JTable(model);
@@ -111,28 +112,31 @@ public class managerTables extends JPanel {
         columns.getColumn(5).setPreferredWidth(160);
         columns.getColumn(6).setPreferredWidth(160);
         columns.getColumn(7).setPreferredWidth(160);
+        columns.getColumn(8).setPreferredWidth(160);
 
         for (RegisteredRenter p : renters) {
             Subscription s = (Subscription) p.getSubscription();
             Object[] entry;
             if (s == null) {
 
-                entry = new Object[3];
+                entry = new Object[4];
 
                 entry[0] = p.getID();
                 entry[1] = p.getUsername();
-                entry[2] = false;
+                entry[2] = p.getEmail();
+                entry[3] = false;
 
             } else {
-                entry = new Object[8];
+                entry = new Object[9];
                 entry[0] = p.getID();
                 entry[1] = p.getUsername();
-                entry[2] = true;
-                entry[3] = s.getNoOfBathrooms();
-                entry[4] = s.getNoOfBedrooms();
-                entry[5] = s.getPropertyType();
-                entry[6] = s.getIsFurnished();
-                entry[7] = s.getCityQuadrant();
+                entry[2] = p.getEmail();
+                entry[3] = true;
+                entry[4] = s.getNoOfBathrooms();
+                entry[5] = s.getNoOfBedrooms();
+                entry[6] = s.getPropertyType();
+                entry[7] = s.getIsFurnished();
+                entry[8] = s.getCityQuadrant();
 
             }
             model.addRow(entry);

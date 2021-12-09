@@ -111,8 +111,7 @@ public class Database {
 			Landlord landlord = new Landlord();
 			while (res.next()) {
 				SimpleEntry<Integer, String> pair = getIDPassword(Username);
-				landlord = new Landlord(Username, pair.getKey(), res.getString("emailAddress"), res.getString("name"),
-						pair.getValue());
+
 			}
 			return landlord;
 		} catch (SQLException e) {
@@ -129,7 +128,9 @@ public class Database {
 			PreparedStatement statement = connection.prepareStatement(query);
 			ResultSet res = statement.executeQuery();
 			while (res.next()) {
-				list.add(new RegisteredRenter(res.getString("Username"), res.getString("email")));
+				SimpleEntry<Integer, String> pair = getIDPassword(res.getString("Username"));
+				list.add(new RegisteredRenter(res.getString("Username"), res.getString("email"), pair.getKey(),
+						getSubscription(res.getString("Username"))));
 			}
 			return list;
 		} catch (SQLException e) {
@@ -138,19 +139,37 @@ public class Database {
 			return new ArrayList<RegisteredRenter>();
 		}
 	}
-	// returns RegisteredRenter given its username
+	// returns list of all landlords in the Database
+	public ArrayList<Landlord> getAllLandlords() {
+		try {
+			ArrayList<Landlord> list = new ArrayList<Landlord>();
+			String query = "SELECT * FROM LANDLORD";
+			PreparedStatement statement = connection.prepareStatement(query);
+			ResultSet res = statement.executeQuery();
+			while (res.next()) {
+				SimpleEntry<Integer, String> pair = getIDPassword(res.getString("Username"));
+				list.add(new Landlord(res.getString("Username"), res.getString("emailAddress"), pair.getKey()));
+			}
+			return list;
+		} catch (SQLException e) {
+			System.out.println(e);
+			System.exit(0);
+			return new ArrayList<Landlord>();
+		}
+
+	}
+  // Returns RegisteredRenter object given username
 	public RegisteredRenter getRegisteredRenter(String user) {
 		try {
-			String query = "SELECT * FROM RegisteredRenter WHERE Username = ?";
+			String query = "SELECT * FROM RENTER WHERE Username = ?";
 			PreparedStatement statement = connection.prepareStatement(query);
 			statement.setString(1, user);
 			ResultSet res = statement.executeQuery();
 			RegisteredRenter RegisteredRenter = new RegisteredRenter();
 			while (res.next()) {
 				SimpleEntry<Integer, String> pair = getIDPassword(user);
-				// RegisteredRenter = new RegisteredRenter(user, res.getString("email"),
-				// pair.getValue(), pair.getKey(),
-				// getSubscription(user));
+				RegisteredRenter = new RegisteredRenter(user, res.getString("email"), pair.getKey(),
+						getSubscription(user));
 			}
 			return RegisteredRenter;
 		} catch (SQLException e) {
@@ -167,15 +186,20 @@ public class Database {
 			statement.setString(1, user);
 			ResultSet res = statement.executeQuery();
 			Subscription subscription = new Subscription();
+			boolean empty = true;
 			while (res.next()) {
+				empty = false;
 				subscription = new Subscription(user, res.getInt("noOfBedrooms"), res.getInt("noOfBathrooms"),
 						res.getBoolean("Furnished"), res.getString("cityQuadrant"), res.getString("propertyType"));
+			}
+			if (empty) {
+				return null;
 			}
 			return subscription;
 		} catch (SQLException e) {
 			System.out.println(e);
 			System.exit(0);
-			return new Subscription();
+			return null;
 		}
 	}
 	//Returns an arraylist of all properties in the Database 
@@ -230,9 +254,8 @@ public class Database {
 	public ArrayList<Property> searchForProperties(int bath, int bed, String prope, boolean fur, String quad) {
 		try {
 			ArrayList<Property> list = new ArrayList<Property>();
-			String query = "SELECT * FROM PROPERTY WHERE listingState = ?";
+			String query = "SELECT * FROM PROPERTY WHERE isListed = 1";
 			PreparedStatement statement = connection.prepareStatement(query);
-			statement.setString(1,"Active");
 			ResultSet res = statement.executeQuery();
 			while (res.next()) {
 				list.add(new Property(res.getString("propertyType"), res.getBoolean("isListed"),
@@ -243,7 +266,6 @@ public class Database {
 						res.getDouble("amountofFee"),
 						res.getString("landlordUsername"), res.getBoolean("isPaid")));
 			}
-			System.out.println(list.size());
 			Iterator<Property> it = list.iterator();
 			while (it.hasNext()) {
 				Property property = it.next();
@@ -253,7 +275,7 @@ public class Database {
 				} else if (property.getNumOfBed() != bed) {
 					System.out.println(bed + " is not equal to " + property.getNumOfBed());
 					it.remove();
-				} else if (!property.getPropertyType().toLowerCase().equals(prope)) {
+				} else if (!property.getPropertyType().equals(prope)) {
 					System.out.println(prope + " is not equal to " + property.getPropertyType());
 					it.remove();
 				} else if (property.getIsFurnished() != fur) {
@@ -346,6 +368,13 @@ public class Database {
 			statement.setString(1, listing);
 			statement.setInt(2, id);
 			statement.executeUpdate();
+			if (listing.equals("Active")) {
+				String query2 = "UPDATE PROPERTY SET isListed = 1 WHERE propertyID = ?";
+				PreparedStatement statement2 = connection.prepareStatement(query2);
+				statement2.setInt(1, id);
+				statement2.executeUpdate();
+
+			}
 		} catch (SQLException e) {
 			System.out.println(e);
 			System.exit(0);
@@ -381,7 +410,11 @@ public class Database {
 			String query = "UPDATE PROPERTY SET isPaid = 1 WHERE propertyID = ?";
 			PreparedStatement statement = connection.prepareStatement(query);
 			statement.setInt(1, propety_id);
+			String query2 = "UPDATE PROPERTY SET isListed = 1 WHERE propertyID = ?";
+			PreparedStatement statement2 = connection.prepareStatement(query2);
+			statement2.setInt(1, propety_id);
 			statement.executeUpdate();
+			statement2.executeUpdate();
 		} catch (SQLException e) {
 			System.out.println(e);
 			System.exit(0);
@@ -405,7 +438,7 @@ public class Database {
 	public void subscribeNotification(String user, int noOfBath, int noOfBed, Boolean Furnished, String cityQuadString,
 			String propertyType) {
 		try {
-			String query = "INSERT INTO NOTIFICATION(Username, noOfBathrooms, noOfBedrooms, Furnished, cityQuadrant, propertyType)";
+			String query = "INSERT INTO NOTIFICATION(Username, noOfBedrooms, noOfBathrooms, Furnished, cityQuadrant, propertyType)";
 			query = query + "Values(?,?,?,?,?,?)";
 			PreparedStatement statement = connection.prepareStatement(query);
 			statement.setString(1, user);

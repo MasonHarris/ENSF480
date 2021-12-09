@@ -22,7 +22,7 @@ public class LoginController extends GUIcontroller {
 		view.addSelectLoginListener(e -> view.showLogin());
 		view.addRenterListener(e -> {
 			view.dispose();
-			RenterController renter = new RenterController(model, new RenterView("Renter", 1200, 1200));
+			RenterController renter = new RenterController(model, new RenterView("Renter", 1200, 1200),this);
 			renter.start();
 
 		});

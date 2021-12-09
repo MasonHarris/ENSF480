@@ -19,7 +19,7 @@ public class RenterView extends GUIview {
 	JComboBox<String> furnished;
 	JLabel errorLabel;
 	EmailForm form;
-
+	JButton endSession;
 	// used to display search results
 	JPanel displayResults;
 
@@ -29,6 +29,8 @@ public class RenterView extends GUIview {
 		initalizeFrame(frameName);
 		form = new EmailForm();
 		tPanel = new TablePanel(width, height, "Contact selected landlord");
+		endSession = new JButton("Return to login screen");
+		
 
 	}
 
@@ -100,6 +102,8 @@ public class RenterView extends GUIview {
 	}
 
 	public void displaySearchPanel() {
+		endSession.setBounds((int) (width * 0.5), (int) (height * 0.15), (int) (width * 0.3), (int) (height * 0.03));
+		panel.add(endSession);
 		frame.setContentPane(panel);
 		frame.revalidate();
 
@@ -114,7 +118,9 @@ public class RenterView extends GUIview {
 		frame.revalidate();
 
 	}
-
+	public void endSession(ActionListener listener){
+		endSession.addActionListener(listener);
+	}
 	public void formListener(ActionListener listener) {
 		form.sendButton.addActionListener(listener);
 	}

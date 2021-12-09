@@ -68,7 +68,7 @@ public class RenterController extends GUIcontroller {
 			return;
 
 		}
-		String propeString = view.getPropertyType();
+		String propeString = view.getPropertyType().toLowerCase();
 		if (!isStringAlpha(propeString)) {
 			view.displayError("Property type must contain only alphabetical characters");
 			return;
@@ -118,17 +118,30 @@ public class RenterController extends GUIcontroller {
 		}
 		view.displayForm(email);
 		final int p = propertyID;
+		
+		
+
 		view.formListener(e -> {
-			sendEmail(p, view.getEmail());
-			view.returnToSearchResults();
+			sendEmail(p, view.getEmail(),view);
+			
 		});
 
 	}
 
-	// updates database with email
+	// updates database with email, email[0] is address, email[1] is body
 
-	public void sendEmail(int propertyID, String email) {
-		model.registerLandlordNotification(model.getProperty(propertyID).getLandlordUsername(), email, propertyID);
+	public void sendEmail(int propertyID, String[] email, RenterView view) {
+		if(email[0].length() == 0 || email[1].length() == 0){
+			view.displayEmailError("Neither field can be left blank");
+			
+			return;
+		}
+		
+		System.out.println("Email body is " + email[1]);
+	
+		model.registerLandlordNotification(model.getProperty(propertyID).getLandlordUsername(), email[0], propertyID);
+		view.returnToSearchResults();
+		view.confirmation("Email sent");
 
 	}
 

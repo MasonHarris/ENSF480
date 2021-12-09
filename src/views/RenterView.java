@@ -122,9 +122,13 @@ public class RenterView extends GUIview {
 		form.sendButton.addActionListener(listener);
 	}
 
-	public String getEmail() {
+	public String[] getEmail() {
 		return form.getEmail();
 
+	}
+
+	public void displayEmailError(String error){
+		form.displayError(error);
 	}
 
 	// following get methods are used to extract the text entered in on gui

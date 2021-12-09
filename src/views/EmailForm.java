@@ -5,7 +5,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
+
 
 import javax.swing.JTextField;
 
@@ -19,11 +19,13 @@ public class EmailForm extends JPanel {
     public EmailForm() {
         sendButton = new JButton("Send");
         setLayout(null);
+        errorLabel = new JLabel();
 
     }
 
     public void displayEmail(int width, int height) {
         this.removeAll();
+        errorLabel.setText("");
         JLabel title = new JLabel("Contact form");
         title.setBounds(110, (int) (0.05 * height), (int) (0.12 * width), (int) (0.05 * height));
         add(title);
@@ -38,7 +40,7 @@ public class EmailForm extends JPanel {
 
         JLabel errorLabel = new JLabel();
         sendButton.setBounds(110, (int) (0.61 * height), (int) (0.1 * width), (int) (0.025 * height));
-        errorLabel.setBounds(110, (int) (0.67 * height), (int) (0.1 * width), (int) (0.05 * height));
+        errorLabel.setBounds(110, (int) (0.61 * height), (int) (0.1 * width), (int) (0.05 * height));
 
         add(addressLabel);
         add(emailAddress);
@@ -52,6 +54,7 @@ public class EmailForm extends JPanel {
 
     public void displayEmail(int width, int height, String email) {
         this.removeAll();
+        errorLabel.setText("");
         JLabel title = new JLabel("Contact form");
         title.setBounds(110, (int) (0.05 * height), (int) (0.12 * width), (int) (0.05 * height));
         add(title);
@@ -64,9 +67,9 @@ public class EmailForm extends JPanel {
         emailBody = new JTextArea();
         emailBody.setBounds(110, (int) (0.2 * height), (int) (0.4 * width), (int) (0.4 * height));
 
-        JLabel errorLabel = new JLabel();
+        
         sendButton.setBounds(110, (int) (0.61 * height), (int) (0.1 * width), (int) (0.025 * height));
-        errorLabel.setBounds(110, (int) (0.67 * height), (int) (0.1 * width), (int) (0.05 * height));
+        errorLabel.setBounds((int)(width*0.4), (int) (0.60 * height), (int) (0.17 * width), (int) (0.05 * height));
 
         add(addressLabel);
         add(emailAddress);
@@ -81,9 +84,9 @@ public class EmailForm extends JPanel {
         errorLabel.setText(error);
         repaint();
     }
-
-    public String getEmail() {
-        return emailAddress.getText();
+    //string[0] == address string[1] == body
+    public String[] getEmail() {
+        return new String[] {emailAddress.getText(),emailBody.getText()};
     }
 
 }

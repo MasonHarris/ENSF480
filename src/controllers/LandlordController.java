@@ -107,8 +107,8 @@ public class LandlordController extends GUIcontroller {
             view.formError("Non alphabetic character put in invalid field");
             return;
         }
-        Property property = new Property(value[4], false, bedrooms, bathrooms, furnished,
-                model.getRegisterPropertyID(), value[5], "Registered", value[0] + " " + value[1], 0, 0, username,
+        Property property = new Property(value[4].toLowerCase(), false, bedrooms, bathrooms, furnished,
+                model.getRegisterPropertyID(), value[5], "Registered", value[0] + " " + value[1].toLowerCase(), 0, 0, username,
                 false);
         model.registerProperty(property);
         view.formError("");

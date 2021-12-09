@@ -76,7 +76,7 @@ public class RegisteredRenterController extends RenterController {
 			return;
 
 		}
-		String propeString = view.getPropertyType();
+		String propeString = view.getPropertyType().toLowerCase();
 		if (!isStringAlpha(propeString)) {
 			view.displayError("Property type must contain only alphabetical characters");
 			return;

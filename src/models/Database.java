@@ -427,12 +427,12 @@ public class Database {
 	//Sets fee of all properties in Database
 	public void setFee(double feeAmount) {
 		try {
-			String query = "UPDATE PROPERTY SET amountofFee = ?";
+		/*	String query = "UPDATE PROPERTY SET amountofFee = ?";
 			PreparedStatement statement = connection.prepareStatement(query);
 			statement.setDouble(1, feeAmount);
-			statement.executeUpdate();
-			query = "UPDATE PERIOD_FEE SET fee = ?";
-			statement = connection.prepareStatement(query);
+			statement.executeUpdate(); */
+			String query = "UPDATE PERIOD_FEE SET fee = ?";
+			PreparedStatement statement = connection.prepareStatement(query);
 			statement.setDouble(1, feeAmount);
 			statement.executeUpdate();
 		} catch (SQLException e) {
@@ -443,12 +443,12 @@ public class Database {
 	//sets period of all properties in Database
 	public void setPeriod(int periodAmount) {
 		try {
-			String query = "UPDATE PROPERTY SET listingPeriod = ?";
+		/*	String query = "UPDATE PROPERTY SET listingPeriod = ?";
 			PreparedStatement statement = connection.prepareStatement(query);
 			statement.setInt(1, periodAmount);
-			statement.executeUpdate();
-			query = "UPDATE PERIOD_FEE SET startListingPeriod = ?";
-			statement = connection.prepareStatement(query);
+			statement.executeUpdate();*/
+			String query = "UPDATE PERIOD_FEE SET startListingPeriod = ?";
+			PreparedStatement statement = connection.prepareStatement(query);
 			statement.setInt(1, periodAmount);
 			statement.executeUpdate();
 		} catch (SQLException e) {

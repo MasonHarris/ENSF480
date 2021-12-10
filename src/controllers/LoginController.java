@@ -28,14 +28,14 @@ public class LoginController extends GUIcontroller {
 		});
 		view.addLoginListener(e -> {
 
-			login(view.getUserText(), view.getPasswordText());
+			login(view.getUserText().strip(), view.getPasswordText());
 		});
 		view.endSession(e-> {
 			view.dispose();
 			start();
 		});
 		view.addSelectSignupListener(e -> view.signUpPanel());
-		view.addSignupListener(e -> signup(view.getUserText(), view.getPasswordText()));
+		view.addSignupListener(e -> signup(view.getUserText().strip(), view.getPasswordText()));
 	}
 
 	public void signup(String username, String password) {

@@ -66,9 +66,9 @@ public class LoginView extends GUIview {
 		passwordText.setBounds((int) (width * 0.25), (int) (height * 0.25), (int) (width * 0.41),
 				(int) (height * 0.125));
 
-		loginButton.setBounds((int) (width * 0.25), (int) (height * 0.40), (int) (width * 0.41),
+		loginButton.setBounds((int) (width * 0.25), (int) (height * 0.40), (int) (width * 0.2),
 				(int) (height * 0.125));
-		endSession.setBounds((int) (width * 0.25), (int) (height * 0.55), (int) (width * 0.41),
+		endSession.setBounds((int) (width * 0.5), (int) (height * 0.40), (int) (width * 0.3),
 				(int) (height * 0.125));
 		loginPanel.add(user);
 		loginPanel.add(usernameText);
@@ -108,7 +108,9 @@ public class LoginView extends GUIview {
 		(int) (height * 0.1));
 		options.setBounds((int) (width * 0.25), (int) (height * 0.40), (int) (width * 0.41),
 		(int) (height * 0.1));
-		signupButton.setBounds((int) (width * 0.25), (int) (height * 0.70), (int) (width * 0.41),
+		signupButton.setBounds((int) (width * 0.25), (int) (height * 0.70), (int) (width * 0.2),
+				(int) (height * 0.1));
+		endSession.setBounds((int) (width * 0.5), (int) (height * 0.7), (int) (width * 0.3),
 				(int) (height * 0.1));
 		signupPanel.add(emailLabel);
 		signupPanel.add(emailText);
@@ -118,6 +120,7 @@ public class LoginView extends GUIview {
 		signupPanel.add(password);
 		signupPanel.add(passwordText);
 		signupPanel.add(signupButton);
+		signupPanel.add(endSession);
 		frame.setTitle("Signup");
 		frame.setContentPane(signupPanel);
 		frame.invalidate();
@@ -171,7 +174,7 @@ public class LoginView extends GUIview {
 
 	public void displayLoginError() {
 		JLabel error = new JLabel("Invalid login");
-		error.setBounds((int) (width * 0.25), (int) (height * 0.7), (int) (width * 0.41), (int) (height * 0.125));
+		error.setBounds((int) (width * 0.25), (int) (height * 0.5), (int) (width * 0.41), (int) (height * 0.125));
 		loginPanel.add(error);
 		loginPanel.repaint();
 

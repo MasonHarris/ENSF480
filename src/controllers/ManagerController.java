@@ -26,7 +26,7 @@ public class ManagerController extends GUIcontroller {
         allProperties = new ArrayList<Property>();
         allProperties = model.getAllProperties();
     }
-
+    //begins manager session
     public void start() {
         view.intializeDashboard();
         view.displayDashboard();
@@ -93,6 +93,12 @@ public class ManagerController extends GUIcontroller {
         } catch (NumberFormatException e) {
             view.displayFormError("INVALID VALUES");
             return;
+        }
+        //error checking
+        if(feeValue <= 0 || period <= 0){
+            view.displayFormError("INVALID VALUES");
+            return;
+
         }
 
         // update database fee period and value code here

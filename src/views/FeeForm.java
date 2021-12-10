@@ -8,7 +8,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import javax.swing.JTextField;
-
+//this class is used by managers to set/change fees
 public class FeeForm extends JPanel {
     JButton submit;
     JTextField fee;
@@ -37,7 +37,7 @@ public class FeeForm extends JPanel {
         submit.setBounds(110, (int) (height * 0.15), (int) (width * 0.1), (int) (height * 0.025));
 
         errorLabel = new JLabel("");
-        errorLabel.setBounds(110, (int) (height * 0.20), (int) (width * 0.1), (int) (height * 0.025));
+        errorLabel.setBounds(110, (int) (height * 0.30), (int) (width * 0.1), (int) (height * 0.025));
         add(period);
         add(periodLabel);
         add(fee);
@@ -46,7 +46,7 @@ public class FeeForm extends JPanel {
         add(errorLabel);
 
     }
-
+    //returns string array in format {fee value, fee period}
     public String[] getFields() {
         return new String[] { fee.getText(), period.getText() };
     }

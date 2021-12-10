@@ -10,7 +10,7 @@ public class TableListSelection extends DefaultListSelectionModel {
 
         if (index1 == index2) {
 
-            // unselect and select single line
+            // toggle selection for a single line
 
             if (!isSelectedIndex(index1)) {
                 addSelectionInterval(index1, index1);

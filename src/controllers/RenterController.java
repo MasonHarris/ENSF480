@@ -25,7 +25,7 @@ public class RenterController extends GUIcontroller {
 		this.login = login;
 
 	}
-
+	//starts renter session
 	public void start() {
 		view.addSubmitListener(e -> propertySearch(this.view));
 		view.addBackListener(e -> view.displaySearchPanel());
@@ -99,7 +99,7 @@ public class RenterController extends GUIcontroller {
 		view.displaySearch(properties);
 
 	}
-
+	//deals with contacting landlords, email is the email address of the user(none if not a registered renter)
 	public void contactLandlord(RenterView view, String email) {
 
 		// array of propertyIDs contacted

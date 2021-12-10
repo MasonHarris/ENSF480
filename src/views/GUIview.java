@@ -35,11 +35,11 @@ public abstract class GUIview {
 	public void dispose() {
 		frame.dispose();
 	}
-
+	//listener for back button
 	public void addBackListener(ActionListener listener) {
 		backButton.addActionListener(listener);
 	}
-
+	//displays confirmation message as popup that must be closed to continue
 	public void confirmation(String message) {
 		JDialog confirm = new JDialog(frame, message);
 		JLabel l = new JLabel("<html> " + message + "<br/><br/>Close this Dialog Box to continue</html>");

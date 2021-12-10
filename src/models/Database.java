@@ -6,7 +6,7 @@ import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.AbstractMap.SimpleEntry;
-
+//uses a singleton design pattern so that only 1 connection to the database exists ever
 public class Database {
 	public static Database onlyInstance;
 	private final String URL;

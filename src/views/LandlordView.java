@@ -23,6 +23,7 @@ public class LandlordView extends GUIview {
     TablePanel tPanel;
     RegistrationForm form;
     ViewLandlordNotifications n;
+    //state change options
     String options[] = { "Suspended", "Unsuspended", "Cancelled", "Rented" };
 
     public LandlordView(String frameName, int width, int height) {
@@ -71,15 +72,15 @@ public class LandlordView extends GUIview {
         changeStateButton.addActionListener(listener);
 
     }
-
+    //add listener for button to take user to pay fee page
     public void addPayFeeListener(ActionListener listener) {
         payFeeButton.addActionListener(listener);
     }
-
+    //adds listener to actual pay fee button
     public void payFormListener(ActionListener listener) {
         feePanel.submitButton.addActionListener(listener);
     }
-
+    
     public void addSubmitListener(ActionListener listener) {
         submitButton.addActionListener(listener);
 
@@ -88,19 +89,19 @@ public class LandlordView extends GUIview {
     public void addNotificationsListener(ActionListener listener) {
         viewNotifications.addActionListener(listener);
     }
-
+    //adds listener to save listing state changes
     public void TableButtonListener(ActionListener listener) {
         tPanel.submitButton.addActionListener(listener);
     }
-
+    //adds listener to submit registered property
     public void registerFormListener(ActionListener listener) {
         form.register.addActionListener(listener);
     }
-
+    //displays errors on registration form
     public void formError(String error) {
         form.displayError(error);
     }
-
+    //string arrays in format {property id, renter email , address} 
     public void displayNotifications(ArrayList<String[]> notifications) {
         n.displayNotifications(notifications);
         backButton.setBounds(110, (int) (height * 0.62), (int) (width * 0.2), (int) (height * 0.03));
@@ -108,7 +109,7 @@ public class LandlordView extends GUIview {
         frame.setContentPane(n);
         frame.revalidate();
     }
-
+    //display outstanding fees for landlords
     public void displayFees(ArrayList<Property> properties, SimpleEntry<Integer, Double> feePair) {
         backButton.setBounds((int) (width * 0.25), (int) (height * 0.55), (int) (width * 0.2),
                 (int) (height * 0.030));
@@ -117,7 +118,7 @@ public class LandlordView extends GUIview {
         frame.setContentPane(feePanel);
         frame.revalidate();
     }
-
+    //displays properties landlords can change the state of
     public void displayListingChanges(ArrayList<Property> properties) {
         tPanel.displayPropertyTableChangeListing(properties);
         backButton.setBounds((int) (width * 0.25), (int) (height * 0.55), (int) (width * 0.2),
@@ -128,19 +129,20 @@ public class LandlordView extends GUIview {
         frame.revalidate();
 
     }
-
+    // gets registration values in this order address number, addresss name,
+    // bathrooms, bedrooms, property type, quadrant, furnished
     public String[] getformFields() {
         return form.getValues();
     }
-
+    //returns property id has key and new property state as value
     public HashMap<Integer, String> getSelectedProperties() {
         return tPanel.getSelectedPropertiesMap(7);
     }
-
+    //returns int array of property ids that have been paid for by the landlord
     public int[] getPaymentProperties() {
         return feePanel.getSelectedPropertiesID();
     }
-
+    //displays register property form
     public void displayRegisterProperty() {
         backButton.setBounds(110, (int) (height * 0.40), (int) (width * 0.1), (int) (height * 0.025));
         

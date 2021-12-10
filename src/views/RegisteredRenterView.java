@@ -50,7 +50,7 @@ public class RegisteredRenterView extends RenterView {
 		dashBoardPanel.add(logout);
 
 	}
-
+	//override to add back button
 	@Override
 	public void displaySearchPanel() {
 		backButton.setBounds((int) (width * 0.5), (int) (height * 0.15), (int) (width * 0.3), (int) (height * 0.03));
@@ -59,7 +59,7 @@ public class RegisteredRenterView extends RenterView {
 
 	}
 
-	// the following methods until the end add event listeners to all the buttons
+	// the following methods until the end add event listeners to buttons
 	public void addLogoutListener(ActionListener listener) {
 		logout.addActionListener(listener);
 
@@ -98,6 +98,7 @@ public class RegisteredRenterView extends RenterView {
 		
 
 	}
+	//displays search results
 	@Override
 	public void displaySearch(ArrayList<Property> properties) {
 		super.displaySearch(properties);
@@ -107,7 +108,7 @@ public class RegisteredRenterView extends RenterView {
 
 
 	}
-
+	//add listener for adding subscription button
 	public void subscribeListener(ActionListener listener){
 		subscribe.addActionListener(listener);
 	}

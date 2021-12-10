@@ -1,6 +1,6 @@
 package models;
 import java.util.ArrayList;
-
+//used to store info about a periodical summary report(in our program this is defined as a listing period defined by the manager)
 public class SummaryReport {
     private int totalNoHouses;
     private int totalHousesRented;

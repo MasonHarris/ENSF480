@@ -25,7 +25,7 @@ public class RegisteredRenterController extends RenterController {
 		// super.view = view;
 
 	}
-
+	//begin registered renter session
 	@Override
 	public void start() {
 		view.displayDashboard();

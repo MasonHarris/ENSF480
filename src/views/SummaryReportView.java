@@ -58,7 +58,7 @@ public class SummaryReportView extends JPanel {
         createTable(report.getRentedHouses(), width, height);
 
     }
-
+    //displays rented property table for manager
     public void createTable(ArrayList<Property> properties, int width, int height) {
 
         String[] colNames = { "Landlord name ", "Address", "Property ID" };

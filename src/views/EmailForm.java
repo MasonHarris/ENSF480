@@ -9,7 +9,7 @@ import javax.swing.JLabel;
 
 import javax.swing.JTextField;
 
-//form class for a form with 2 fields
+//email form for renters to contact landlords
 public class EmailForm extends JPanel {
     JTextField emailAddress;
     JTextArea emailBody;

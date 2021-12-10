@@ -97,7 +97,7 @@ public class RenterView extends GUIview {
 		panel.add(errorLabel);
 
 	}
-
+	//displays intitial search panel
 	public void displaySearchPanel() {
 		endSession.setBounds((int) (width * 0.5), (int) (height * 0.15), (int) (width * 0.3), (int) (height * 0.03));
 		panel.add(endSession);
@@ -105,7 +105,7 @@ public class RenterView extends GUIview {
 		frame.revalidate();
 
 	}
-
+	//adds listener to display email form
 	public void displayForm(String email) {
 		backButton.setBounds(250, (int) (0.61 * height), (int) (0.1 * width), (int) (0.025 * height));
 
@@ -118,15 +118,16 @@ public class RenterView extends GUIview {
 	public void endSession(ActionListener listener){
 		endSession.addActionListener(listener);
 	}
+	//adds listener to actual email form button
 	public void formListener(ActionListener listener) {
 		form.sendButton.addActionListener(listener);
 	}
-
+	//email formatted as [0] = email address , [1] = email body
 	public String[] getEmail() {
 		return form.getEmail();
 
 	}
-
+	//displays error on email form
 	public void displayEmailError(String error){
 		form.displayError(error);
 	}
@@ -157,7 +158,7 @@ public class RenterView extends GUIview {
 	public void addSubmitListener(ActionListener listener) {
 		submitButton.addActionListener(listener);
 	}
-
+	// add listener for contact landlord button
 	public void addContactListener(ActionListener listener) {
 		tPanel.submitButton.addActionListener(listener);
 	}
@@ -166,7 +167,7 @@ public class RenterView extends GUIview {
 		errorLabel.setText(error);
 		panel.repaint();
 	}
-
+	//returns int array of selected property ID's
 	public int[] getSelectedProperties() {
 		return tPanel.getSelectedPropertiesID();
 	}

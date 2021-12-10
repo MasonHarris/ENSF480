@@ -102,11 +102,11 @@ public class ManagerView extends GUIview {
     public void addSetFeesListner(ActionListener listener) {
         setFeesButton.addActionListener(listener);
     }
-
+    //adds listener to save listing state changes button
     public void TableButtonListener(ActionListener listener) {
         tPanel.submitButton.addActionListener(listener);
     }
-
+    //adds button to landlord set fee/period 
     public void FeesListener(ActionListener listener) {
         if (form.submit == null) {
             System.out.println("submit is null");
@@ -114,7 +114,7 @@ public class ManagerView extends GUIview {
         form.submit.addActionListener(listener);
 
     }
-
+    //display change/set fee form
     public void displayForm(SimpleEntry<Integer,Double> feePair) {
         backButton.setBounds(110, (int) (height * 0.20), (int) (width * 0.2), (int) (height * 0.025));
 
@@ -127,15 +127,15 @@ public class ManagerView extends GUIview {
     public void displayFormError(String error) {
         form.displayError(error);
     }
-
+    //returns in form {fee value, fee period}
     public String[] getFormFields() {
         return form.getFields();
     }
-
+    //returns id of changed property in integer(key) and new state of property in string(value)
     public HashMap<Integer, String> getSelectedProperties() {
         return tPanel.getSelectedPropertiesMap(7);
     }
-
+    //displays change listing state table
     public void displayListingChanges(ArrayList<Property> properties) {
         backButton.setBounds((int) (width * 0.25), (int) (height * 0.55), (int) (width * 0.2),
                 (int) (height * 0.030));
@@ -146,7 +146,7 @@ public class ManagerView extends GUIview {
         frame.revalidate();
 
     }
-
+    //used to display summary report
     public void displaySummaryReport(SummaryReport r) {
         reportView.displayReport(width, height, r);
         backButton.setBounds(110, (int) (height * 0.62), (int) (width * 0.2), (int) (height * 0.03));
@@ -154,7 +154,7 @@ public class ManagerView extends GUIview {
         frame.setContentPane(reportView);
         frame.revalidate();
     }
-
+    //used to display renter table with their subscriptions, username, id and email
     public void displayRenterTable(ArrayList<RegisteredRenter> renters) {
         backButton.setBounds(110, (int) (height * 0.6), (int) (width * 0.2), (int) (height * 0.03));
         viewTable.displayRenters(renters);
@@ -165,7 +165,7 @@ public class ManagerView extends GUIview {
         frame.revalidate();
 
     }
-
+    //used to display landlord table with their id, name and email
     public void displayLandlordTable(ArrayList<Landlord> landlords) {
         backButton.setBounds(110, (int) (height * 0.6), (int) (width * 0.2), (int) (height * 0.03));
         viewTable.displayLandlords(landlords);
@@ -176,7 +176,7 @@ public class ManagerView extends GUIview {
         frame.revalidate();
 
     }
-
+    //displays all properties with all information about properties
     public void displayPropertyTable(ArrayList<Property> properties) {
         backButton.setBounds(110, (int) (height * 0.6), (int) (width * 0.2), (int) (height * 0.03));
         viewTable.displayProperties(properties);

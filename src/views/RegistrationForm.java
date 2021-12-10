@@ -7,7 +7,7 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
-
+//this class is used for the register property form
 public class RegistrationForm extends JPanel {
     JButton register;
     JTextField addressNumber;
@@ -27,7 +27,7 @@ public class RegistrationForm extends JPanel {
         
         setLayout(null);
     }
-
+    //displays the register property form
     public void displayForm(int width, int height) {
         this.removeAll();
 

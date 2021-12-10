@@ -18,7 +18,7 @@ public class ViewLandlordNotifications extends JPanel {
         this.height = height;
         setLayout(null);
     }
-    //each array == {property id, renter email , address}
+    //each array == {property id, renter email , address} displays notifications for landlords
     public void displayNotifications(ArrayList<String[]> notifications) {
         this.removeAll();
         String[] colNames = { "Property ID", "Renter email", "Property address" };

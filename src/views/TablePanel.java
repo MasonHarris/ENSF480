@@ -52,7 +52,7 @@ public class TablePanel extends JPanel {
 
     }
 
-    // single select table with no editable attributes
+    // single select table with no editable attributes, used to display search results
     public void displayPropertyTableRenter(ArrayList<Property> properties) {
         this.removeAll();
         String[] colNames = { "Property ID", "Address", "Number of bedrooms", "Number of bathrooms", "City quadrant",
@@ -92,7 +92,7 @@ public class TablePanel extends JPanel {
 
     }
 
-    // multi select table with changeable combobox
+    // multi select table with changeable combobox, used property state changes
     public void displayPropertyTableChangeListing(ArrayList<Property> properties) {
         this.removeAll();
         String[] colNames = { "Property ID", "Address", "Number of bedrooms", "Number of bathrooms", "City quadrant",
@@ -145,7 +145,7 @@ public class TablePanel extends JPanel {
 
     }
 
-    // single select table with no editable attributes
+    // single select table with no editable attributes, used for landlord payments
     public void displayPropertyPayFees(ArrayList<Property> properties, SimpleEntry<Integer,Double> feePair){
         this.removeAll();
         String[] colNames = { "Property ID", "Address", "Number of bedrooms", "Number of bathrooms", "City quadrant",

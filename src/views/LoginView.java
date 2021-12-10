@@ -25,7 +25,7 @@ public class LoginView extends GUIview {
 		intializeDashboard();
 
 	}
-
+	//creates intitial gui screen and stores it in memory
 	public void intializeDashboard() {
 
 		panel = new JPanel(new FlowLayout());
@@ -41,7 +41,7 @@ public class LoginView extends GUIview {
 		panel.add(renterButton);
 
 	}
-
+	//displays intial gui screen
 	public void displayDashboard() {
 
 		frame.setContentPane(panel);

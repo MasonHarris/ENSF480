@@ -1,5 +1,5 @@
 package models;
-
+//this class is used to store a renter subscription
 public class Subscription {
     private String username;
     private int noOfBedrooms;

@@ -40,7 +40,7 @@ public class RegisteredRenterView extends RenterView {
 	public void intializeDashboard() {
 		dashBoardPanel = new JPanel(new FlowLayout());
 		logout = new JButton("Logout");
-		viewNotifications = new JButton("View Notificiatons");
+		viewNotifications = new JButton("View Notifications");
 		unsubscribe = new JButton("Unsubscribe");
 		search = new JButton("Search");
 		subscribe = new JButton("Subscribe");

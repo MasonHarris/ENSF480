@@ -43,7 +43,7 @@ public class RegisteredRenterController extends RenterController {
 		// notified of as an arraylist of property
 		// then put that arraylist as the argument of view.displayNotificationsPanel()
 
-		view.addNotificationsListener(e -> view.displayNotificationsPanel(model.getRenterNotifications(username)));
+		view.addNotificationsListener(e -> view.displayNotificationsPanel(model.getRenterNotifications(username), model.getSubscription(username)));
 		view.addBackListener(e -> view.displayDashboard());
 		view.addContactListener(e -> contactLandlord(this.view, model.getRegisteredRenter(username).getEmail()));
 		view.subscribeListener(e-> subscribeRenter());

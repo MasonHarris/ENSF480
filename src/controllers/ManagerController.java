@@ -10,7 +10,7 @@ import models.Property;
 import models.SummaryReport;
 import views.ManagerView;
 import java.util.HashMap;
-import java.util.AbstractMap.SimpleEntry;
+
 
 public class ManagerController extends GUIcontroller {
     private ManagerView view;
@@ -40,8 +40,8 @@ public class ManagerController extends GUIcontroller {
         view.TableButtonListener(e -> changeListingState());
         // needs to retrieve fees from database(please add this) random values hardcoded
         // for now
-        SimpleEntry<Integer,Double> feePair = model.getListingPeriodFee();
-        view.addSetFeesListner(e -> view.displayForm(feePair));
+        
+        view.addSetFeesListner(e -> view.displayForm(model.getListingPeriodFee()));
         view.FeesListener(e -> changeFees());
         view.addReportListener(e -> summary());
         // someone should fill these in with the correct arraylist argument(these should

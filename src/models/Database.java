@@ -398,25 +398,14 @@ public class Database {
 
 
 	}
-	//changes a property listing given property id and string of new listing
-	public void changePropertyListing(int id, String listing) {
-		try {
-			String query = "UPDATE PROPERTY SET listingState = ? WHERE propertyID = ?";
-			PreparedStatement statement = connection.prepareStatement(query);
-			statement.setString(1, listing);
-			statement.setInt(2, id);
-			statement.executeUpdate();
-			//changes isListed based on state change
-			if (listing.equals("Active")) {
-				String query2 = "UPDATE PROPERTY SET isListed = 1 WHERE propertyID = ?";
-				PreparedStatement statement2 = connection.prepareStatement(query2);
-				statement2.setInt(1, id);
-				statement2.executeUpdate();
+	//notfies applicable renters about property defined by property id
+	public void notifyRenters(int id){
 
-				// notify applicable renters
+			// notify applicable renters
+			try{
 			Property p = getProperty(id);
-			 query2 = "SELECT * FROM NOTIFICATION WHERE noOfBathrooms = ? AND noOfBedrooms = ? AND FURNISHED = ? AND cityQuadrant = ? AND propertyType = ?";
-			 statement2 = connection.prepareStatement(query2);
+			String query2 = "SELECT * FROM NOTIFICATION WHERE noOfBathrooms = ? AND noOfBedrooms = ? AND FURNISHED = ? AND cityQuadrant = ? AND propertyType = ?";
+			PreparedStatement statement2 = connection.prepareStatement(query2);
 			statement2.setInt(1, p.getNumOfBath());
 			statement2.setInt(2, p.getNumOfBed());
 			statement2.setBoolean(3, p.getIsFurnished());
@@ -431,6 +420,35 @@ public class Database {
 				statement3.executeUpdate();
 
 			}
+		}
+		catch(SQLException e){
+			System.out.println(e);
+			System.exit(0);
+
+		}
+
+
+	}
+
+
+	//changes a property listing given property id and string of new listing
+	public void changePropertyListing(int id, String listing) {
+		try {
+			String query = "UPDATE PROPERTY SET listingState = ? WHERE propertyID = ?";
+			PreparedStatement statement = connection.prepareStatement(query);
+			statement.setString(1, listing);
+			statement.setInt(2, id);
+			statement.executeUpdate();
+			//changes isListed based on state change
+			if (listing.equals("Active")) {
+				String query2 = "UPDATE PROPERTY SET isListed = 1 WHERE propertyID = ?";
+				PreparedStatement statement2 = connection.prepareStatement(query2);
+				statement2.setInt(1, id);
+				statement2.executeUpdate();
+				notifyRenters(id);
+
+			
+			
 
 			}
 
@@ -493,24 +511,7 @@ public class Database {
 			statement.executeUpdate();
 			statement3.executeUpdate();
 
-			// notify applicable renters
-			Property p = getProperty(propety_id);
-			query2 = "SELECT * FROM NOTIFICATION WHERE noOfBathrooms = ? AND noOfBedrooms = ? AND FURNISHED = ? AND cityQuadrant = ? AND propertyType = ?";
-			 statement2 = connection.prepareStatement(query2);
-			statement2.setInt(1, p.getNumOfBath());
-			statement2.setInt(2, p.getNumOfBed());
-			statement2.setBoolean(3, p.getIsFurnished());
-			statement2.setString(4, p.getCityQuadrant());
-			statement2.setString(5, p.getPropertyType());
-			ResultSet res = statement2.executeQuery();
-			while (res.next()) {
-				String update = "INSERT INTO NOTIFICATION_RENTER(Username, property_id)Values(?,?)";
-				statement3 = connection.prepareStatement(update);
-				statement3.setString(1, res.getString("Username"));
-				statement3.setInt(2, p.getPropertyId());
-				statement3.executeUpdate();
-
-			}
+			
 		} catch (SQLException e) {
 			System.out.println(e);
 			System.exit(0);

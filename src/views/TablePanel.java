@@ -181,10 +181,10 @@ public class TablePanel extends JPanel {
                 (int) (height * 0.030));
 
         if (properties.size() > 0) {
-            JLabel label2 = new JLabel("Fee per property(dollars) " + feePair.getValue());
+            JLabel label2 = new JLabel("Fee per property(dollars): " + feePair.getValue());
             label2.setBounds((int) (width * 0.50), (int) (height * 0.55), (int) (width * 0.2),
                     (int) (height * 0.030));
-            JLabel label3 = new JLabel("LISTING PERIOD(days) " + feePair.getKey());
+            JLabel label3 = new JLabel("LISTING PERIOD(days): " + feePair.getKey());
             label3.setBounds((int) (width * 0.70), (int) (height * 0.55), (int) (width * 0.2),
             (int) (height * 0.030));
             this.add(label3);

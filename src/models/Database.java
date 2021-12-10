@@ -486,6 +486,13 @@ public class Database {
 			statement2.setInt(1, propety_id);
 			statement.executeUpdate();
 			statement2.executeUpdate();
+			//start listing period
+			String query3 = "UPDATE PROPERTY SET listingPeriod = ? WHERE propertyID = ?";
+			PreparedStatement statement3 = connection.prepareStatement(query3);
+			statement3.setInt(1, getListingPeriodFee().getKey());
+			statement3.setInt(2, propety_id);
+			statement.executeUpdate();
+			statement3.executeUpdate();
 		} catch (SQLException e) {
 			System.out.println(e);
 			System.exit(0);

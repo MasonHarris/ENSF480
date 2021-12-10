@@ -13,7 +13,7 @@ public class LoginController extends GUIcontroller {
 	}
 
 	public void start() {
-		view.initalizeFrame("Login");
+		view.initalizeFrame("Property App");
 		view.intializeDashboard();
 		view.displayDashboard();
 
@@ -28,11 +28,14 @@ public class LoginController extends GUIcontroller {
 		});
 		view.addLoginListener(e -> {
 
-			login(view.getUserText(), view.getPasswordText());
+			login(view.getUserText().strip(), view.getPasswordText());
 		});
-
+		view.endSession(e-> {
+			view.dispose();
+			start();
+		});
 		view.addSelectSignupListener(e -> view.signUpPanel());
-		view.addSignupListener(e -> signup(view.getUserText(), view.getPasswordText()));
+		view.addSignupListener(e -> signup(view.getUserText().strip(), view.getPasswordText()));
 	}
 
 	public void signup(String username, String password) {
@@ -51,7 +54,7 @@ public class LoginController extends GUIcontroller {
 		}
 
 		if(view.getEmail().length() == 0){
-			view.displayEmptyTextError("Password");
+			view.displayEmptyTextError("Email");
 			return;
 
 		}

@@ -28,7 +28,7 @@ public class ManagerTables extends JPanel {
 
     public void displayProperties(ArrayList<Property> properties) {
         this.removeAll();
-        String[] colNames = { "Property ID", "Landlord name", "Address ", "Number of bedrooms", "Number of bathrooms",
+        String[] colNames = { "Property ID", "Landlord username", "Address ", "Number of bedrooms", "Number of bathrooms",
                 "Property type", "Property status" };
         DefaultTableModel model = new DefaultTableModel(colNames, 0);
         JTable table = new JTable(model);
@@ -62,7 +62,7 @@ public class ManagerTables extends JPanel {
 
     public void displayLandlords(ArrayList<Landlord> landlords) {
         this.removeAll();
-        String[] colNames = { "Landlord ID ", "Landlord name", "Landlord email" };
+        String[] colNames = { "Landlord ID ", "Landlord username", "Landlord email" };
         DefaultTableModel model = new DefaultTableModel(colNames, 0);
         JTable table = new JTable(model);
         table.getTableHeader().setReorderingAllowed(false);
@@ -94,7 +94,7 @@ public class ManagerTables extends JPanel {
 
     public void displayRenters(ArrayList<RegisteredRenter> renters) {
         this.removeAll();
-        String[] colNames = { "Renter ID ", "Renter name", "Email", "Subscribed", "Number of bathrooms",
+        String[] colNames = { "Renter ID ", "Renter username", "Email", "Subscribed", "Number of bathrooms",
                 "Number of bedrooms",
                 "Property type", "Furnished", "Quadrant" };
         DefaultTableModel model = new DefaultTableModel(colNames, 0);

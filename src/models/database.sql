@@ -110,7 +110,8 @@ LOCK TABLES `NOTIFICATION` WRITE;
 INSERT INTO `NOTIFICATION` (`Username`, `noOfBathrooms`, `noOfBedrooms`, `Furnished`, `cityQuadrant`, `propertyType`)
 VALUES
 	('jack23',4,3,0,'NE','Townhouse'),
-	('gary',1,1,1,'NW','Apartment');
+	('gary',1,1,1,'NW','Apartment'),
+	('cats34',1,1,1,'NW','apartment');
 
 /*!40000 ALTER TABLE `NOTIFICATION` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -133,7 +134,9 @@ LOCK TABLES `NOTIFICATION_LANDLORD` WRITE;
 INSERT INTO `NOTIFICATION_LANDLORD` (`Username`, `renter_email`, `property_id`)
 VALUES
 	('doctor','gary@123.com',1),
-	('doctor','hi@me.com',1);
+	('doctor','hi@me.com',1),
+	('doctor','hello',1),
+	('doctor','gary@123.com',1);
 
 /*!40000 ALTER TABLE `NOTIFICATION_LANDLORD` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -175,7 +178,7 @@ LOCK TABLES `PERIOD_FEE` WRITE;
 
 INSERT INTO `PERIOD_FEE` (`startListingPeriod`, `fee`)
 VALUES
-	(40,30.03);
+	(70,30.03);
 
 /*!40000 ALTER TABLE `PERIOD_FEE` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -201,19 +204,20 @@ CREATE TABLE `PROPERTY` (
   `address` varchar(256) DEFAULT NULL,
   `isPaid` tinyint(1) DEFAULT '0',
   PRIMARY KEY (`propertyID`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 LOCK TABLES `PROPERTY` WRITE;
 /*!40000 ALTER TABLE `PROPERTY` DISABLE KEYS */;
 
 INSERT INTO `PROPERTY` (`propertyType`, `propertyID`, `isListed`, `noOfBedrooms`, `noOfBathrooms`, `Furnished`, `cityQuadrant`, `listingPeriod`, `landlordUsername`, `listingState`, `amountofFee`, `address`, `isPaid`)
 VALUES
-	('Apartment',1,1,1,1,1,'NW',40,'doctor','Active',30.33,'12 Ave',1),
-	('Townhouse',2,1,3,3,1,'SE',20,'sandy','Rented',30.33,'20 World Way',1),
-	('Apartment',3,1,2,2,0,'NW',10,'sandy','Active',30.33,'44 User Hwy',1),
-	('Attached House',4,0,5,3,0,'NE',30,'doctor','Registered',30.33,'81 Easter Ave',0),
-	('Detached House',5,0,2,1,0,'SE',15,'mike','Suspended',30.33,'45 Road Street',0),
-	('House',6,1,3,3,1,'NE',10,'mike','Active',30.33,'23 Hunter Hwy',1);
+	('apartment',1,1,1,1,1,'NW',40,'doctor','Active',30.33,'12 Ave',1),
+	('townhouse',2,0,3,3,1,'SE',20,'sandy','Rented',30.33,'20 World Way',1),
+	('apartment',3,1,2,2,0,'NW',10,'sandy','Active',30.33,'44 User Hwy',1),
+	('attached house',4,1,5,3,0,'NE',60,'doctor','Active',32,'81 Easter Ave',1),
+	('detached house',5,0,2,1,0,'SE',15,'mike','Cancelled',30.03,'45 Road Street',0),
+	('house',6,1,3,3,1,'NE',10,'mike','Active',30.33,'23 Hunter Hwy',1),
+	('house',7,1,5,5,1,'NW',40,'doctor','Registered',30.33,'32 Hunter street',0);
 
 /*!40000 ALTER TABLE `PROPERTY` ENABLE KEYS */;
 UNLOCK TABLES;

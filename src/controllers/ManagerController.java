@@ -77,10 +77,6 @@ public class ManagerController extends GUIcontroller {
                 rentedHouses.add(properties.get(i));
             }
         }
-        // dummy.add(new Property("Apartment", true, 1, 1, true, 1, "SW", "Active",
-        // "123", 1, 8, "joe", true));
-        // dummy.add(new Property("Apartment", true, 1, 1, true, 79, "NW", "Active",
-        // "123", 1, 8, "joe", true));
         SummaryReport r = new SummaryReport(totalHousesListed, totalHousesRented, totalHousesActive, rentedHouses);
         view.displaySummaryReport(r);
 
@@ -107,10 +103,6 @@ public class ManagerController extends GUIcontroller {
 
     }
 
-    // used to fill properties arraylist
-    public void getAllProperties() {
-
-    }
 
     public void changeListingState() {
         // integer contains index of altered property, string is altered properties new

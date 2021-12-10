@@ -616,7 +616,7 @@ public class Database {
 				property_ids.add(res.getInt("property_id"));
 			}
 			for (int i = 0; i < property_ids.size(); i++) {
-				query = "SELECT * FROM PROPERTY WHERE propertyID = ?";
+				query = "SELECT * FROM PROPERTY WHERE propertyID = ? AND isListed = 1";
 				statement = connection.prepareStatement(query);
 				statement.setInt(1, property_ids.get(i));
 				res = statement.executeQuery();

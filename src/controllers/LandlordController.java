@@ -87,8 +87,8 @@ public class LandlordController extends GUIcontroller {
         Boolean furnished = false;
         try {
             int addressNumber = Integer.parseInt(value[0]);
-            bedrooms = Integer.parseInt(value[2]);
-            bathrooms = Integer.parseInt(value[3]);
+            bedrooms = Integer.parseInt(value[3]);
+            bathrooms = Integer.parseInt(value[2]);
 
             if (bedrooms <= 0 || bathrooms <= 0 || addressNumber < 0) {
                 view.formError("Invalid number");

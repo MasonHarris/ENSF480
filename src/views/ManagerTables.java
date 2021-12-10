@@ -14,6 +14,8 @@ import models.Landlord;
 import models.Property;
 import models.RegisteredRenter;
 
+
+//used by managers to view database info
 public class ManagerTables extends JPanel {
     int width;
     int height;

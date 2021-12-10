@@ -13,6 +13,8 @@ import models.Landlord;
 import models.Property;
 import models.RegisteredRenter;
 
+//used for ma
+
 public class ViewTablePanel extends JPanel {
     int width;
     int height;

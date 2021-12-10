@@ -3,9 +3,9 @@ package controllers;
 import java.util.ArrayList;
 
 import models.Database;
-import models.Landlord;
+
 import models.Property;
-import models.RegisteredRenter;
+
 
 import models.SummaryReport;
 import views.ManagerView;

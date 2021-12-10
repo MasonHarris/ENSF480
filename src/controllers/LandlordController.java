@@ -64,6 +64,7 @@ public class LandlordController extends GUIcontroller {
     }
 
     public ArrayList<Property> getUnpaid() {
+        landlord_properties = model.getLandlordProperties(username);
         ArrayList<Property> unpaid = new ArrayList<Property>();
         for (Property property : landlord_properties) {
             if (!property.getisPaid()) {
@@ -86,6 +87,7 @@ public class LandlordController extends GUIcontroller {
         int bedrooms;
         int bathrooms;
         Boolean furnished = false;
+        //error checking
         try {
             int addressNumber = Integer.parseInt(value[0]);
             bedrooms = Integer.parseInt(value[3]);

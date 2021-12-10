@@ -87,29 +87,29 @@ public class LoginView extends GUIview {
 		JLabel user = new JLabel("Username");
 		System.out.println("height " + height);
 		System.out.println("width " + width);
-		user.setBounds((int) (width * 0.025), (int) (height * 0.1), (int) (width * 0.2), (int) (height * 0.125));
+		user.setBounds((int) (width * 0.025), (int) (height * 0.1), (int) (width * 0.2), (int) (height * 0.1));
 
 		usernameText = new JTextField(20);
 		usernameText.setBounds((int) (width * 0.25), (int) (height * 0.1), (int) (width * 0.41),
-				(int) (height * 0.125));
+				(int) (height * 0.1));
 		JLabel password = new JLabel("Password");
-		password.setBounds((int) (width * 0.025), (int) (height * 0.25), (int) (width * 0.2), (int) (height * 0.125));
+		password.setBounds((int) (width * 0.025), (int) (height * 0.25), (int) (width * 0.2), (int) (height * 0.1));
 		passwordText = new JPasswordField();
 		passwordText.setBounds((int) (width * 0.25), (int) (height * 0.25), (int) (width * 0.41),
-				(int) (height * 0.125));
+				(int) (height * 0.1));
 
 		
 
 		emailText = new JTextField(20);
 		JLabel emailLabel = new JLabel("Email");
 		emailText.setBounds((int) (width * 0.25), (int) (height * 0.55), (int) (width * 0.41),
-		(int) (height * 0.125));
+		(int) (height * 0.1));
 		emailLabel.setBounds((int) (width * 0.025), (int) (height * 0.55), (int) (width * 0.41),
-		(int) (height * 0.125));
+		(int) (height * 0.1));
 		options.setBounds((int) (width * 0.25), (int) (height * 0.40), (int) (width * 0.41),
-		(int) (height * 0.125));
+		(int) (height * 0.1));
 		signupButton.setBounds((int) (width * 0.25), (int) (height * 0.70), (int) (width * 0.41),
-				(int) (height * 0.125));
+				(int) (height * 0.1));
 		signupPanel.add(emailLabel);
 		signupPanel.add(emailText);
 		signupPanel.add(options);
@@ -184,7 +184,7 @@ public class LoginView extends GUIview {
 			error = null;
 		}
 		error = new JLabel("Invalid Signup -- username already exists");
-		error.setBounds((int) (width * 0.25), (int) (height * 0.55), (int) (width * 0.7), (int) (height * 0.125));
+		error.setBounds((int) (width * 0.25), (int) (height * 0.8), (int) (width * 0.7), (int) (height * 0.125));
 		signupPanel.add(error);
 		signupPanel.repaint();
 
@@ -197,7 +197,7 @@ public class LoginView extends GUIview {
 			error = null;
 		}
 		error = new JLabel("Empty Text field in " + empty);
-		error.setBounds((int) (width * 0.25), (int) (height * 0.55), (int) (width * 0.7), (int) (height * 0.125));
+		error.setBounds((int) (width * 0.25), (int) (height * 0.77), (int) (width * 0.7), (int) (height * 0.125));
 		signupPanel.add(error);
 		signupPanel.repaint();
 

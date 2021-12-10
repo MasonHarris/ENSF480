@@ -545,8 +545,8 @@ public class Database {
 			query = query + "Values(?,?,?,?,?,?)";
 			PreparedStatement statement = connection.prepareStatement(query);
 			statement.setString(1, user);
-			statement.setInt(2, noOfBath);
-			statement.setInt(3, noOfBed);
+			statement.setInt(3, noOfBath);
+			statement.setInt(2, noOfBed);
 			statement.setBoolean(4, Furnished);
 			statement.setString(5, cityQuadString);
 			statement.setString(6, propertyType);

@@ -6,7 +6,7 @@ public class PropertyApp {
 	
 
 	public static void main(String[] args) {
-		LoginController login = new LoginController(Database.getOnlyInstance(), new LoginView("Login Screen",400,200));
+		LoginController login = new LoginController(Database.getOnlyInstance(), new LoginView("Login Screen",500,300));
 		login.start();
 
 	}

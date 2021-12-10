@@ -17,7 +17,7 @@ public class LoginView extends GUIview {
 	JLabel error = null;
 	JTextField emailText;
 	JComboBox<String> options;
-
+	JButton endSession;
 	public LoginView(String frameName, int width, int height) {
 
 		super(width, height);
@@ -34,6 +34,7 @@ public class LoginView extends GUIview {
 		signupButton = new JButton("signup");
 		selectLogin = new JButton("Login as registered user");
 		selectSignUpButton = new JButton("Sign up");
+		endSession = new JButton("Return to login screen");
 		panel.add(renterButton);
 		panel.add(selectSignUpButton);
 		panel.add(selectLogin);
@@ -67,12 +68,14 @@ public class LoginView extends GUIview {
 
 		loginButton.setBounds((int) (width * 0.25), (int) (height * 0.40), (int) (width * 0.41),
 				(int) (height * 0.125));
+		endSession.setBounds((int) (width * 0.25), (int) (height * 0.55), (int) (width * 0.41),
+				(int) (height * 0.125));
 		loginPanel.add(user);
 		loginPanel.add(usernameText);
 		loginPanel.add(password);
 		loginPanel.add(passwordText);
 		loginPanel.add(loginButton);
-
+		loginPanel.add(endSession);
 		frame.setContentPane(loginPanel);
 		frame.invalidate();
 		frame.validate();
@@ -142,7 +145,10 @@ public class LoginView extends GUIview {
 	public void addSignupListener(ActionListener listener) {
 		signupButton.addActionListener(listener);
 	}
-
+	
+	public void endSession(ActionListener listener){
+		endSession.addActionListener(listener);
+	}
 	// methods used to retrieve values in user input sections
 	public String getUserText() {
 		return usernameText.getText();
@@ -165,7 +171,7 @@ public class LoginView extends GUIview {
 
 	public void displayLoginError() {
 		JLabel error = new JLabel("Invalid login");
-		error.setBounds((int) (width * 0.25), (int) (height * 0.55), (int) (width * 0.41), (int) (height * 0.125));
+		error.setBounds((int) (width * 0.25), (int) (height * 0.7), (int) (width * 0.41), (int) (height * 0.125));
 		loginPanel.add(error);
 		loginPanel.repaint();
 

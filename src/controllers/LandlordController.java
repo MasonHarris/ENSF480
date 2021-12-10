@@ -108,8 +108,8 @@ public class LandlordController extends GUIcontroller {
             return;
         }
         Property property = new Property(value[4].toLowerCase(), false, bedrooms, bathrooms, furnished,
-                model.getRegisterPropertyID(), value[5], "Registered", value[0] + " " + value[1].toLowerCase(), 0, 0, username,
-                false);
+                model.getRegisterPropertyID(), value[5], "Registered", value[0] + " " + value[1].toLowerCase(), 
+                model.getListingPeriodFee().getKey(), model.getListingPeriodFee().getValue(), username, false);
         model.registerProperty(property);
         view.formError("");
         view.confirmation("registered property successfully");

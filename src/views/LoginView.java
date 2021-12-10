@@ -34,7 +34,7 @@ public class LoginView extends GUIview {
 		signupButton = new JButton("signup");
 		selectLogin = new JButton("Login as registered user");
 		selectSignUpButton = new JButton("Sign up");
-		endSession = new JButton("Return to login screen");
+		endSession = new JButton("Return to main screen");
 		panel.add(renterButton);
 		panel.add(selectSignUpButton);
 		panel.add(selectLogin);

@@ -106,12 +106,17 @@ public class LoginView extends GUIview {
 		(int) (height * 0.1));
 		emailLabel.setBounds((int) (width * 0.025), (int) (height * 0.55), (int) (width * 0.41),
 		(int) (height * 0.1));
+
+		JLabel optionsLabel = new JLabel("User type");
+		optionsLabel.setBounds((int) (width * 0.025), (int) (height * 0.40), (int) (width * 0.41),
+		(int) (height * 0.1));
 		options.setBounds((int) (width * 0.25), (int) (height * 0.40), (int) (width * 0.41),
 		(int) (height * 0.1));
 		signupButton.setBounds((int) (width * 0.25), (int) (height * 0.70), (int) (width * 0.2),
 				(int) (height * 0.1));
 		endSession.setBounds((int) (width * 0.5), (int) (height * 0.7), (int) (width * 0.3),
 				(int) (height * 0.1));
+		signupPanel.add(optionsLabel);
 		signupPanel.add(emailLabel);
 		signupPanel.add(emailText);
 		signupPanel.add(options);

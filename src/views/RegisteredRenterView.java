@@ -85,8 +85,8 @@ public class RegisteredRenterView extends RenterView {
 		super.displaySearch(notifications);
 		JLabel subLabel;
 		if(s != null){
-		 subLabel = new JLabel("You are subscribed for " + s.getNoOfBathrooms() + " bathrooms " + s.getNoOfBedrooms() + " bedrooms"
-		+ " furnished is " + s.getIsFurnished() + " and city quadrant " + s.getCityQuadrant() );
+		 subLabel = new JLabel("You are subscribed for " + s.getNoOfBathrooms() + " bathrooms, " + s.getNoOfBedrooms() + " bedrooms,"
+		+ " furnished is, " + s.getIsFurnished() + " and city quadrant " + s.getCityQuadrant() );
 		}
 		else {
 			subLabel = new JLabel("You are not subscribed");

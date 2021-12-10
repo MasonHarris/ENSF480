@@ -110,7 +110,7 @@ public class RegisteredRenterController extends RenterController {
 			
 			s = new Subscription(username, bedrooms, bathrooms, true, quadString, propeString);
 		} else {
-			s = new Subscription(username, bedrooms, bathrooms, true, quadString, propeString);
+			s = new Subscription(username, bedrooms, bathrooms, false, quadString, propeString);
 		}
 
 	}

@@ -413,6 +413,25 @@ public class Database {
 				statement2.setInt(1, id);
 				statement2.executeUpdate();
 
+				// notify applicable renters
+			Property p = getProperty(id);
+			 query2 = "SELECT * FROM NOTIFICATION WHERE noOfBathrooms = ? AND noOfBedrooms = ? AND FURNISHED = ? AND cityQuadrant = ? AND propertyType = ?";
+			 statement2 = connection.prepareStatement(query2);
+			statement2.setInt(1, p.getNumOfBath());
+			statement2.setInt(2, p.getNumOfBed());
+			statement2.setBoolean(3, p.getIsFurnished());
+			statement2.setString(4, p.getCityQuadrant());
+			statement2.setString(5, p.getPropertyType());
+			ResultSet res = statement2.executeQuery();
+			while (res.next()) {
+				String update = "INSERT INTO NOTIFICATION_RENTER(Username, property_id)Values(?,?)";
+				PreparedStatement statement3 = connection.prepareStatement(update);
+				statement3.setString(1, res.getString("Username"));
+				statement3.setInt(2, p.getPropertyId());
+				statement3.executeUpdate();
+
+			}
+
 			}
 
 			else {

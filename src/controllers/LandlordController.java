@@ -22,7 +22,7 @@ public class LandlordController extends GUIcontroller {
         landlord_properties = model.getLandlordProperties(this.username);
 
     }
-
+    //starts landlord session
     public void start() {
         view.intializeDashboard();
         view.displayDashboard();
@@ -103,7 +103,7 @@ public class LandlordController extends GUIcontroller {
             }
 
         } catch (NumberFormatException e) {
-            view.formError("Non number put in number field");
+            view.formError("Non integer put in integer field");
             return;
         }
 

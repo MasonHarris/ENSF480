@@ -65,6 +65,7 @@ public class LandlordController extends GUIcontroller {
 
     public ArrayList<Property> getUnpaid() {
         ArrayList<Property> unpaid = new ArrayList<Property>();
+        landlord_properties = model.getLandlordProperties(username);
         for (Property property : landlord_properties) {
             if (!property.getisPaid()) {
                 unpaid.add(property);

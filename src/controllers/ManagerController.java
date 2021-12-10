@@ -36,7 +36,7 @@ public class ManagerController extends GUIcontroller {
             login.start();
         });
         view.addBackListener(e -> view.displayDashboard());
-        view.addChangeStateListener(e -> view.displayListingChanges(allProperties));
+        view.addChangeStateListener(e -> view.displayListingChanges(model.getAllProperties()));
         view.TableButtonListener(e -> changeListingState());
         // needs to retrieve fees from database(please add this) random values hardcoded
         // for now
@@ -115,6 +115,8 @@ public class ManagerController extends GUIcontroller {
     public void changeListingState() {
         // integer contains index of altered property, string is altered properties new
         // state
+
+        allProperties = model.getAllProperties();
         HashMap<Integer, String> alteredProperties = view.getSelectedProperties();
         if (alteredProperties == null) {
             return;

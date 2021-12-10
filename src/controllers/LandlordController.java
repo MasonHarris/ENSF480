@@ -51,6 +51,7 @@ public class LandlordController extends GUIcontroller {
     }
 
     public ArrayList<Property> getPaid() {
+        landlord_properties = model.getLandlordProperties(username);
         ArrayList<Property> paid = new ArrayList<Property>();
         for (var p : landlord_properties) {
             if (p.getisPaid()) {
@@ -120,6 +121,7 @@ public class LandlordController extends GUIcontroller {
     public void changeListingState() {
         // integer contains index of altered property, string is altered properties new
         // state
+        landlord_properties = model.getLandlordProperties(username);
         HashMap<Integer, String> alteredProperties = view.getSelectedProperties();
         if (alteredProperties == null) {
             return;
